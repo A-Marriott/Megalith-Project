@@ -1,0 +1,2 @@
+class Megalith < ApplicationRecord
+end
