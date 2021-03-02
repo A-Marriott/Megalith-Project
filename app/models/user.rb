@@ -11,6 +11,10 @@ class User < ApplicationRecord
   has_many :trip_users
   has_many :trips, through: :trip_users
 
+  def visited
+    self.visiteds.map(&:megalith)
+  end
+
   def favourited
     self.favourites.map(&:megalith)
   end
