@@ -3,7 +3,6 @@ class User < ApplicationRecord
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
-
   has_many :visiteds
   has_many :favourites
   has_many :ratings
@@ -11,4 +10,12 @@ class User < ApplicationRecord
   has_many :megalith_photos
   has_many :trip_users
   has_many :trips, through: :trip_users
+
+  def visited
+    self.visiteds.map(&:megalith)
+  end
+
+  def favourited
+    self.favourites.map(&:megalith)
+  end
 end
