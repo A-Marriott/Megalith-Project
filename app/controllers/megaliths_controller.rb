@@ -14,11 +14,7 @@ class MegalithsController < ApplicationController
   def create
     @megalith = Megalith.new megalith_params
     if @megalith.save
-      if params[:megalith][:photos]
-        @megalith_photo = MegalithPhoto.new(user: current_user, megalith: Megalith.last)
-        raise
-        @megalith_photo
-      end
+      MegalithPhoto.create(user: current_user, megalith: Megalith.last, photo: params[:megalith][:photo]) if params[:megalith][:photo]
       redirect_to megalith_path(@megalith)
     else
       render :new
@@ -30,4 +26,8 @@ class MegalithsController < ApplicationController
   def megalith_params
     params.require(:megalith).permit(:name, :category, :tagline, :description)
   end
+
+  # def megalith_photo_params
+  #   params.require(:megalith_photo).permit(:photo)
+  # end
 end
