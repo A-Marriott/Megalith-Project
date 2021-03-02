@@ -1,11 +1,51 @@
 <h1>Showing all megaliths</h1>
 
-<% @megaliths.each do |megalith| %>
-  <%= link_to megalith_path(megalith) do %>
-    <h3>Name: <%= megalith.name %></h3>
-    <h5>Tagline: <%= megalith.tagline %></h5>
-    <p>Category</p>
-    <p>Avg rating</p>
-    <img src="https://kitt.lewagon.com/placeholder/users/krokrob" style="width: 200px; height: 200px;">
-  <% end %>
-<% end %>
+
+
+
+<div class="content">
+    <div>
+      <h1 class="text-center">Megalithic Sites</h1>
+      <div class="search-bar">
+
+      </div>
+    </div>
+  </div>
+
+  <div class="megalith-container mt-3">
+      <div class="row">
+        <div class="col-xs-12 col-sm-6 col-md-8">
+          <div class="megalith-card">
+            <% @megaliths.each do |megalith| %>
+              <%= link_to megalith_path(megalith) do %>
+
+
+                <img src="https://kitt.lewagon.com/placeholder/users/krokrob" style="width: 200px; height: 200px;">
+
+
+            <div class="card-mega">
+                <img src="https://images.unsplash.com/photo-1574863312236-9e70c2f566ad?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1357&q=80" />
+              <div class="card-mega-infos">
+                <div>
+                  <h3>Name: <%= megalith.name %></h3>
+                  <h5>Tagline: <%= megalith.tagline %></h5>
+                  <p>Category</p>
+                  <p>Avg rating</p>
+                </div>
+              </div>
+            </div>
+            <% end %>
+            <% end %>
+          </div>
+      </div>
+    </div>
+    <div class="col-xs-12 col-sm-6 col-md-4">
+    <div id="map"
+          data-markers="<%= @markers.to_json %>"
+          data-mapbox-api-key="<%= ENV['MAPBOX_API_KEY'] %>">
+      </div>
+    </div>
+
+
+  </div>
+
