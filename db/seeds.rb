@@ -13,7 +13,7 @@ photoadmin = User.create(email: 'photographer@test.com', password: 'password', u
 
 json_file = File.join(File.dirname(__FILE__), "./seed-play/Dorset-latlong.json")
 liths = JSON.parse(File.read(json_file))
-liths.each do |lith|
+liths.first(20).each do |lith|
   new_lith = Megalith.new(
     name: lith['name'],
     category: lith['category'],
