@@ -1,0 +1,2 @@
+class MegalithPhotosController < ApplicationController
+end
