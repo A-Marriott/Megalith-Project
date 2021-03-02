@@ -1,6 +1,6 @@
 class Megalith < ApplicationRecord
   has_many :ratings
-  has_many :megalith_photos
+  has_many :megalith_photos, dependent: :destroy
   has_many :favourites
   has_many :comments
   has_many :visiteds
