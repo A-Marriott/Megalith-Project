@@ -10,4 +10,5 @@ class MegalithsController < ApplicationController
   def new
     @megalith = Megalith.new
   end
+
 end

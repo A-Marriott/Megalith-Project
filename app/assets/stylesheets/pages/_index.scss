@@ -1,19 +1,15 @@
 // Import page-specific CSS files here.
 @import "home";
 
+
 .megalith-container {
   display: flex;
 }
 
-.content {
-  justify-content: center;
-}
-
 .index-cards-container {
-  width: 66%;
-  grid-gap: 16px;
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  grid-gap: 16px;
 }
 
 .index-card {
@@ -24,7 +20,8 @@
   background: grey;
   margin-top: 8px;
   height: 100vh;
-  width: 33%;
   position: sticky;
   top: 0;
+  padding-right: 0px;
+  padding-left: 0px;
 }
