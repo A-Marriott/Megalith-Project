@@ -3,7 +3,6 @@
   <%= f.input :category %>
   <%= f.input :tagline %>
   <%= f.input :description %>
-  <%= f.association :megalith_photos %>
   <%= f.input :photos, as: :file, input_html: { multiple: true } %>
   <%= f.button :submit %>
 <% end %>
