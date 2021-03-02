@@ -1,6 +1,7 @@
 require 'json'
 
 # # use only those liths for which we have a phot url
+# check if imgurl contains geograph,if so drop it
 # v1 = JSON.parse(File.read('Dorset-v1.json'))
 # with_photos = v1.select { |_k, lith| lith.keys.include? 'imgurl' }
 # File.write('Dorset-with-photos.json', JSON.dump(with_photos))
