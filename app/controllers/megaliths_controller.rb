@@ -16,6 +16,7 @@ class MegalithsController < ApplicationController
     if @megalith.save
       if params[:megalith][:photos]
         @megalith_photo = MegalithPhoto.new(user: current_user, megalith: Megalith.last)
+        raise
         @megalith_photo
       end
       redirect_to megalith_path(@megalith)
