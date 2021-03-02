@@ -26,8 +26,4 @@ class MegalithsController < ApplicationController
   def megalith_params
     params.require(:megalith).permit(:name, :category, :tagline, :description)
   end
-
-  # def megalith_photo_params
-  #   params.require(:megalith_photo).permit(:photo)
-  # end
 end
