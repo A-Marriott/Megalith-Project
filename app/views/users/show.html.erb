@@ -1,0 +1,11 @@
+<div class="container">
+  <div class="profile-details">
+    <% if @user %>
+      <%= cl_image_tag '553o7l389jwb8060qxkf9hezyart', alt: "profile picture", class: "profile-picture" %>
+    <% else %>
+      <div class="profile-substitute"></div>
+    <% end %>
+    <h1><%= @user.username %></h1>
+    <%= link_to "edit", edit_user_registration_path, class: "btn btn-outline-secondary" %>
+  </div>
+</div>

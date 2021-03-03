@@ -10,6 +10,7 @@ class User < ApplicationRecord
   has_many :megalith_photos
   has_many :trip_users
   has_many :trips, through: :trip_users
+  has_one_attached :photo
 
   def visited
     self.visiteds.map(&:megalith)
