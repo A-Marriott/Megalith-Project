@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_03_01_182917) do
+ActiveRecord::Schema.define(version: 2021_03_03_122747) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -128,7 +128,6 @@ ActiveRecord::Schema.define(version: 2021_03_01_182917) do
 
   create_table "trips", force: :cascade do |t|
     t.string "name"
-    t.string "duration"
     t.string "tagline"
     t.string "top_tip"
     t.text "description"
@@ -136,6 +135,7 @@ ActiveRecord::Schema.define(version: 2021_03_01_182917) do
     t.integer "upvote_score"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.boolean "published"
   end
 
   create_table "users", force: :cascade do |t|
