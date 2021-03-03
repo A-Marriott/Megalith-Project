@@ -103,18 +103,41 @@
   <h2>Most Visited Sites</h2>
   <div class="row">
     <div class="col-xs-12 col-sm-6 col-md-4">
-        <div class="megalith-card">
-          <div class="card-mega">
-              <img src="https://images.unsplash.com/photo-1574863312236-9e70c2f566ad?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1357&q=80" />
-            <div class="card-mega-infos">
-              <div>
-                <h2>Name of megalith</h2>
-                  <p>★<strong>4.67</strong></p>
+        <div class="index-cards-container">
+        <% @megaliths.first(3).each do |megalith| %>
+          <%= link_to megalith_path(megalith) do %>
+            <div class="card-mega">
+              <%= cl_image_tag megalith.megalith_photos.first.photo.key, height: 200, width: 200, crop: :fill %>
+              <div class="card-mega-infos">
+                <div>
+                  <h2><%= megalith.name %></h2>
+                  <p><%= megalith.description.truncate(35) %></p>
+                </div>
+                  <p class="card-mega-pricing">latitude: <%= megalith.latitude %></p>
+                  <p>longitude: <%= megalith.longitude %></p>
               </div>
-              <h2 class="card-mega-pricing">Something</h2>
             </div>
-          </div>
-        </div>
+          <%end%>
+        <%end%>
+        <div class="collapse" id="collapseExample">
+            <% @megaliths.last(7).each do |megalith| %>
+              <%= link_to megalith_path(megalith) do %>
+                <div class="card-mega mt-3">
+                  <%= cl_image_tag megalith.megalith_photos.first.photo.key, height: 200, width: 200, crop: :fill %>
+                  <div class="card-mega-infos">
+                    <div>
+                      <h2><%= megalith.name %></h2>
+                      <p><%= megalith.description.truncate(35) %></p>
+                    </div>
+                      <p class="card-mega-pricing">latitude: <%= megalith.latitude %></p>
+                      <p>longitude: <%= megalith.longitude %></p>
+                  </div>
+                </div>
+              <%end%>
+            <%end%>
+            </div>
+            <a class="btn btn-outline-secondary" id="view-more" data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">View More</a>
+      </div>
     </div>
   </div>
 </div>
