@@ -1,8 +1,9 @@
 class TripsController < ApplicationController
   def new
+    @megalith = Megalith.find(params[:megalith_id])
     @trip = Trip.new
   end
 
-  def edit
+  def create
   end
 end
