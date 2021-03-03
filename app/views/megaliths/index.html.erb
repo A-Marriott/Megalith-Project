@@ -26,8 +26,9 @@
     </div>
   </div>
   <div class="col-12 col-lg-4">
-    <div id="map" src='https://api.mapbox.com/[...]?access_token==pk.eyJ1IjoiYWdlbnRuZWFsZSIsImEiOiJja2wwczB5ZnozZDh5Mm9xbnJnY3lzbGRiIn0.eCVJCp1SGKX9jYNA7twz-g'>
-    </div>
+    <div id="map"
+     data-markers="<%= @markers.to_json %>"
+     data-mapbox-api-key="<%= ENV['MAPBOX_API_KEY'] %>"></div>
   </div>
 </div>
 
