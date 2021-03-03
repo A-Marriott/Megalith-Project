@@ -54,6 +54,10 @@
 
   <HR>
 
+<div id="map"
+     style="width: 100%; height: 600px;"
+     data-markers="<%= @markers.to_json %>"
+     data-mapbox-api-key="<%= ENV['MAPBOX_API_KEY'] %>"></div>
   <div class="description-text-box">
     <div class="tagline"><h4>Tagline: <%= @megalith.tagline %> </h4></div>
     <div class="Description"><p>Description: <%= @megalith.description %></p></div>
