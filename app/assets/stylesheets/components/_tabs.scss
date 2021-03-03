@@ -1,0 +1,23 @@
+.nav-tabs {
+  .nav-link {
+    color: black;
+    background-color: transparent;
+  }
+  .nav-link:hover {
+    color: $clay-red;
+    border-top: $clay-red;
+    border-left: $clay-red;
+    border-right: $clay-red;
+  }
+  .nav-link.active {
+    color: black;
+    cursor: initial;
+    border-top: 1px solid $clay-red;
+    border-left: 1px solid $clay-red;
+    border-right: 1px solid $clay-red;
+  }
+  .nav-link.active:hover {
+    color: black;
+  }
+}
+
