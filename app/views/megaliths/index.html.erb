@@ -1,14 +1,15 @@
-<div class="container">
-  <div>
-    <div class="search-bar">
-    </div>
-  </div>
+
 
   <div class="row flex-column-reverse flex-lg-row">
 
 
     <div class="col-12 col-lg-8">
-      <div class="megalith-container mt-3">
+      <div class="ml-3 mt-3">
+        <h2>Sites near [search term]</h2>
+        <div class="search-bar">
+        </div>
+      </div>
+      <div class="megalith-container m-3">
         <div class="index-cards-container">
           <% @megaliths.each do |megalith| %>
             <%= link_to megalith_path(megalith) do %>
@@ -33,5 +34,4 @@
       </div>
     </div>
   </div>
-</div>
 
