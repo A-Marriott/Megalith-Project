@@ -1,0 +1,41 @@
+
+.title-elements {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  &-left {
+    display: flex;
+    align-items: center;
+  }
+  .favourites-star {
+    font-size: 32px;
+  }
+  .title {
+    margin-right: 16px;
+  }
+}
+
+.subheading-elements {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.description-text-box {
+  background-color: white;
+  padding: 5px;
+  margin-top: 16px;
+  margin-bottom: 16px;
+}
+
+#showpage-map {
+  background: grey;
+  margin-top: 8px;
+  width: inherit;
+  height: 30vh;
+  position: sticky;
+  top: 0;
+  padding-right: 0px;
+  padding-left: 0px;
+}
