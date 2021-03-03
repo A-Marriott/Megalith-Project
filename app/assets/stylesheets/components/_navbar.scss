@@ -8,6 +8,7 @@
 .navbar-megalithic-transparent {
   background: transparent;
   transition: 0.5s background-color ease;
+  filter: brightness(0) invert(1);
 }
 
 
