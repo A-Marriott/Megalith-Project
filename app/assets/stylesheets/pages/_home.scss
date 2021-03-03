@@ -1,7 +1,9 @@
 // Specific CSS for your home-page
 
 .homepage-card-container {
-  display: grid;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
   grid-gap: 16px;
 
 
