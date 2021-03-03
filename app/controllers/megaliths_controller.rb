@@ -5,6 +5,11 @@ class MegalithsController < ApplicationController
 
   def show
     @megalith = Megalith.find(params[:id])
+    @trip_ids = @megalith.trip_ids
+    @all_trips = @trip_ids.map do |id|
+      Trip.find(id)
+    end
+    @trips = @all_trips.select { |trip| trip.published == true }
   end
 
   def new
