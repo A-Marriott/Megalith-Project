@@ -1,0 +1,13 @@
+<div class="container mt-5">
+  <h1>Finalise trip</h1>
+  <%= simple_form_for [ @megalith, @trip ] do |f| %>
+    <%= f.input :name %>
+    <%= f.input :tagline %>
+    <%= f.input :description %>
+    <%= f.input :top_tip %>
+    <%= f.input :date_visited %>
+    <%= f.input :published, label: "Publish trip?" %>
+    <%= f.input :photos, as: :file, input_html: { multiple: true } %>
+    <%= f.button :submit %>
+  <% end %>
+</div>

@@ -13,7 +13,7 @@ class MegalithsController < ApplicationController
 
   def show
     @megalith = Megalith.find(params[:id])
-
+    @trips = @megalith.trips.where(published: true)
     @markers = [{lat:@megalith.latitude, lng:@megalith.longitude}]
   end
 
