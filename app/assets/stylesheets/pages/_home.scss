@@ -2,17 +2,54 @@
 
 .homepage-card-container {
   display: flex;
-  align-items: center;
+  flex-wrap: wrap;
+  align-items: stretch;
   justify-content: space-between;
   grid-gap: 16px;
-
-
-
+  margin: 50px;
 }
 
 .homepage-card{
-  padding: 50px;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: center;
+  flex-grow: 1;
+  background: #F4F4F4;
   font-weight: lighter;
   text-align: center;
+  padding: 16px;
 }
 
+.homepage-banner {
+  background-size: cover;
+  background-position: center;
+  padding: 30vh 0;
+}
+
+.homepage-banner h1 {
+  margin: 0;
+  color: white;
+  text-shadow: 1px 1px 3px rgba(0,0,0,0.2);
+  font-size: 32px;
+  font-weight: bold;
+}
+
+.homepage-banner h2 {
+  color: white;
+}
+
+.homepage-banner p {
+  font-size: 20px;
+  color: white;
+  opacity: .7;
+  text-shadow: 1px 1px 3px rgba(0,0,0,0.2);
+}
+
+.most-visited-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-content: flex-start;
+  grid-gap: 16px;
+}
