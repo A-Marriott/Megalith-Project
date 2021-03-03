@@ -1,26 +1,25 @@
 
 .title-elements {
-  .title {
-    display: inline-block;
-  }
-  .more-options-button {
-    margin: 5px;
-    display: inline-block;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  &-left {
+    display: flex;
+    align-items: center;
   }
   .favourites-star {
-    display: inline-block;
-    float: right;
+    font-size: 32px;
+  }
+  .title {
+    margin-right: 16px;
   }
 }
 
 .subheading-elements {
-  .rating {
-    display: inline-block;
-  }
-  .category {
-    display: inline-block;
-    float: right;
-  }
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 }
 
 .description-text-box {
