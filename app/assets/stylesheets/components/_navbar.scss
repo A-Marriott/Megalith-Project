@@ -8,7 +8,11 @@
   background: transparent;
   transition: all 0.5s ease;
   .navbar-brand {
-  filter: invert(91%) sepia(2%) saturate(1648%) hue-rotate(42deg) brightness(82%) contrast(100%);
+    filter: invert(91%) sepia(2%) saturate(1648%) hue-rotate(42deg) brightness(82%) contrast(100%);
+  }
+  .navigation-search {
+    display: none;
+    transition: all 1s ease;
   }
 }
 
