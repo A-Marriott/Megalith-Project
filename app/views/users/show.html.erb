@@ -8,20 +8,77 @@
     <h1 class="text-center my-2"><%= @user.username %></h1>
     <%= link_to "edit", edit_user_registration_path, class: "btn btn-outline-secondary" %>
   </div>
-    <ul class="nav nav-tabs" id="myTab" role="tablist">
+    <ul class="nav nav-tabs justify-content-around" id="myTab" role="tablist">
     <li class="nav-item" role="presentation">
-      <button class="nav-link active" id="profile-tab" data-bs-toggle="tab" data-bs-target="#profile" type="button" role="tab" aria-controls="profile" aria-selected="true">Profile</button>
+      <button class="nav-link active" id="profile-tab" data-toggle="tab" data-target="#profile" type="button" role="tab" aria-controls="profile" aria-selected="true">Profile</button>
     </li>
     <li class="nav-item" role="presentation">
-      <button class="nav-link" id="saved-tab" data-bs-toggle="tab" data-bs-target="#saved" type="button" role="tab" aria-controls="saved" aria-selected="false">Saved</button>
+      <button class="nav-link" id="saved-tab" data-toggle="tab" data-target="#saved" type="button" role="tab" aria-controls="saved" aria-selected="false">Saved</button>
     </li>
     <li class="nav-item" role="presentation">
-      <button class="nav-link" id="trips-tab" data-bs-toggle="tab" data-bs-target="#trips" type="button" role="tab" aria-controls="trips" aria-selected="false">Trips</button>
+      <button class="nav-link" id="trips-tab" data-toggle="tab" data-target="#trips" type="button" role="tab" aria-controls="trips" aria-selected="false">Trips</button>
     </li>
   </ul>
   <div class="tab-content" id="myTabContent">
-    <div class="tab-pane fade show active" id="profile" role="tabpanel" aria-labelledby="profile-tab"><h1>MY PROFILE</h1></div>
-    <div class="tab-pane fade" id="saved" role="tabpanel" aria-labelledby="saved-tab"><h1>SAVED LITHS</h1></div>
-    <div class="tab-pane fade" id="trips" role="tabpanel" aria-labelledby="trips-tab"><h1>TRIPS??!!?!</h1></div>
+    <div class="tab-pane fade show active" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+      <div class="badge-container">
+        <h2>holding text, badges here</h2>
+      </div>
+      <div class="comment-container">
+        <h2>holding text, comments here</h2>
+        <% @user.comments.each do |comment| %>
+          <!-- Todd, agree/get format for comment cards -->
+        <% end %>
+      </div>
+      <div class="photo-container">
+        <h2>holding text, photos here</h2>
+        <% @user.megalith_photos.each do |mega_photo| %>
+          <div class="profile-megalith-photos">
+            <%= mega_photo.megalith.name %> Upvotes: <%= mega_photo.upvote_score %>
+            <%= cl_image_tag mega_photo.photo.key, alt: mega_photo.megalith.name %>
+          </div>
+        <% end %>
+      </div>
+    </div>
+    <div class="tab-pane fade" id="saved" role="tabpanel" aria-labelledby="saved-tab">
+      <ul class="nav nav-tabs justify-content-around" id="myTab" role="tablist">
+        <li class="nav-item" role="presentation">
+          <a class="nav-link active" id="favourites-tab" data-toggle="tab" href="#favourites" role="tab" aria-controls="favourites" aria-selected="true">Favourites</a>
+        </li>
+        <li class="nav-item" role="presentation">
+          <a class="nav-link" id="visited-tab" data-toggle="tab" href="#visited" role="tab" aria-controls="visited" aria-selected="false">Visited</a>
+        </li>
+      </ul>
+      <div class="tab-content" id="myTabContent">
+        <div class="tab-pane fade show active" id="favourites" role="tabpanel" aria-labelledby="favourites-tab">
+          <h2>Delete me I'm holding text</h2>
+          <p>Delete me too: Stonehenge, Eggardon Hill, Barrows aplenty</p>
+          <% @user.favourited.each do |megalith| %>
+            <!-- get megalith cards from Todd -->
+          <% end %>
+        </div>
+        <div class="tab-pane fade" id="visited" role="tabpanel" aria-labelledby="visited-tab">
+          <h2>Delete me I'm holding text</h2>
+          <p>Delete me too: Stonehenge, Eggardon Hill, Barrows aplenty</p>
+          <% @user.visited.each do |megalith| %>
+            <!-- get megalith cards from Todd -->
+          <% end %>
+        </div>
+      </div>
+    </div>
+    <div class="tab-pane fade" id="trips" role="tabpanel" aria-labelledby="trips-tab">
+      <ul class="nav nav-tabs justify-content-around" id="myTab" role="tablist">
+        <li class="nav-item" role="presentation">
+          <a class="nav-link active" id="in-planning-tab" data-toggle="tab" href="#in-planning" role="tab" aria-controls="in-planning" aria-selected="true">In Planning</a>
+        </li>
+        <li class="nav-item" role="presentation">
+          <a class="nav-link" id="completed-tab" data-toggle="tab" href="#completed" role="tab" aria-controls="completed" aria-selected="false">Completed</a>
+        </li>
+      </ul>
+      <div class="tab-content" id="myTabContent">
+        <div class="tab-pane fade show active" id="in-planning" role="tabpanel" aria-labelledby="in-planning-tab">...</div>
+        <div class="tab-pane fade" id="completed" role="tabpanel" aria-labelledby="completed-tab">...</div>
+      </div>
+    </div>
   </div>
 </div>

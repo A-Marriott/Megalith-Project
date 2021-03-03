@@ -25,4 +25,29 @@
   }
 }
 
+.badge-container {
+  height: 200px;
+  // to remove:
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid black;
+}
 
+.comment-container {
+  height: 200px;
+  // to remove:
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid black;
+}
+
+.photo-container {
+  height: 200px;
+  // to remove:
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid black;
+}
