@@ -1,2 +1,8 @@
-<h1>Trips#edit</h1>
-<p>Find me in app/views/trips/edit.html.erb</p>
+<%= form_tag users_path, method: :get do %>
+  <%= text_field_tag :query,
+    params[:query],
+    class: "form-control",
+    placeholder: "Invite others"
+  %>
+  <%= submit_tag "Search", class: "btn btn-primary" %>
+<% end %>

@@ -19,4 +19,11 @@ class User < ApplicationRecord
   def favourited
     self.favourites.map(&:megalith)
   end
+
+  include PgSearch::Model
+  pg_search_scope :search_users,
+    against: [:email, :username],
+    using: {
+      tsearch: { prefix: true }
+    }
 end
