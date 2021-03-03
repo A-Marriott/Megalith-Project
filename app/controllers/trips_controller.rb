@@ -24,7 +24,12 @@ class TripsController < ApplicationController
   end
 
   def update
-    if params[:trip][:top_tip]
+    if params["trip"]["date_visited(1i)"]
+      if params[:trip][:photos]
+        params[:trip][:photos].each do |photo|
+          TripPhoto.create(trip: @trip, photo: photo)
+        end
+      end
       @trip.update(finalise_trip_params)
       redirect_to trip_path(@trip)
     else
