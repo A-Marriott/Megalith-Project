@@ -1,11 +1,27 @@
 <div class="container">
-  <div class="profile-details">
+  <div class="profile-details my-3 p-2">
     <% if @user %>
-      <%= cl_image_tag '553o7l389jwb8060qxkf9hezyart', alt: "profile picture", class: "profile-picture" %>
+      <%= cl_image_tag '553o7l389jwb8060qxkf9hezyart', alt: "profile picture", class: "profile-picture my-2" %>
     <% else %>
-      <div class="profile-substitute"></div>
+      <div class="profile-substitute my-2"></div>
     <% end %>
-    <h1><%= @user.username %></h1>
+    <h1 class="text-center my-2"><%= @user.username %></h1>
     <%= link_to "edit", edit_user_registration_path, class: "btn btn-outline-secondary" %>
+  </div>
+    <ul class="nav nav-tabs" id="myTab" role="tablist">
+    <li class="nav-item" role="presentation">
+      <button class="nav-link active" id="profile-tab" data-bs-toggle="tab" data-bs-target="#profile" type="button" role="tab" aria-controls="profile" aria-selected="true">Profile</button>
+    </li>
+    <li class="nav-item" role="presentation">
+      <button class="nav-link" id="saved-tab" data-bs-toggle="tab" data-bs-target="#saved" type="button" role="tab" aria-controls="saved" aria-selected="false">Saved</button>
+    </li>
+    <li class="nav-item" role="presentation">
+      <button class="nav-link" id="trips-tab" data-bs-toggle="tab" data-bs-target="#trips" type="button" role="tab" aria-controls="trips" aria-selected="false">Trips</button>
+    </li>
+  </ul>
+  <div class="tab-content" id="myTabContent">
+    <div class="tab-pane fade show active" id="profile" role="tabpanel" aria-labelledby="profile-tab"><h1>MY PROFILE</h1></div>
+    <div class="tab-pane fade" id="saved" role="tabpanel" aria-labelledby="saved-tab"><h1>SAVED LITHS</h1></div>
+    <div class="tab-pane fade" id="trips" role="tabpanel" aria-labelledby="trips-tab"><h1>TRIPS??!!?!</h1></div>
   </div>
 </div>
