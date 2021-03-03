@@ -22,3 +22,9 @@
   padding-right: 0px;
   padding-left: 0px;
 }
+
+@media only screen and (max-width: 600px), (max-width: 800px) {
+  #map {
+    height: 80vh;
+  }
+}
