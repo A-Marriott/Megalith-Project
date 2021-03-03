@@ -1,0 +1,42 @@
+
+.title-elements {
+  .title {
+    display: inline-block;
+  }
+  .more-options-button {
+    margin: 5px;
+    display: inline-block;
+  }
+  .favourites-star {
+    display: inline-block;
+    float: right;
+  }
+}
+
+.subheading-elements {
+  .rating {
+    display: inline-block;
+  }
+  .category {
+    display: inline-block;
+    float: right;
+  }
+}
+
+.description-text-box {
+  background-color: white;
+  padding: 5px;
+  margin-top: 16px;
+  margin-bottom: 16px;
+}
+
+#showpage-map {
+  background: grey;
+  margin-top: 8px;
+  width: inherit;
+  height: 30vh;
+  position: sticky;
+  top: 0;
+  padding-right: 0px;
+  padding-left: 0px;
+}
