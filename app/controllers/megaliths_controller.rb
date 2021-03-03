@@ -13,9 +13,14 @@ class MegalithsController < ApplicationController
 
   def create
     @megalith = Megalith.new megalith_params
-    if @megalith.save
-      MegalithPhoto.create(user: current_user, megalith: Megalith.last, photo: params[:megalith][:photo]) if params[:megalith][:photo]
+    if params[:megalith][:photos] && @megalith.save
+        params[:megalith][:photos].each do |photo|
+          MegalithPhoto.create(user: current_user, megalith: @megalith, photo: photo)
+        end
       redirect_to megalith_path(@megalith)
+    elsif @megalith.valid?
+      flash[:alert] = "Please upload at least one photo"
+      render :new
     else
       render :new
     end

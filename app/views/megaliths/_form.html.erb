@@ -3,6 +3,6 @@
   <%= f.input :category %>
   <%= f.input :tagline %>
   <%= f.input :description %>
-  <%= f.input :photo, as: :file %>
+  <%= f.input :photos, as: :file, input_html: { multiple: true }, required: true %>
   <%= f.button :submit %>
 <% end %>
