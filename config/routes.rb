@@ -9,8 +9,6 @@ Rails.application.routes.draw do
     resources :visiteds, only: :create
     resources :megalith_photos, only: :create
   end
-  resources :users, only: [:show, :edit, :update] do
-    resources :trips, only: [:edit, :update]
-  end
-  resources :trips, only: [:destroy]
+  resources :users, only: [:show, :edit, :update]
+  resources :trips, only: [:edit, :update, :show, :destroy]
 end
