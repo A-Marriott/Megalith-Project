@@ -1,5 +1,5 @@
 class TripsController < ApplicationController
-  before_action :set_trip, only: [:show, :edit, :update, :destroy, :finalise_trip_edit]
+  before_action :set_trip, only: [:show, :edit, :update, :destroy, :finalise_trip_edit, :publish_trip]
 
   def new
     @megalith = Megalith.find(params[:megalith_id])
@@ -53,6 +53,6 @@ class TripsController < ApplicationController
   end
 
   def finalise_trip_params
-    params.require(:trip).permit(:name, :tagline, :description, :top_tip, :date_visited)
+    params.require(:trip).permit(:name, :tagline, :description, :top_tip, :date_visited, :published)
   end
 end

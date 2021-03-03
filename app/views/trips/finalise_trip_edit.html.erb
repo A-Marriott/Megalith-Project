@@ -6,6 +6,7 @@
     <%= f.input :description %>
     <%= f.input :top_tip %>
     <%= f.input :date_visited %>
+    <%= f.input :published, label: "Publish trip?" %>
     <%= f.input :photos, as: :file, input_html: { multiple: true } %>
     <%= f.button :submit %>
   <% end %>

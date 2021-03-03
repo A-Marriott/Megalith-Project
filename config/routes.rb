@@ -12,5 +12,4 @@ Rails.application.routes.draw do
   resources :users, only: [:show, :edit, :update]
   resources :trips, only: [:edit, :update, :show, :destroy]
   get "trips/:id/finalise_trip", to: "trips#finalise_trip_edit", as: :finalise_trip_edit
-  patch "trips/:id", to: "trips#finalise_trip_update", as: :finalise_trip_update
 end
