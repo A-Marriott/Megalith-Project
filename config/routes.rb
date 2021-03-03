@@ -3,6 +3,7 @@ Rails.application.routes.draw do
   root to: 'pages#home'
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
   resources :megaliths, only: [:index, :show, :new, :create, :update] do
+    resources :trips, only: [:new, :create]
     resources :favourites, only: :create
     resources :comments, only: :create
     resources :visiteds, only: :create
@@ -11,5 +12,5 @@ Rails.application.routes.draw do
   resources :users, only: [:show, :edit, :update] do
     resources :trips, only: [:edit, :update]
   end
-  resources :trips, only: [:create, :destroy]
+  resources :trips, only: [:destroy]
 end
