@@ -1,4 +1,6 @@
 class TripsController < ApplicationController
+  before_action :set_trip, only: [:show, :edit, :update, :destroy, :finalise_trip_edit]
+
   def new
     @megalith = Megalith.find(params[:megalith_id])
     @trip = Trip.new
@@ -16,30 +18,41 @@ class TripsController < ApplicationController
   end
 
   def show
-    @trip = Trip.find(params[:id])
   end
 
   def edit
-    @trip = Trip.find(params[:id])
   end
 
   def update
-    @trip = Trip.find(params[:id])
-    @trip.update(trip_params)
-
-    redirect_to trip_path(@trip)
+    if params[:trip][:top_tip]
+      @trip.update(finalise_trip_params)
+      redirect_to trip_path(@trip)
+    else
+      @trip.update(trip_params)
+      redirect_to trip_path(@trip)
+    end
   end
 
   def destroy
-    @trip = Trip.find(params[:id])
     @trip.destroy
 
     redirect_to root_path
   end
 
+  def finalise_trip_edit
+  end
+
   private
+
+  def set_trip
+    @trip = Trip.find(params[:id])
+  end
 
   def trip_params
     params.require(:trip).permit(:name, :tagline, :description)
+  end
+
+  def finalise_trip_params
+    params.require(:trip).permit(:name, :tagline, :description, :top_tip, :date_visited)
   end
 end
