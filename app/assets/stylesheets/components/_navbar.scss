@@ -1,12 +1,22 @@
-.navbar-lewagon {
+.navbar-megalithic {
+  // [...]
   justify-content: space-between;
-  background: white;
+  background-color: white;
+  transition: 0.5s background-color ease;
 }
 
-.navbar-lewagon .navbar-collapse {
+.navbar-megalithic-transparent {
+  background: transparent;
+  transition: 0.5s background-color ease;
+  filter: brightness(0) invert(1);
+}
+
+
+
+.navbar-megalithic .navbar-collapse {
   flex-grow: 0;
 }
 
-.navbar-lewagon .navbar-brand img {
+.navbar-megalithic .navbar-brand img {
   width: 40px;
 }
