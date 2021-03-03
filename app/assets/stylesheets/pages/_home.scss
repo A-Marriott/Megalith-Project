@@ -1,7 +1,16 @@
 // Specific CSS for your home-page
 
+.homepage-card-container {
+  display: grid;
+  grid-gap: 16px;
+
+
+
+}
+
 .homepage-card{
   padding: 50px;
   font-weight: lighter;
+  text-align: center;
 }
 
