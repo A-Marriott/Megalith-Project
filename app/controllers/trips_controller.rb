@@ -30,18 +30,18 @@ class TripsController < ApplicationController
   end
 
   def update
-    @other_megaliths = params[:trip][:megalith_ids]
-
-    @other_megaliths.shift
     if params[:trip][:photos]
       params[:trip][:photos].each do |photo|
         TripPhoto.create(trip: @trip, photo: photo)
       end
-    end
+    else
+      @other_megaliths = params[:trip][:megalith_ids]
+      @other_megaliths.shift
 
-    @trip.trip_megaliths.where(main: false).destroy_all
-    @other_megaliths.each do |lith|
-      TripMegalith.create(megalith_id: lith, trip: @trip, main: false)
+      @trip.trip_megaliths.where(main: false).destroy_all
+      @other_megaliths.each do |lith|
+        TripMegalith.create(megalith_id: lith, trip: @trip, main: false)
+      end
     end
 
     @trip.update(trip_params)

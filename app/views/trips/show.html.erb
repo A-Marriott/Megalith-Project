@@ -8,9 +8,23 @@
   <% if @trip.date_visited %>
     <p>date_visited: <%= @trip.date_visited %></p>
   <% end %>
-  <% @trip.trip_megaliths.each do |trip_megalith| %>
-    <p>megalith: <%= trip_megalith.megalith.name %> </p>
+  <h3>Primary lith:<%= @trip.trip_megaliths.first.megalith.name %></h3>
+  <% @trip.trip_megaliths[1..-1].each do |trip_megalith| %>
+    <p>Other liths: <%= trip_megalith.megalith.name %> </p>
   <% end %>
+  <% if @trip.trip_photos %>
+    <% @trip.trip_photos.each do |photo| %>
+      <%= cl_image_tag photo.photo.key, height: 200, width: 200, crop: :fill  %>
+    <% end %>
+  <% end %>
+
+  <h3>upload photos</h3>
+  <%= simple_form_for @trip do |f| %>
+    <%= f.input :photos, as: :file, input_html: { multiple: true, class: 'hidden', id: 'photo-input', label_html: { class: 'upload-photo'}, label: '📷 Upload a photo' } %>
+    <%= f.button :submit %>
+  <% end %>
+    <%= image_tag "", width: 200, class: "hidden", id: "photo-preview" %>
+
 <%= link_to 'Edit', edit_trip_path(@trip) %>
 <%= link_to 'Delete',
             trip_path(@trip),
