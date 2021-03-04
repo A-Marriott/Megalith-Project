@@ -19,11 +19,11 @@
   <% end %>
 
   <h3>upload photos</h3>
-  <%= simple_form_for @trip do |f| %>
+  <%= simple_form_for @trip, html: { id: :photo_upload_form } do |f| %>
     <%= f.input :photos, as: :file, input_html: { multiple: true, class: 'hidden', id: 'photo-input' } %>
     <%= f.button :submit %>
   <% end %>
-    <%= image_tag "", width: 200, class: "hidden", id: "photo-preview" %>
+    <img src="" class="hidden" width="200" id="photo-preview">
 
 <%= link_to 'Edit', edit_trip_path(@trip) %>
 <%= link_to 'Delete',
