@@ -1,5 +1,6 @@
 const collapse = () => {
   const collapseBtn = document.getElementById( "view-more" );
+  if (collapseBtn) {
     collapseBtn.addEventListener("click", () => {
       if (collapseBtn.innerHTML === "View More") {
         collapseBtn.innerHTML = "View Less"
@@ -7,6 +8,7 @@ const collapse = () => {
         collapseBtn.innerHTML = "View More"
       }
     });
+  }
 }
 
 export default collapse;
