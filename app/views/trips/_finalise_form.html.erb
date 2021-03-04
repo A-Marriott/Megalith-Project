@@ -5,7 +5,6 @@
   <%= f.association :megaliths, as: :check_boxes, collection: Megalith.where.not(id: @megalith.id), label: "Does your trip include other megaliths?" %>
   <%= f.input :top_tip %>
   <%= f.input :date_visited %>
-  <%= f.input :photos, as: :file, input_html: { multiple: true } %>
   <%= f.input :published, label: "Publish trip?" %>
   <%= f.button :submit %>
 <% end %>
