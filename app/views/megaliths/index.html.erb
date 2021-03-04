@@ -9,17 +9,7 @@
       <div class="index-cards-container">
         <% @megaliths.each do |megalith| %>
           <%= link_to megalith_path(megalith) do %>
-            <div class="card-mega">
-              <%= cl_image_tag megalith.megalith_photos.first.photo.key, height: 200, width: 200, crop: :fill %>
-              <div class="card-mega-infos">
-                <div>
-                  <h2><%= megalith.name %></h2>
-                  <p><%= megalith.description.truncate(35) %></p>
-                </div>
-                  <p class="card-mega-pricing">latitude: <%= megalith.latitude %></p>
-                  <p>longitude: <%= megalith.longitude %></p>
-              </div>
-            </div>
+            <%= render 'shared/card', megalith: megalith %>
           <%end%>
         <%end%>
       </div>
@@ -28,7 +18,7 @@
   <div class="col-12 col-lg-4">
     <div id="map"
      data-markers="<%= @markers.to_json %>"
-     data-mapbox-api-key="<%= ENV['MAPBOX_API_KEY'] %>"></div>
+     data-mapbox-api-key="<%= ENV['MAPBOX_API_KEY'] %>">
+    </div>
   </div>
 </div>
-

@@ -3,11 +3,17 @@
 
     <h1>Megalithipedia</h1>
     <h2>The best online archive of megalithic sites in the world.</h2>
-
-      <button type="button" class="btn btn-lg btn-outline-light"> Start Here </button>
-
-    <div class="search-bar mt-3" style="display: flex;">
-
+      <% if user_signed_in? %>
+        <div class="navigation-search mx-auto order-0">
+          <form class="form-inline mx-auto">
+          <input class="form-control col-9" type="search" placeholder="Search" aria-label="Search">
+          <button class="btn btn-secondary" type="submit">Go</button>
+          </form>
+        </div>
+      <%else%>
+        <%= link_to "Sign Up", new_user_session_path, class: "btn btn-light", type: "submit"%>
+        <%= link_to "Login", new_user_session_path, class: "btn btn-outline-light", type: "submit"%>
+      <% end %>
     </div>
 
   </div>
@@ -73,61 +79,38 @@
 
 
 <div class="container mt-3">
-  <h2>Top Rated Sites</h2>
-  <div class="row">
-    <div class="col-xs-12 col-sm-6 col-md-4">
-        <div class="megalith-card">
-          <div class="card-mega">
-              <img src="https://images.unsplash.com/photo-1574863312236-9e70c2f566ad?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1357&q=80" />
-            <div class="card-mega-infos">
-              <div>
-                <h2>Name of megalith</h2>
-                  <p>★<strong>4.67</strong></p>
-              </div>
-              <h2 class="card-mega-pricing">Something</h2>
-            </div>
-          </div>
-        </div>
+  <h2>Top Sites</h2>
+  <div class="most-visited-container"
+    <% @megaliths.first(3).each do |megalith| %>
+      <%= link_to megalith_path(megalith) do %>
+        <%= render 'shared/card', megalith: megalith %>
+      <%end%>
+    <%end%>
+    <div class="collapse" id="collapseExample">
+      <% @megaliths.last(7).each do |megalith| %>
+        <%= link_to megalith_path(megalith) do %>
+          <%= render 'shared/card', megalith: megalith %>
+        <%end%>
+      <%end%>
     </div>
   </div>
+  <a class="btn btn-outline-secondary mt-3" id="view-more" data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">View More</a>
 </div>
 
 <div class="container mt-3">
   <h2>Most Visited Sites</h2>
-  <div class="most-visited-container">
-    <div class="index-cards-container">
-      <% @megaliths.first(3).each do |megalith| %>
+  <div class="most-visited-container"
+    <% @megaliths.first(3).each do |megalith| %>
+      <%= link_to megalith_path(megalith) do %>
+        <%= render 'shared/card', megalith: megalith %>
+      <%end%>
+    <%end%>
+    <div class="collapse" id="collapseExample">
+      <% @megaliths.last(7).each do |megalith| %>
         <%= link_to megalith_path(megalith) do %>
-          <div class="card-mega">
-            <%= cl_image_tag megalith.megalith_photos.first.photo.key, height: 200, width: 200, crop: :fill %>
-            <div class="card-mega-infos">
-              <div>
-                <h2><%= megalith.name %></h2>
-                <p><%= megalith.description.truncate(35) %></p>
-              </div>
-                <p class="card-mega-pricing">latitude: <%= megalith.latitude %></p>
-                <p>longitude: <%= megalith.longitude %></p>
-            </div>
-          </div>
+          <%= render 'shared/card', megalith: megalith %>
         <%end%>
       <%end%>
-      <div class="collapse" id="collapseExample">
-          <% @megaliths.last(7).each do |megalith| %>
-            <%= link_to megalith_path(megalith) do %>
-              <div class="card-mega mt-3">
-                <%= cl_image_tag megalith.megalith_photos.first.photo.key, height: 200, width: 200, crop: :fill %>
-                <div class="card-mega-infos">
-                  <div>
-                    <h2><%= megalith.name %></h2>
-                    <p><%= megalith.description.truncate(35) %></p>
-                  </div>
-                    <p class="card-mega-pricing">latitude: <%= megalith.latitude %></p>
-                    <p>longitude: <%= megalith.longitude %></p>
-                </div>
-              </div>
-            <%end%>
-          <%end%>
-          </div>
     </div>
   </div>
   <a class="btn btn-outline-secondary mt-3" id="view-more" data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">View More</a>
@@ -136,13 +119,7 @@
 
 
 <div class="container mt-3">
-  <h2>Most Visited Sites</h2>
-    <div class="card-trip">
-  <img src="https://images.unsplash.com/photo-1525433712192-ab7b4628bd52?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" />
-  <div class="card-trip-infos">
-    <h2>Trip name</h2>
-    <p>Product description with <strong>relevant info</strong> only.</p>
-  </div>
+  <h2>Most popular trips</h2>
 </div>
 
 
