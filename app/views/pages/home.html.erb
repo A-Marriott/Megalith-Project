@@ -3,11 +3,17 @@
 
     <h1>Megalithipedia</h1>
     <h2>The best online archive of megalithic sites in the world.</h2>
-
-      <button type="button" class="btn btn-lg btn-outline-light"> Start Here </button>
-
-    <div class="search-bar mt-3" style="display: flex;">
-
+      <% if user_signed_in? %>
+        <div class="navigation-search mx-auto order-0">
+          <form class="form-inline mx-auto">
+          <input class="form-control col-9" type="search" placeholder="Search" aria-label="Search">
+          <button class="btn btn-light" type="submit">Go</button>
+          </form>
+        </div>
+      <%else%>
+        <%= link_to "Sign Up", new_user_session_path, class: "btn btn-light", type: "submit"%>
+        <%= link_to "Login", new_user_session_path, class: "btn btn-outline-light", type: "submit"%>
+      <% end %>
     </div>
 
   </div>
