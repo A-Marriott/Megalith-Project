@@ -8,7 +8,10 @@ const previewImageOnFileSelect = () => {
 }
 
 const displayPreview = (input) => {
-  if (input.files && input.files[0]) {
+  if (input.files) {
+    while (document.querySelector("#photo_upload_form > img") !== null) {
+      document.querySelector("#photo_upload_form > img").remove();
+    };
     let count = 0;
     for (const [key, value] of Object.entries(input.files)) {
 
@@ -20,7 +23,6 @@ const displayPreview = (input) => {
         document.getElementById(`photo_upload_form`).children[document.getElementById(`photo_upload_form`).children.length - 1].classList.remove('hidden');
       }
       reader.readAsDataURL(input.files[count])
-
       count += 1;
     }
   }
