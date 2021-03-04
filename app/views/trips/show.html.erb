@@ -20,7 +20,7 @@
 
   <h3>upload photos</h3>
   <%= simple_form_for @trip do |f| %>
-    <%= f.input :photos, as: :file, input_html: { multiple: true, class: 'hidden', id: 'photo-input', label_html: { class: 'upload-photo'}, label: '📷 Upload a photo' } %>
+    <%= f.input :photos, as: :file, input_html: { multiple: true, class: 'hidden', id: 'photo-input' } %>
     <%= f.button :submit %>
   <% end %>
     <%= image_tag "", width: 200, class: "hidden", id: "photo-preview" %>
