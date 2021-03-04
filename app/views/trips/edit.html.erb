@@ -1,4 +1,36 @@
 <div class="container mt-5">
   <h1>Edit trip</h1>
-  <%= render 'form' %>
+  <%= render 'trips/form' %>
+
+  <div class="trip-megaliths">
+    <div class="current-trip-megaliths">
+      <% @trip_megaliths.each do |trip_megalith| %>
+        <p><%= trip_megalith.megalith.name %></p>
+      <% end %>
+    </div>
+  </div>
+
+  <div class="trip-users">
+    <div class="current-trip-users">
+      <% @trip_users.each do |tripper| %>
+        <%= render 'shared/user_card', user: tripper, button: 'delete', trip: @trip %>
+      <% end %>
+    </div>
+
+    <div class="trip-user-search">
+      <%= form_tag edit_trip_path(@trip), method: :get, class: "d-flex", remote: true do %>
+        <%= text_field_tag :query,
+          params[:query],
+          class: "form-control",
+          placeholder: "Invite others"
+        %>
+        <%= hidden_field_tag 'trip_id', @trip.id.to_s %>
+        <%= submit_tag "Search", class: "btn btn-outline-secondary ml-2" %>
+      <% end %>
+    </div>
+
+    <div class="trip-user-search-results">
+    </div>
+  </div>
+
 </div>

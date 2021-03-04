@@ -9,7 +9,9 @@ Rails.application.routes.draw do
     resources :visiteds, only: :create
     resources :megalith_photos, only: :create
   end
-  resources :users, only: [:show, :edit, :update]
+  get "users/search", to: "users#search", as: :users_search
+  resources :users, only: [:index, :show, :edit, :update]
   resources :trips, only: [:edit, :update, :show, :destroy]
+  resources :trip_users, only: [:create, :destroy]
   get "trips/:id/finalise_trip", to: "trips#finalise_trip_edit", as: :finalise_trip_edit
 end
