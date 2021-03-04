@@ -1,11 +1,29 @@
 <h1>Trip show page</h1>
-<p>Name: <%= @trip.name %> </p>
-<p>tagline: <%= @trip.tagline %> </p>
-<p>description: <%= @trip.description %> </p>
-<% if @trip.top_tip %>
-<p>top_tip: <%= @trip.top_tip %> </p>
-<p>date_visited: <%= @trip.date_visited %> </p>
-<% end %>
+  <p>Name: <%= @trip.name %> </p>
+  <p>tagline: <%= @trip.tagline %> </p>
+  <p>description: <%= @trip.description %> </p>
+  <% if @trip.top_tip %>
+    <p>top_tip: <%= @trip.top_tip %> </p>
+  <% end %>
+  <% if @trip.date_visited %>
+    <p>date_visited: <%= @trip.date_visited %></p>
+  <% end %>
+  <h3>Primary lith:<%= @trip.trip_megaliths.first.megalith.name %></h3>
+  <% @trip.trip_megaliths[1..-1].each do |trip_megalith| %>
+    <p>Other liths: <%= trip_megalith.megalith.name %> </p>
+  <% end %>
+  <% if @trip.trip_photos %>
+    <% @trip.trip_photos.each do |photo| %>
+      <%= cl_image_tag photo.photo.key, height: 200, width: 200, crop: :fill  %>
+    <% end %>
+  <% end %>
+
+  <h3>upload photos</h3>
+  <%= simple_form_for @trip, html: { id: :photo_upload_form } do |f| %>
+    <%= f.input :photos, as: :file, input_html: { multiple: true, class: 'hidden', id: 'photo-input' } %>
+    <%= f.button :submit, class: "sub-btn" %>
+  <% end %>
+
 <%= link_to 'Edit', edit_trip_path(@trip) %>
 <%= link_to 'Delete',
             trip_path(@trip),
