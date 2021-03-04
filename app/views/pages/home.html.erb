@@ -1,10 +1,10 @@
-<div class="banner banner-home mb-5" style="background-image: linear-gradient(rgba(0,0,0,0.1),rgba(0,0,0,0.1)), url(https://images.unsplash.com/photo-1601465364325-34b5b5fdb6c4?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80);">
+<div class="homepage-banner banner-home mb-5" style="background-image: linear-gradient(rgba(0,0,0,0.1),rgba(0,0,0,0.1)), url(https://images.unsplash.com/photo-1601465364325-34b5b5fdb6c4?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80);">
   <div class="container">
 
     <h1>Megalithipedia</h1>
     <h2>The best online archive of megalithic sites in the world.</h2>
 
-      <button type="button" class="btn btn-lg btn-outline-secondary"> Start Here </button>
+      <button type="button" class="btn btn-lg btn-outline-light"> Start Here </button>
 
     <div class="search-bar mt-3" style="display: flex;">
 
@@ -26,27 +26,20 @@
 </div>
 
 <div class="homepage-card-container">
-  <div class="row">
-    <div class="col-xs-12 col-sm-6 col-md-4">
-      <div class="homepage-card">
-        <%= image_tag "sustainability.png", alt: "sustanability", size: "70" %>
-        <h2>Sustanability</h2>
-        <p>This is a carbon neutral project</p>
-      </div>
+    <div class="homepage-card">
+      <%= image_tag "sustainability.png", alt: "sustanability", size: "70" %>
+      <h2>Sustanability</h2>
+      <p>This is a carbon neutral project</p>
     </div>
-    <div class="col-xs-12 col-sm-6 col-md-4">
-      <div class="homepage-card">
-        <%= image_tag "stones.png", alt: "community", size: "100" %>
-        <h2>Community</h2>
-        <p>Explore with our active community of over 1000+ members</p>
-      </div>
+    <div class="homepage-card">
+      <%= image_tag "stones.png", alt: "community", size: "100" %>
+      <h2>Community</h2>
+      <p>Explore with our active community of over 1000+ members</p>
     </div>
-    <div class="col-xs-12 col-sm-6 col-md-4">
-      <div class="homepage-card">
-        <%= image_tag "patreon.png", alt: "patreon", size: "50" %>
-        <h2>Support</h2>
-        <p>Support our project on Patreon</p>
-      </div>
+    <div class="homepage-card">
+      <%= image_tag "patreon.png", alt: "patreon", size: "50", :style=>"padding-bottom: 7px;"%>
+      <h2>Support</h2>
+      <p>Support our project on Patreon</p>
     </div>
   </div>
 </div>
@@ -101,46 +94,45 @@
 
 <div class="container mt-3">
   <h2>Most Visited Sites</h2>
-  <div class="row">
-    <div class="col-xs-12 col-sm-6 col-md-4">
-        <div class="index-cards-container">
-        <% @megaliths.first(3).each do |megalith| %>
-          <%= link_to megalith_path(megalith) do %>
-            <div class="card-mega">
-              <%= cl_image_tag megalith.megalith_photos.first.photo.key, height: 200, width: 200, crop: :fill %>
-              <div class="card-mega-infos">
-                <div>
-                  <h2><%= megalith.name %></h2>
-                  <p><%= megalith.description.truncate(35) %></p>
-                </div>
-                  <p class="card-mega-pricing">latitude: <%= megalith.latitude %></p>
-                  <p>longitude: <%= megalith.longitude %></p>
+  <div class="most-visited-container">
+    <div class="index-cards-container">
+      <% @megaliths.first(3).each do |megalith| %>
+        <%= link_to megalith_path(megalith) do %>
+          <div class="card-mega">
+            <%= cl_image_tag megalith.megalith_photos.first.photo.key, height: 200, width: 200, crop: :fill %>
+            <div class="card-mega-infos">
+              <div>
+                <h2><%= megalith.name %></h2>
+                <p><%= megalith.description.truncate(35) %></p>
               </div>
+                <p class="card-mega-pricing">latitude: <%= megalith.latitude %></p>
+                <p>longitude: <%= megalith.longitude %></p>
             </div>
-          <%end%>
+          </div>
         <%end%>
-        <div class="collapse" id="collapseExample">
-            <% @megaliths.last(7).each do |megalith| %>
-              <%= link_to megalith_path(megalith) do %>
-                <div class="card-mega mt-3">
-                  <%= cl_image_tag megalith.megalith_photos.first.photo.key, height: 200, width: 200, crop: :fill %>
-                  <div class="card-mega-infos">
-                    <div>
-                      <h2><%= megalith.name %></h2>
-                      <p><%= megalith.description.truncate(35) %></p>
-                    </div>
-                      <p class="card-mega-pricing">latitude: <%= megalith.latitude %></p>
-                      <p>longitude: <%= megalith.longitude %></p>
+      <%end%>
+      <div class="collapse" id="collapseExample">
+          <% @megaliths.last(7).each do |megalith| %>
+            <%= link_to megalith_path(megalith) do %>
+              <div class="card-mega mt-3">
+                <%= cl_image_tag megalith.megalith_photos.first.photo.key, height: 200, width: 200, crop: :fill %>
+                <div class="card-mega-infos">
+                  <div>
+                    <h2><%= megalith.name %></h2>
+                    <p><%= megalith.description.truncate(35) %></p>
                   </div>
+                    <p class="card-mega-pricing">latitude: <%= megalith.latitude %></p>
+                    <p>longitude: <%= megalith.longitude %></p>
                 </div>
-              <%end%>
+              </div>
             <%end%>
-            </div>
-            <a class="btn btn-outline-secondary" id="view-more" data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">View More</a>
-      </div>
+          <%end%>
+          </div>
     </div>
   </div>
+  <a class="btn btn-outline-secondary mt-3" id="view-more" data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">View More</a>
 </div>
+
 
 
 <div class="container mt-3">

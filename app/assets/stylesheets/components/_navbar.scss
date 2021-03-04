@@ -1,17 +1,19 @@
 .navbar-megalithic {
-  // [...]
   justify-content: space-between;
-  background-color: white;
-  transition: 0.5s background-color ease;
+  background-color: #BAC2AE;
+  transition: all 0.5s ease;
 }
 
 .navbar-megalithic-transparent {
   background: transparent;
-  transition: 0.5s background-color ease;
-  filter: brightness(0) invert(1);
+  transition: all 0.5s ease;
+  .navbar-brand {
+    filter: invert(91%) sepia(2%) saturate(1648%) hue-rotate(42deg) brightness(82%) contrast(100%);
+  }
+  .navigation-search {
+    display: none;
+  }
 }
-
-
 
 .navbar-megalithic .navbar-collapse {
   flex-grow: 0;
@@ -19,4 +21,13 @@
 
 .navbar-megalithic .navbar-brand img {
   width: 40px;
+}
+
+.nav-profile-image {
+  border:4px solid transparent;
+  border-radius:50%;
+}
+.nav-profile-image:hover {
+  border:4px solid #F4F4F4;
+  border-radius:50%;
 }
