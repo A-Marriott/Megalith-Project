@@ -1,0 +1,41 @@
+<div class="card-general mt-3">
+  <div class="card-general-image">
+    <%= cl_image_tag megalith.megalith_photos.first.photo.key, height: 200, width: 200, crop: :fill %>
+  </div>
+  <div class="card-general-infos">
+    <div class="card-general-top">
+      <div class="card-general-title">
+        <h2><%= megalith.name %></h2>
+      </div>
+      <div class="card-general-top-left">
+        <p><%= megalith.category %></p>
+      </div>
+    </div>
+    <div class="card-general-extras">
+      <div class="mr-5">
+      <p>★ Favourites</p>
+      </div>
+      <div class="mr-5">
+      <p>☭ Commy Points</p>
+      </div>
+    </div>
+    <HR>
+    <div class="card-general-tagline">
+      <p><% if megalith.tagline? %>
+        <%= megalith.tagline %><p>
+        <% else %>
+        <%= megalith.description.truncate(240) %>
+      <%end%></p>
+    </div>
+    <div class="card-general-bottom">
+      <div class="card-general-location">
+        <p>location</p>
+      </div>
+      <div class="card-general-bottom-left">
+        <p>★ 2.4</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+

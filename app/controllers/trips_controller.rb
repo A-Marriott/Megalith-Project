@@ -7,10 +7,15 @@ class TripsController < ApplicationController
   end
 
   def create
+    @other_megaliths = params[:trip][:megalith_ids]
+    @other_megaliths.shift
     @trip = Trip.new(trip_params)
     if @trip.save
       TripUser.create(user: current_user, trip: @trip)
       TripMegalith.create(megalith_id: params[:megalith_id], trip: @trip, main: true)
+        @other_megaliths.each do |lith|
+          TripMegalith.create(megalith_id: lith, trip: @trip, main: false)
+        end
       redirect_to trip_path(@trip)
     else
       render :new
@@ -28,21 +33,26 @@ class TripsController < ApplicationController
       format.html
       format.js
     end
+    @megalith = @trip.trip_megaliths.find_by(main: true).megalith
   end
 
   def update
-    if params["trip"]["date_visited(1i)"]
-      if params[:trip][:photos]
-        params[:trip][:photos].each do |photo|
-          TripPhoto.create(trip: @trip, photo: photo)
-        end
+    if params[:trip][:photos]
+      params[:trip][:photos].each do |photo|
+        TripPhoto.create(trip: @trip, photo: photo)
       end
-      @trip.update(finalise_trip_params)
-      redirect_to trip_path(@trip)
     else
-      @trip.update(trip_params)
-      redirect_to trip_path(@trip)
+      @other_megaliths = params[:trip][:megalith_ids]
+      @other_megaliths.shift
+
+      @trip.trip_megaliths.where(main: false).destroy_all
+      @other_megaliths.each do |lith|
+        TripMegalith.create(megalith_id: lith, trip: @trip, main: false)
+      end
     end
+
+    @trip.update(trip_params)
+    redirect_to trip_path(@trip)
   end
 
   def destroy
@@ -52,6 +62,7 @@ class TripsController < ApplicationController
   end
 
   def finalise_trip_edit
+    @megalith = @trip.trip_megaliths.find_by(main: true).megalith
   end
 
   private
@@ -61,10 +72,6 @@ class TripsController < ApplicationController
   end
 
   def trip_params
-    params.require(:trip).permit(:name, :tagline, :description)
-  end
-
-  def finalise_trip_params
     params.require(:trip).permit(:name, :tagline, :description, :top_tip, :date_visited, :published)
   end
 end

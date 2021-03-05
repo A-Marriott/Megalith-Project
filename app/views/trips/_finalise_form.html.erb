@@ -1,0 +1,10 @@
+<%= simple_form_for @trip do |f| %>
+  <%= f.input :name %>
+  <%= f.input :tagline %>
+  <%= f.input :description %>
+  <%= f.association :megaliths, as: :check_boxes, collection: Megalith.where.not(id: @megalith.id), label: "Does your trip include other megaliths?" %>
+  <%= f.input :top_tip %>
+  <%= f.input :date_visited %>
+  <%= f.input :published, label: "Publish trip?" %>
+  <%= f.button :submit %>
+<% end %>
