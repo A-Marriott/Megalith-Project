@@ -1,0 +1,9 @@
+<% if search_users %>
+  <% if search_users.empty? %>
+    <p>Sorry, no users matching that search</p>
+  <% else %>
+    <% search_users.each do |chum| %>
+      <%= render 'shared/user_card', user: chum, button: 'add', trip: trip %>
+    <% end %>
+  <% end %>
+<% end %>

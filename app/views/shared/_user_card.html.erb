@@ -1,0 +1,16 @@
+<div class="d-flex user-card align-items-center">
+  <% if user.photo.attached? %>
+    <%= cl_image_tag user.photo.key, alt: "alttext", class: "avatar" %>
+  <% else %>
+    <%= image_tag "https://upload.wikimedia.org/wikipedia/commons/7/7c/Profile_avatar_placeholder_large.png", class: "avatar" %>
+  <% end %>
+  <div class="user-details mx-3">
+    <strong><%= user.username %></strong>
+    <p class='mb-0'><small><%= user.email %></small></p>
+  </div>
+  <% if button == 'add' %>
+    <%= link_to "Add to trip", trip_users_path(user: user, trip: trip), method: :post, remote: true, class: "btn btn-outline-secondary" %>
+  <% elsif button == 'delete' %>
+    <%= link_to "Remove from trip", trip_user_path(user: user, trip: trip), method: :delete, remote: true, class: "btn btn-outline-warning" %>
+  <% end %>
+</div>
