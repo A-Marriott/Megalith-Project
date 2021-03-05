@@ -6,13 +6,14 @@
       <%= f.input :tagline %>
       <%= f.input :description %>
       <%= f.association :megaliths, as: :check_boxes, collection: Megalith.where.not(id: @megalith.id), label: "Does your trip include other megaliths?" %>
+
+
         <%= f.input :photos, as: :file, input_html: { multiple: true, class: 'hidden', id: 'photo-input' } %>
       <%= f.button :submit, class: "sub-btn" %>
     <% end %>
   </div>
 
-
-
+  <h3 class="pt-3">Add other users</h3>
   <div class="trip-users">
     <div class="current-trip-users">
       <% @trip_users.each do |tripper| %>
@@ -36,5 +37,6 @@
     </div>
   </div>
 
+  <h4><%= link_to 'Back', trip_path(@trip) %></h4>
 
 </div>

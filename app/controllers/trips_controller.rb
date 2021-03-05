@@ -52,7 +52,7 @@ class TripsController < ApplicationController
     end
 
     @trip.update(trip_params)
-    redirect_to trip_path(@trip)
+    redirect_to edit_trip_path(@trip), notice: "Trip updated"
   end
 
   def destroy
