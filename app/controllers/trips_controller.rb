@@ -26,8 +26,12 @@ class TripsController < ApplicationController
   end
 
   def edit
+    @main_megalith = @trip.trip_megaliths.where(main: true).first.megalith
     @search_users = User.search_users(params[:user_query]) if params[:user_query]
     @trip_megaliths = @trip.trip_megaliths.includes(:megalith)
+    @search_megaliths = Megalith.near([@main_megalith.latitude, @main_megalith.longitude], 5)
+                                .reject { |megalith| @trip.megaliths.include? megalith }
+                                .first(5)
     @trip_users = @trip.users
     respond_to do |format|
       format.html

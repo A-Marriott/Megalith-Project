@@ -13,5 +13,6 @@ Rails.application.routes.draw do
   resources :users, only: [:index, :show, :edit, :update]
   resources :trips, only: [:edit, :update, :show, :destroy]
   resources :trip_users, only: [:create, :destroy]
+  resources :trip_megaliths, only: [:create, :destroy]
   get "trips/:id/finalise_trip", to: "trips#finalise_trip_edit", as: :finalise_trip_edit
 end

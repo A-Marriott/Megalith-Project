@@ -1,5 +1,5 @@
 <div class="container mt-5">
-  <h1>Edit trip</h1>
+  <h1 class="text-center"><%= @trip.name %></h1>
   <div class="row">
     <div class="trip-edit-form col-12 col-md-6">
       <%= simple_form_for @trip do |f| %>
@@ -13,8 +13,14 @@
 
     <div class="trip-megaliths col-12 col-md-6">
       <div class="current-trip-megaliths">
-        <% @trip_megaliths.each do |trip_megalith| %>
-          <p><%= trip_megalith.megalith.name %></p>
+        <h2>Current Megaliths</h2>
+          <%= render 'shared/trip_megalith_card', megalith: @main_megalith, button: 'none' %>
+        <% @trip_megaliths.reject{ |meg| meg.megalith == @main_megalith }.each do |trip_megalith| %>
+          <%= render 'shared/trip_megalith_card', megalith: trip_megalith.megalith, button: 'delete' %>
+        <% end %>
+        <h4>Other megaliths within 5 miles</h4>
+        <% @search_megaliths.each do |megalith| %>
+          <%= render 'shared/trip_megalith_card', megalith: megalith, button: 'add', trip: @trip %>
         <% end %>
       </div>
     </div>
