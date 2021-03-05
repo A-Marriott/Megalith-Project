@@ -41,11 +41,11 @@ class TripsController < ApplicationController
   end
 
   def update
-    if params[:trip][:photos]
+    if params[:trip] && params[:trip][:photos]
       params[:trip][:photos].each do |photo|
         TripPhoto.create(trip: @trip, photo: photo)
       end
-    else
+    elsif params[:trip]
       @other_megaliths = params[:trip][:megalith_ids]
       @other_megaliths.shift
 
