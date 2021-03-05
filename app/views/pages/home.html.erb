@@ -102,16 +102,12 @@
 
 <div class="container mt-3">
   <h2>Most popular trips</h2>
-  <div class="most-visited-container"
+  <div class="most-visited-container">
     <% @megaliths.first(3).each do |megalith| %>
       <%= link_to megalith_path(megalith) do %>
         <%= render 'shared/trip_card', megalith: megalith %>
       <%end%>
     <%end%>
-
-
-</div>
-
-
+  </div>
 </div>
 
