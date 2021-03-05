@@ -31,8 +31,7 @@
             +
           </button>
           <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-            <a class="dropdown-item" href="#">Add to Trip</a>
-            <a class="dropdown-item" href="#">Another action</a>
+            <%= link_to 'Make a trip', new_megalith_trip_path(@megalith), class: "dropdown-item" %>
             <a class="dropdown-item" href="#">Share this page 🚀</a>
           </div>
         </div>
@@ -54,7 +53,6 @@
 
   <HR>
 
-<%= link_to 'Make a trip', new_megalith_trip_path(@megalith) %>
   <div class="description-text-box">
     <div class="tagline"><h4>Tagline: <%= @megalith.tagline %> </h4></div>
     <div class="Description"><p>Description: <%= @megalith.description %></p></div>
