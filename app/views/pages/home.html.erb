@@ -4,11 +4,12 @@
     <h1>Megalithipedia</h1>
     <h2>The best online archive of megalithic sites in the world.</h2>
       <% if user_signed_in? %>
-        <div class="navigation-search mx-auto order-0">
-          <form class="form-inline mx-auto">
-          <input class="form-control col-9" type="search" placeholder="Search" aria-label="Search">
-          <button class="btn btn-secondary" type="submit">Go</button>
-          </form>
+        <div class="home-search">
+            <%= form_tag megaliths_path, class:"d-flex", method:"get" do %>
+            <div id="geocoder"></div>
+            <%= hidden_field_tag :query, nil, id: "geocoder-query" %>
+              <%= submit_tag "Go", class:"btn btn-secondary" %>
+            <% end %>
         </div>
       <%else%>
         <%= link_to "Sign Up", new_user_session_path, class: "btn btn-light", type: "submit"%>
@@ -80,25 +81,6 @@
 
 <div class="container mt-3">
   <h2>Top Sites</h2>
-  <div class="most-visited-container"
-    <% @megaliths.first(3).each do |megalith| %>
-      <%= link_to megalith_path(megalith) do %>
-        <%= render 'shared/card', megalith: megalith %>
-      <%end%>
-    <%end%>
-    <div class="collapse" id="collapseExample">
-      <% @megaliths.last(7).each do |megalith| %>
-        <%= link_to megalith_path(megalith) do %>
-          <%= render 'shared/card', megalith: megalith %>
-        <%end%>
-      <%end%>
-    </div>
-  </div>
-  <a class="btn btn-outline-secondary mt-3" id="view-more" data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">View More</a>
-</div>
-
-<div class="container mt-3">
-  <h2>Most Visited Sites</h2>
   <div class="most-visited-container"
     <% @megaliths.first(3).each do |megalith| %>
       <%= link_to megalith_path(megalith) do %>

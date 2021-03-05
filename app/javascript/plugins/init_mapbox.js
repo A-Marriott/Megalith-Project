@@ -38,14 +38,32 @@ const initMapbox = () => {
     const markers = JSON.parse(mapElement.dataset.markers);
     fitMapToMarkers(map, markers);
     addMarkersToMap(map, markers);
-    map.addControl(new MapboxGeocoder({ accessToken: mapboxgl.accessToken,
-                                      mapboxgl: mapboxgl }));
+    // map.addControl(new MapboxGeocoder({ accessToken: mapboxgl.accessToken,
+    //                                  mapboxgl: mapboxgl }));
     map.addControl(new mapboxgl.NavigationControl());
   }
 
 };
 
-export { initMapbox };
+const initGeocoder = () => {
+  const geocoder = new MapboxGeocoder({
+    accessToken: process.env.MAPBOX_API_KEY,
+    types: 'country,region,place,postcode,locality,neighborhood'
+    });
+    const geocoderDiv = document.getElementById('geocoder')
+      if ( geocoderDiv && geocoderDiv.childElementCount === 1 ) {
+        geocoderDiv.removeChild(geocoderDiv.firstChild)
+      }
+      geocoder.addTo('#geocoder');
+      geocoder.on('result', (result) => {
+        const hiddenField = document.getElementById( 'geocoder-query' )
+        hiddenField.value = JSON.stringify( { coordinates: result.result.center, name: result.result.place_name } )
+       })
+};
+
+
+
+export { initMapbox, initGeocoder };
 
 
 // if (mapElement) {

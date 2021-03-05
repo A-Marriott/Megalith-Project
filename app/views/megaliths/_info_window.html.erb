@@ -1,2 +1,9 @@
-<h2><%= megalith.name %></h2>
-
+<div class="card-map mt-3">
+  <div class="card-map-image">
+    <%= cl_image_tag megalith.megalith_photos.first.photo.key, height: 200, width: 200, crop: :fill %>
+  </div>
+  <div class="card-map-infos">
+        <h2><%= megalith.name %></h2>
+        <p><%= megalith.category %></p>
+  </div>
+</div>
