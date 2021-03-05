@@ -26,7 +26,7 @@ class TripsController < ApplicationController
   end
 
   def edit
-    @search_users = User.search_users params[:query] if params[:query]
+    @search_users = User.search_users(params[:user_query]) if params[:user_query]
     @trip_megaliths = @trip.trip_megaliths.includes(:megalith)
     @trip_users = @trip.users
     respond_to do |format|

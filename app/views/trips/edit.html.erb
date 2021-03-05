@@ -1,6 +1,14 @@
 <div class="container mt-5">
   <h1>Edit trip</h1>
-  <%= render 'trips/form' %>
+  <div class="trip-edit-form">
+    <%= simple_form_for @trip do |f| %>
+      <%= f.input :name %>
+      <%= f.input :tagline %>
+      <%= f.input :description %>
+      <%= f.association :megaliths, as: :check_boxes, collection: Megalith.where.not(id: @megalith.id), label: "Does your trip include other megaliths?" %>
+      <%= f.button :submit %>
+    <% end %>
+  </div>
 
   <div class="trip-megaliths">
     <div class="current-trip-megaliths">
@@ -19,8 +27,8 @@
 
     <div class="trip-user-search">
       <%= form_tag edit_trip_path(@trip), method: :get, class: "d-flex", remote: true do %>
-        <%= text_field_tag :query,
-          params[:query],
+        <%= text_field_tag :user_query,
+          params[:user_query],
           class: "form-control",
           placeholder: "Invite others"
         %>
@@ -31,6 +39,9 @@
 
     <div class="trip-user-search-results">
     </div>
+  </div>
+
+  <div class="megalith-photos">
   </div>
 
 </div>
