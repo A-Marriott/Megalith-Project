@@ -1,4 +1,5 @@
 class MegalithsController < ApplicationController
+  skip_before_action :authenticate_user!, only: [:index, :show]
   def index
     if params[:query].present?
       @queryhash = JSON.parse(params[:query])
