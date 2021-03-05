@@ -166,16 +166,8 @@
       </div>
       <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
         <!-- Placeholder for trip cards -->
-        <% if @trips %>
-          <% @trips.each do |trip| %>
-            <div class="card-horizontal mt-3">
-              <img src="https://images.unsplash.com/photo-1485686531765-ba63b07845a7?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1047&q=80" />
-              <div class="card-horizontal-infos">
-                <h2><%= trip.name %> </h2>
-                <p>Product description with <strong>relevant info</strong> only.</p>
-              </div>
-            </div>
-          <% end %>
+        <% @megalith.trips.each do |trip| %>
+          <%= render 'shared/trip_card', trip: trip %>
         <% end %>
         <!-- placeholder for trip cards -->
       </div>

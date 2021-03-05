@@ -1,28 +1,24 @@
 <div class="card-general mt-3">
-  <div class="card-general-image">
-    <%= cl_image_tag megalith.megalith_photos.first.photo.key, height: 200, width: 200, crop: :fill %>
+  <div class="card-trip-image">
+    <%= cl_image_tag trip.megaliths.first.megalith_photos.first.photo.key, class:"trip-card-thumbnail" %>
   </div>
   <div class="card-general-infos">
     <div class="card-general-top">
       <div class="card-general-title">
-        <h2><%= "Trip Name" %></h2>
+        <h2><%= trip.name %></h2>
       </div>
       <div class="card-general-top-left card-trip-top-left">
-        <p><%= "Date" %></p>
+        <p><%= trip.date_visited %></p>
       </div>
     </div>
     <div class="card-general-extras">
-      <span class="badge badge-pill badge-secondary mr-2">First Site</span>
-      <span class="mr-2"><p>⇢</p></span>
-      <span class="badge badge-pill badge-secondary mr-2">Second Site</span>
+      <% trip.megaliths.each do |megalith| %>
+      <span class="badge badge-pill badge-secondary mr-2"><%= megalith.name.truncate(20) %></span>
+      <% end %>
     </div>
     <HR>
     <div class="card-general-tagline">
-      <p><% if megalith.tagline? %>
-        <%= megalith.tagline %><p>
-        <% else %>
-        <%= megalith.description.truncate(240) %>
-      <%end%></p>
+        <p><%= trip.tagline %><p>
     </div>
     <HR>
     <div class="card-general-bottom">

@@ -10,6 +10,16 @@
   margin-right: 8px;
 }
 
+.card-trip-image {
+  height: 233px;
+  width: 233px;
+  .trip-card-thumbnail {
+    min-height:100%;
+    width: 100%;
+    object-fit: cover;
+  }
+}
+
 .trip-profiles-container {
   display: flex;
 
