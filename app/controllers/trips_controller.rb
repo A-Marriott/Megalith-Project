@@ -18,6 +18,8 @@ class TripsController < ApplicationController
   end
 
   def show
+    @main_megalith = @trip.trip_megaliths.where(main: true).first.megalith
+    @other_megaliths = @trip.megaliths.reject { |lith| lith == @main_megalith }
   end
 
   def edit

@@ -1,26 +1,38 @@
-<h1>Trip show page</h1>
-  <p>Name: <%= @trip.name %> </p>
-  <p>tagline: <%= @trip.tagline %> </p>
-  <p>description: <%= @trip.description %> </p>
-  <% if @trip.top_tip %>
-    <p>top_tip: <%= @trip.top_tip %> </p>
-  <% end %>
-  <% if @trip.date_visited %>
-    <p>date_visited: <%= @trip.date_visited %></p>
-  <% end %>
-  <h3>Primary lith:<%= @trip.trip_megaliths.first.megalith.name %></h3>
-  <% @trip.trip_megaliths[1..-1].each do |trip_megalith| %>
-    <p>Other liths: <%= trip_megalith.megalith.name %> </p>
-  <% end %>
-  <% if @trip.trip_photos %>
-    <% @trip.trip_photos.each do |photo| %>
-      <%= cl_image_tag photo.photo.key, height: 200, width: 200, crop: :fill  %>
-    <% end %>
-  <% end %>
-
-<%= link_to 'Edit', edit_trip_path(@trip) %>
-<%= link_to 'Delete',
-            trip_path(@trip),
-            method: :delete,
-            data: { confirm: "Are you sure?" } %>
-<%= link_to 'Add trip to visited?', finalise_trip_edit_path(@trip) %>
+<div class="container">
+  <h1 class="text-center mt-3"><%= @trip.name %></h1>
+  <div class="trip-show-buttons d-flex justify-content-center mb-3">
+    <%= link_to 'Edit', edit_trip_path(@trip), class: "btn btn-outline-secondary mx-2" %>
+    <%= link_to 'Delete',
+                trip_path(@trip),
+                method: :delete,
+                data: { confirm: "Are you sure?" }, class: "btn btn-outline-danger mx-2" %>
+    <%= link_to 'Add trip to visited?', finalise_trip_edit_path(@trip), class: "btn btn-outline-secondary mx-2" %>
+  </div>
+  <div class="row">
+    <div class="trip-basics col-12 col-md-6">
+      <p>tagline: <%= @trip.tagline %></p>
+      <p>description: <%= @trip.description %></p>
+      <% if @trip.top_tip %>
+        <p>top_tip: <%= @trip.top_tip %> </p>
+      <% end %>
+      <% if @trip.date_visited %>
+        <p>date_visited: <%= @trip.date_visited %></p>
+      <% end %>
+    </div>
+    <div class="trip-show-photos col-12 col-md-6">
+      <% if @trip.trip_photos.empty? %>
+        <h3>No photos yet. Upload some!</h3>
+      <% else %>
+        <% @trip.trip_photos.each do |photo| %>
+          <%= cl_image_tag photo.photo.key, height: 200, width: 200, crop: :fill  %>
+        <% end %>
+      <% end %>
+    </div>
+    <div class="trip-show-megaliths col-12 col-md-6">
+      <%= render 'shared/trip_megalith_card', megalith: @main_megalith, button: 'none' %>
+      <% @other_megaliths.each do |megalith| %>
+      <%= render 'shared/trip_megalith_card', megalith: megalith, button: 'none' %>
+      <% end %>
+    </div>
+  </div>
+</div>
