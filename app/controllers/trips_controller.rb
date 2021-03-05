@@ -53,10 +53,10 @@ class TripsController < ApplicationController
       @other_megaliths.each do |lith|
         TripMegalith.create(megalith_id: lith, trip: @trip, main: false)
       end
+      @trip.update(trip_params)
     end
 
-    @trip.update(trip_params)
-    redirect_to trip_path(@trip)
+    redirect_to edit_trip_path(@trip), notice: "Trip updated"
   end
 
   def destroy
