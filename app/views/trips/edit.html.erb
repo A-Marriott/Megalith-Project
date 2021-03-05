@@ -6,10 +6,8 @@
       <%= f.input :tagline %>
       <%= f.input :description %>
       <%= f.association :megaliths, as: :check_boxes, collection: Megalith.where.not(id: @megalith.id), label: "Does your trip include other megaliths?" %>
-
-
-        <%= f.input :photos, as: :file, input_html: { multiple: true, class: 'hidden', id: 'photo-input' } %>
-      <%= f.button :submit, class: "sub-btn" %>
+      <%= f.input :photos, as: :file, input_html: { multiple: true, class: 'hidden', id: 'photo-input' } %>
+      <%= f.button :submit, class: "sub-btn btn btn-outline-secondary" %>
     <% end %>
   </div>
 
@@ -37,6 +35,6 @@
     </div>
   </div>
 
-  <h4><%= link_to 'Back', trip_path(@trip) %></h4>
+  <h4><%= link_to 'Back', trip_path(@trip), class: "btn btn-outline-secondary" %></h4>
 
 </div>
