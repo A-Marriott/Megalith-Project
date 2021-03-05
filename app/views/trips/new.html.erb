@@ -1,4 +1,10 @@
 <div class="container mt-5">
   <h1>New Trip</h1>
-  <%= render 'form' %>
+  <%= simple_form_for [ @megalith, @trip ] do |f| %>
+    <%= f.input :name %>
+    <%= f.input :tagline %>
+    <%= f.input :description %>
+    <%= f.association :megaliths, as: :check_boxes, collection: Megalith.where.not(id: @megalith.id), label: "Does your trip include other megaliths?" %>
+    <%= f.button :submit, class: "btn btn-primary" %>
+  <% end %>
 </div>
