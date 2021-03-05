@@ -28,6 +28,7 @@ import "bootstrap";
 import { initMapbox, initGeocoder } from '../plugins/init_mapbox';
 import collapse from "../plugins/init_collapse.js" ;
 import { initUpdateNavbarOnScroll } from '../plugins/init_navbar.js';
+import { previewImageOnFileSelect } from '../plugins/init_image_preview.js';
 
 
 // Internal imports, e.g:
@@ -39,5 +40,6 @@ document.addEventListener('turbolinks:load', () => {
   initUpdateNavbarOnScroll();
   initGeocoder();
   initMapbox();
+  previewImageOnFileSelect();
   collapse();
 });
