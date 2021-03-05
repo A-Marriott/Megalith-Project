@@ -1,13 +1,13 @@
 require 'json'
 
-# # use only those liths for which we have a phot url
-# check if imgurl contains geograph,if so drop it
-# v1 = JSON.parse(File.read('Dorset-v1.json'))
+# # use only those liths for which we have a valid phot url
+# v1 = JSON.parse(File.read('Devon-v1.json'))
 # with_photos = v1.select { |_k, lith| lith.keys.include? 'imgurl' }
-# File.write('Dorset-with-photos.json', JSON.dump(with_photos))
+#                 .select { |_k, lith| lith['imgurl'].match /https:\/\/megalithic.co.uk\/a558\/.*/ }
+# # File.write('Somerset-v2-filtered-with-photos.json', JSON.dump(with_photos))
 
 # # convert lat long to usable format
-# with_photos = JSON.parse(File.read('Dorset-with-photos.json'))
+# # with_photos = JSON.parse(File.read('Somerset-v2-filtered-with-photos.json'))
 # lat_long_corrected = with_photos.map do |name, lith|
 #   lith['latitude'].delete_prefix! 'Latitude: '
 #   if lith['latitude'][-1] == 'N'
@@ -27,4 +27,13 @@ require 'json'
 #   end
 #   lith
 # end
-# File.write('Dorset-latlong.json', JSON.dump(lat_long_corrected))
+# File.write('Devon-v3-latlong-formatted.json', JSON.dump(lat_long_corrected))
+
+# # with_imgurl = JSON.parse(File.read('Devon-v3-latlong-formatted.json'))
+# all_urls = []
+# lat_long_corrected.each do |lithhash|
+#   all_urls << lithhash['imgurl']
+# end
+# puts all_urls.select { |url| url.match /https:\/\/megalithic.co.uk\/a558\/.*/ }
+# p v1.size
+# p all_urls.size
