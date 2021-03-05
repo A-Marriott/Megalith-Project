@@ -12,12 +12,16 @@
       <%= link_to "Random Megalith", "/megaliths/random", class: "nav-item nav-link" %>
     </div>
 
-  <div class="navigation-search mx-auto order-0">
-      <form class="form-inline mx-auto">
-      <input class="form-control col-9" type="search" placeholder="Search" aria-label="Search">
-      <button class="btn btn-secondary" type="submit">Go</button>
-      </form>
-  </div>
+    <% unless current_page? root_path %>
+      <div class="home-search">
+          <%= form_tag megaliths_path, class:"d-flex", method:"get" do %>
+          <div id="geocoder"></div>
+          <%= hidden_field_tag :query, nil, id: "geocoder-query" %>
+            <%= submit_tag "Go", class:"btn btn-secondary" %>
+          <% end %>
+      </div>
+    <% end %>
+
 
 
   <div class="collapse navbar-collapse" id="navbarSupportedContent">

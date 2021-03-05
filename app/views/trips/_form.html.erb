@@ -1,6 +1,17 @@
-<%= simple_form_for [ @megalith, @trip ] do |f| %>
-  <%= f.input :name %>
-  <%= f.input :tagline %>
-  <%= f.input :description %>
-  <%= f.button :submit %>
+<% if params[:action] == "new"%>
+  <%= simple_form_for [ @megalith, @trip ] do |f| %>
+    <%= f.input :name %>
+    <%= f.input :tagline %>
+    <%= f.input :description %>
+    <%= f.association :megaliths, as: :check_boxes, collection: Megalith.where.not(id: @megalith.id), label: "Does your trip include other megaliths?" %>
+    <%= f.button :submit, class: "btn btn-primary" %>
+  <% end %>
+<% else %>
+  <%= simple_form_for @trip do |f| %>
+    <%= f.input :name %>
+    <%= f.input :tagline %>
+    <%= f.input :description %>
+    <%= f.association :megaliths, as: :check_boxes, collection: Megalith.where.not(id: @megalith.id), label: "Does your trip include other megaliths?" %>
+    <%= f.button :submit %>
+  <% end %>
 <% end %>

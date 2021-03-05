@@ -25,9 +25,10 @@ require("channels")
 
 // External imports
 import "bootstrap";
-import { initMapbox } from '../plugins/init_mapbox';
+import { initMapbox, initGeocoder } from '../plugins/init_mapbox';
 import collapse from "../plugins/init_collapse.js" ;
 import { initUpdateNavbarOnScroll } from '../plugins/init_navbar.js';
+import { previewImageOnFileSelect } from '../plugins/init_image_preview.js';
 
 
 // Internal imports, e.g:
@@ -36,7 +37,9 @@ import { initUpdateNavbarOnScroll } from '../plugins/init_navbar.js';
 document.addEventListener('turbolinks:load', () => {
   // Call your functions here, e.g:
   // initSelect2();
-  initMapbox();
-  collapse();
   initUpdateNavbarOnScroll();
+  initGeocoder();
+  initMapbox();
+  previewImageOnFileSelect();
+  collapse();
 });

@@ -1,6 +1,6 @@
 <div class="card-general mt-3">
-  <div class="card-general-image">
-    <%= cl_image_tag megalith.megalith_photos.first.photo.key, height: 200, width: 200, crop: :fill %>
+  <div class="card-general-image-container">
+    <%= cl_image_tag megalith.megalith_photos.first.photo.key, class:"card-general-image" %>
   </div>
   <div class="card-general-infos">
     <div class="card-general-top">
