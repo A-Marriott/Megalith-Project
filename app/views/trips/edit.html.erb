@@ -1,22 +1,17 @@
 <div class="container mt-5">
   <h1>Edit trip</h1>
   <div class="trip-edit-form">
-    <%= simple_form_for @trip do |f| %>
+    <%= simple_form_for @trip, html: { id: :photo_upload } do |f| %>
       <%= f.input :name %>
       <%= f.input :tagline %>
       <%= f.input :description %>
       <%= f.association :megaliths, as: :check_boxes, collection: Megalith.where.not(id: @megalith.id), label: "Does your trip include other megaliths?" %>
-      <%= f.button :submit %>
+        <%= f.input :photos, as: :file, input_html: { multiple: true, class: 'hidden', id: 'photo-input' } %>
+      <%= f.button :submit, class: "sub-btn" %>
     <% end %>
   </div>
 
-  <div class="trip-megaliths">
-    <div class="current-trip-megaliths">
-      <% @trip_megaliths.each do |trip_megalith| %>
-        <p><%= trip_megalith.megalith.name %></p>
-      <% end %>
-    </div>
-  </div>
+
 
   <div class="trip-users">
     <div class="current-trip-users">
@@ -41,7 +36,5 @@
     </div>
   </div>
 
-  <div class="megalith-photos">
-  </div>
 
 </div>
