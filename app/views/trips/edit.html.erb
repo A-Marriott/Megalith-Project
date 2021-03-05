@@ -6,23 +6,8 @@
         <%= f.input :name %>
         <%= f.input :tagline %>
         <%= f.input :description %>
-        <%= f.association :megaliths, as: :check_boxes, collection: Megalith.where.not(id: @megalith.id), label: "Does your trip include other megaliths?" %>
         <%= f.button :submit, class: "btn btn-outline-secondary" %>
       <% end %>
-    </div>
-
-    <div class="trip-megaliths col-12 col-md-6">
-      <div class="current-trip-megaliths">
-        <h2>Current Megaliths</h2>
-          <%= render 'shared/trip_megalith_card', megalith: @main_megalith, button: 'none' %>
-        <% @trip_megaliths.reject{ |meg| meg.megalith == @main_megalith }.each do |trip_megalith| %>
-          <%= render 'shared/trip_megalith_card', megalith: trip_megalith.megalith, button: 'delete' %>
-        <% end %>
-        <h4>Other megaliths within 5 miles</h4>
-        <% @search_megaliths.each do |megalith| %>
-          <%= render 'shared/trip_megalith_card', megalith: megalith, button: 'add', trip: @trip %>
-        <% end %>
-      </div>
     </div>
 
     <div class="trip-users col-12 col-md-6">
@@ -45,6 +30,20 @@
       </div>
 
       <div class="trip-user-search-results">
+      </div>
+    </div>
+
+    <div class="trip-megaliths col-12 col-md-6">
+      <div class="current-trip-megaliths">
+        <h2>Current Megaliths</h2>
+          <%= render 'shared/trip_megalith_card', megalith: @main_megalith, button: 'none' %>
+        <% @trip_megaliths.reject{ |meg| meg.megalith == @main_megalith }.each do |trip_megalith| %>
+          <%= render 'shared/trip_megalith_card', megalith: trip_megalith.megalith, button: 'delete' %>
+        <% end %>
+        <h4>Other megaliths within 5 miles</h4>
+        <% @search_megaliths.each do |megalith| %>
+          <%= render 'shared/trip_megalith_card', megalith: megalith, button: 'add', trip: @trip %>
+        <% end %>
       </div>
     </div>
 
