@@ -1,0 +1,50 @@
+<div class="card-general mt-3">
+  <div class="card-general-image">
+    <%= cl_image_tag megalith.megalith_photos.first.photo.key, height: 200, width: 200, crop: :fill %>
+  </div>
+  <div class="card-general-infos">
+    <div class="card-general-top">
+      <div class="card-general-title">
+        <h2><%= "Trip Name" %></h2>
+      </div>
+      <div class="card-general-top-left card-trip-top-left">
+        <p><%= "Date" %></p>
+      </div>
+    </div>
+    <div class="card-general-extras">
+      <span class="badge badge-pill badge-secondary mr-5">First Site</span>
+      <span class="badge badge-pill badge-secondary mr-5">Second Site</span>
+    </div>
+    <HR>
+    <div class="card-general-tagline">
+      <p><% if megalith.tagline? %>
+        <%= megalith.tagline %><p>
+        <% else %>
+        <%= megalith.description.truncate(240) %>
+      <%end%></p>
+    </div>
+    <HR>
+    <div class="card-general-bottom">
+      <div class="card-general-location trip-profiles-container">
+        <div class="trip-profile-image">
+            <%= image_tag "https://upload.wikimedia.org/wikipedia/commons/7/7c/Profile_avatar_placeholder_large.png", class: "trip-avatar" %>
+          <p>User Name</p>
+        </div>
+        <div class="trip-profile-image">
+            <%= image_tag "https://upload.wikimedia.org/wikipedia/commons/7/7c/Profile_avatar_placeholder_large.png", class: "trip-avatar" %>
+          <p>User Name</p>
+        </div>
+        <div class="trip-profile-image">
+            <%= image_tag "https://upload.wikimedia.org/wikipedia/commons/7/7c/Profile_avatar_placeholder_large.png", class: "trip-avatar" %>
+          <p>User Name</p>
+        </div>
+      </div>
+      <div class="card-general-bottom-left">
+        <h2>⇧ 17</h2>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+

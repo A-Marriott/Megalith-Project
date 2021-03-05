@@ -18,22 +18,28 @@
       <% end %>
     </div>
 
-    <div class="trip-user-search">
-      <%= form_tag edit_trip_path(@trip), method: :get, class: "d-flex", remote: true do %>
-        <%= text_field_tag :user_query,
-          params[:user_query],
-          class: "form-control",
-          placeholder: "Invite others"
-        %>
-        <%= hidden_field_tag 'trip_id', @trip.id.to_s %>
-        <%= submit_tag "Search", class: "btn btn-outline-secondary ml-2" %>
-      <% end %>
-    </div>
+    <div class="trip-users col-12 col-md-6">
+      <div class="current-trip-users">
+        <% @trip_users.each do |tripper| %>
+          <%= render 'shared/user_card', user: tripper, button: 'delete', trip: @trip %>
+        <% end %>
+      </div>
 
-    <div class="trip-user-search-results">
-    </div>
-  </div>
+      <div class="trip-user-search">
+        <%= form_tag edit_trip_path(@trip), method: :get, class: "d-flex", remote: true do %>
+          <%= text_field_tag :user_query,
+            params[:user_query],
+            class: "form-control",
+            placeholder: "Invite others"
+          %>
+          <%= hidden_field_tag 'trip_id', @trip.id.to_s %>
+          <%= submit_tag "Search", class: "btn btn-outline-secondary ml-2" %>
+        <% end %>
+      </div>
 
+      <div class="trip-user-search-results">
+      </div>
+    </div>
   <div class="trip-photos">
   <h2 class="pt-3">Add photos</h2>
     <%= simple_form_for @trip, html: { id: :photo_upload } do |f| %>
@@ -43,5 +49,4 @@
   </div>
 
   <h4><%= link_to 'Back', trip_path(@trip), class: "btn btn-outline-secondary" %></h4>
-
 </div>
