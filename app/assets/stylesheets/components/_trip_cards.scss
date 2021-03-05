@@ -1,0 +1,31 @@
+.user-card, .trip-megalith-card {
+  background: white;
+  box-shadow: 0 0 15px rgba(0,0,0,0.2);
+  display: flex;
+  align-items: center;
+  padding: 8px 8px 8px 0;
+  border-radius: 2px;
+  .user-details, .trip-megalith-card-details {
+    flex-grow: 1;
+  }
+  a {
+    font-size: 0.8rem;
+  }
+}
+
+.user-card {
+  padding-left: 8px
+}
+
+.trip-megalith-card {
+  height: 150px;
+  .trip-megalith-card-image-container {
+    height: 150px;
+    width: 150px;
+    overflow: hidden;
+  }
+  img {
+    height: 100%;
+    object-fit: cover;
+  }
+}

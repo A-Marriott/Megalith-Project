@@ -1,21 +1,28 @@
 <div class="container mt-5">
-  <div class="trip-edit-form">
-    <h2>Edit trip details</h2>
-    <%= simple_form_for @trip do |f| %>
-      <%= f.input :name %>
-      <%= f.input :tagline %>
-      <%= f.input :description %>
-      <%= f.association :megaliths, as: :check_boxes, collection: Megalith.where.not(id: @megalith.id), label: "Does your trip include other megaliths?" %>
-      <%= f.button :submit, class: "btn btn-outline-secondary" %>
-    <% end %>
-  </div>
-
-  <h2 class="pt-3">Add other users</h2>
-  <div class="trip-users">
-    <div class="current-trip-users">
-      <% @trip_users.each do |tripper| %>
-        <%= render 'shared/user_card', user: tripper, button: 'delete', trip: @trip %>
+  <h1 class="text-center"><%= @trip.name %></h1>
+  <div class="row">
+    <div class="trip-edit-form col-12 col-md-6">
+      <%= simple_form_for @trip do |f| %>
+        <%= f.input :name %>
+        <%= f.input :tagline %>
+        <%= f.input :description %>
+        <%= f.association :megaliths, as: :check_boxes, collection: Megalith.where.not(id: @megalith.id), label: "Does your trip include other megaliths?" %>
+        <%= f.button :submit, class: "btn btn-outline-secondary" %>
       <% end %>
+    </div>
+
+    <div class="trip-megaliths col-12 col-md-6">
+      <div class="current-trip-megaliths">
+        <h2>Current Megaliths</h2>
+          <%= render 'shared/trip_megalith_card', megalith: @main_megalith, button: 'none' %>
+        <% @trip_megaliths.reject{ |meg| meg.megalith == @main_megalith }.each do |trip_megalith| %>
+          <%= render 'shared/trip_megalith_card', megalith: trip_megalith.megalith, button: 'delete' %>
+        <% end %>
+        <h4>Other megaliths within 5 miles</h4>
+        <% @search_megaliths.each do |megalith| %>
+          <%= render 'shared/trip_megalith_card', megalith: megalith, button: 'add', trip: @trip %>
+        <% end %>
+      </div>
     </div>
 
     <div class="trip-users col-12 col-md-6">
@@ -40,13 +47,14 @@
       <div class="trip-user-search-results">
       </div>
     </div>
-  <div class="trip-photos">
-  <h2 class="pt-3">Add photos</h2>
-    <%= simple_form_for @trip, html: { id: :photo_upload } do |f| %>
-      <%= f.input :photos, as: :file, input_html: { multiple: true, class: 'hidden', id: 'photo-input' } %>
-      <%= f.button :submit, class: "sub-btn btn btn-outline-secondary" %>
-    <% end %>
-  </div>
 
+    <div class="trip-photos col-12 col-md-6">
+      <h2 class="pt-3">Add photos</h2>
+        <%= simple_form_for @trip, html: { id: :photo_upload } do |f| %>
+          <%= f.input :photos, as: :file, input_html: { multiple: true, class: 'hidden', id: 'photo-input' } %>
+          <%= f.button :submit, class: "sub-btn btn btn-outline-secondary" %>
+        <% end %>
+    </div>
+  </div>
   <h4><%= link_to 'Back', trip_path(@trip), class: "btn btn-outline-secondary" %></h4>
 </div>

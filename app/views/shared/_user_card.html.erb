@@ -1,4 +1,4 @@
-<div class="d-flex user-card align-items-center">
+<div class="user-card my-2">
   <% if user.photo.attached? %>
     <%= cl_image_tag user.photo.key, alt: "alttext", class: "avatar" %>
   <% else %>
