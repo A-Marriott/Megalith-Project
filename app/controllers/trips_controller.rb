@@ -7,15 +7,10 @@ class TripsController < ApplicationController
   end
 
   def create
-    @other_megaliths = params[:trip][:megalith_ids]
-    @other_megaliths.shift
     @trip = Trip.new(trip_params)
     if @trip.save
       TripUser.create(user: current_user, trip: @trip)
       TripMegalith.create(megalith_id: params[:megalith_id], trip: @trip, main: true)
-        @other_megaliths.each do |lith|
-          TripMegalith.create(megalith_id: lith, trip: @trip, main: false)
-        end
       redirect_to trip_path(@trip)
     else
       render :new
@@ -46,13 +41,6 @@ class TripsController < ApplicationController
         TripPhoto.create(trip: @trip, photo: photo)
       end
     elsif params[:trip]
-      @other_megaliths = params[:trip][:megalith_ids]
-      @other_megaliths.shift
-
-      @trip.trip_megaliths.where(main: false).destroy_all
-      @other_megaliths.each do |lith|
-        TripMegalith.create(megalith_id: lith, trip: @trip, main: false)
-      end
       @trip.update(trip_params)
     end
 
