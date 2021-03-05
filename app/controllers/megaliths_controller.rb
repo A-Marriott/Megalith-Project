@@ -1,7 +1,12 @@
 class MegalithsController < ApplicationController
+  skip_before_action :authenticate_user!, only: [:index, :show]
   def index
-    @megaliths = Megalith.all
-
+    if params[:query].present?
+      @queryhash = JSON.parse(params[:query])
+      @megaliths = Megalith.near(@queryhash['coordinates'].reverse, 10)
+    else
+      @megaliths = Megalith.all
+    end
     @markers = @megaliths.map do |megalith|
       {
         lat: megalith.latitude,

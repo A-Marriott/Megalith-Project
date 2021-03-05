@@ -51,3 +51,18 @@
 .most-visited-container {
 
 }
+
+.home-search {
+
+  .geocoder {
+    position: absolute;
+    width: 50%;
+    left: 50%;
+    margin-left: -25%;
+    top: 10px;
+    }
+    .mapboxgl-ctrl-geocoder {
+    min-width: 100%;
+    }
+}
+

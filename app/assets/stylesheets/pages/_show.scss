@@ -29,6 +29,30 @@
   margin-bottom: 16px;
 }
 
+@media screen and (max-width: 992px) {
+  .title-elements {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: none;
+    justify-content: none;
+
+    &-left {
+      display: flex;
+      align-items: none;
+    }
+  }
+
+ .element-below-sm {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  }
+
+  .title {
+    margin-right: 100%;
+  }
+}
+
 #photo_upload_form {
   position: relative;
   padding-bottom: 45px;
@@ -38,3 +62,4 @@
   bottom: 0;
   left: 10px;
 }
+
