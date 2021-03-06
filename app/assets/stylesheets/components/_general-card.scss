@@ -1,8 +1,8 @@
 .card-general {
   overflow: auto;
   height: fit-content;
-  background: white;
-  box-shadow: 0 0 15px rgba(0,0,0,0.2);
+  background: #F4F4F4;
+  box-shadow: 0 0 5px rgba(0,0,0,0.2);
   display: flex;
   align-items: center;
 
@@ -73,10 +73,8 @@
 
 @media screen and (max-width: 992px) {
   .card-general {
-    overflow: auto;
     max-height: none;
-    background: white;
-    box-shadow: 0 0 15px rgba(0,0,0,0.2);
+    box-shadow: 0 0 5px rgba(0,0,0,0.2);
     display: flex;
     flex-direction: column;
     align-items: center;
