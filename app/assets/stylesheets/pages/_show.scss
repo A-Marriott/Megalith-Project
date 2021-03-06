@@ -1,19 +1,22 @@
-
 .title-elements {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-
-  &-left {
-    display: flex;
-    align-items: center;
+  h1 {
+    font-size: 24px;
   }
   .favourites-star {
     font-size: 32px;
   }
-  .title {
-    margin-right: 16px;
-  }
+}
+
+.show-page-top {
+  background-color: #F4F4F4;
+  padding: 16px;
+}
+
+
+.title-elements-line-two {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 }
 
 .subheading-elements {
@@ -29,28 +32,47 @@
   margin-bottom: 16px;
 }
 
-@media screen and (max-width: 992px) {
-  .title-elements {
+@media screen and (min-width: 992px) {
+  .show-page-top {
     display: flex;
-    flex-wrap: wrap;
-    align-items: none;
-    justify-content: none;
+    align-items: center;
+    justify-content: space-between;
 
-    &-left {
-      display: flex;
-      align-items: none;
+    .show-page-images {
+      width: 66%;
+    }
+    .show-page-text {
+      width: 33%;
+    }
+    .more-options-button {
+      display: none;
     }
   }
+}
 
- .element-below-sm {
+@media screen and (max-width: 992px) {
+  .show-page-top {
+    display: flex;
+    flex-wrap: wrap-reverse;
+    align-items: center;
+    justify-content: space-between;
+
+    .show-page-images {
+      width: none;
+    }
+    .show-page-text {
+      width: none;
+    }
+    .more-options-nav {
+      display: none;
+    }
+  }
+}
+
+.element-below-sm {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  }
-
-  .title {
-    margin-right: 100%;
-  }
 }
 
 #photo_upload {
