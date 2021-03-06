@@ -35,8 +35,17 @@ def load_lith_without_photo(lith)
 end
 
 # THIS WILL ONLY WORK IF ON ARFA.CAMBLE CLOUDINARY
-def give_lith_fake_photo_key(lith)
-  lith.update(fake_photo_key: FAKE_PHOTO_KEYS.sample)
+def load_lith_with_fake_photo(lith)
+  new_lith = Megalith.new(
+    name: lith['name'],
+    category: lith['category'],
+    description: lith['description'],
+    latitude: lith['latitude'],
+    longitude: lith['longitude']
+  )
+  p new_lith.name
+  new_lith.fake_photo_key = FAKE_PHOTO_KEYS.sample
+  p new_lith.save
 end
 
 p 'deleting users, liths and trips'
@@ -66,20 +75,25 @@ end
 # 1 load 20 with photos
 # hash_of_liths_from_json(dorset_file_relative).first(20).each { |lith| load_lith_with_photo(lith) }
 
-# 2 load all with photos
+# 2 load all with photos - expensive for cloudinary, will take a long time
 # all_three.each do |filepath|
 #   hash_of_liths_from_json(filepath).each { |lith| load_lith_with_photo(lith) }
 # end
 
-# 3 load all without photos
+# 3 load all without photos - good to practise with pagination and lots of stuff on the map
 # all_three.each do |filepath|
 #   hash_of_liths_from_json(filepath).each { |lith| load_lith_without_photo(lith) }
 # end
 
-# 4 load somerset with photos and devon/dorset without
+# 4 load somerset with photos and devon/dorset without - maybe a good balance for the final presentation?
 # hash_of_liths_from_json(somerset_file_relative).each { |lith| load_lith_with_photo(lith) }
 # hash_of_liths_from_json(devon_file_relative).each { |lith| load_lith_without_photo(lith) }
 # hash_of_liths_from_json(dorset_file_relative).each { |lith| load_lith_without_photo(lith) }
+
+# 5 load somerset with photos and devon/dorset with fakes
+# hash_of_liths_from_json(somerset_file_relative).each { |lith| load_lith_with_photo(lith) }
+# hash_of_liths_from_json(devon_file_relative).each { |lith| load_lith_with_fake_photo(lith) }
+# hash_of_liths_from_json(dorset_file_relative).each { |lith| load_lith_with_fake_photo(lith) }
 
 p 'liths loaded'
 
