@@ -90,7 +90,7 @@ end
 # hash_of_liths_from_json(devon_file_relative).each { |lith| load_lith_without_photo(lith) }
 # hash_of_liths_from_json(dorset_file_relative).each { |lith| load_lith_without_photo(lith) }
 
-# 5 load somerset with photos and devon/dorset with fakes
+# 5 load somerset with photos and devon/dorset with fakes - WILL ONLY WORK WITH ARFA.CAMBLE CLOUDINARY
 # hash_of_liths_from_json(somerset_file_relative).each { |lith| load_lith_with_photo(lith) }
 # hash_of_liths_from_json(devon_file_relative).each { |lith| load_lith_with_fake_photo(lith) }
 # hash_of_liths_from_json(dorset_file_relative).each { |lith| load_lith_with_fake_photo(lith) }
