@@ -20,6 +20,13 @@ class TripsController < ApplicationController
   def show
     @main_megalith = @trip.trip_megaliths.where(main: true).first.megalith
     @other_megaliths = @trip.megaliths.reject { |lith| lith == @main_megalith }
+    @markers = @trip.megaliths.geocoded.map do |megalith|
+      {
+        lat: megalith.latitude,
+        lng: megalith.longitude,
+        infoWindow: render_to_string(partial: "shared/info_window", locals: { megalith: megalith })
+      }
+    end
   end
 
   def edit
