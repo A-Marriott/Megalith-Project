@@ -56,11 +56,21 @@ User.destroy_all
 Megalith.destroy_all
 p 'some new ones:'
 
+def attach_avatar(user, img_url)
+  avatar_img = URI.open(img_url)
+  user.photo.attach(io: avatar_img, filename: "avatar.jpg", content_type: 'image/png')
+end
+
 brian = User.create(email: 'brian@internet.com', password: 'password', username: 'Brian LithLegend')
+attach_avatar(brian, 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcReSqEhw-txJbZQc80W8nIJkrm848vAAYUb6Q&usqp=CAU')
 noobles = User.create(email: 'rocknoob@test.com', password: 'password', username: 'Noob on the Rocks')
+attach_avatar(noobles, 'https://i.dailymail.co.uk/i/pix/2017/04/20/13/3F6B966D00000578-4428630-image-m-80_1492690622006.jpg')
 david = User.create(email: 'david@test.com', password: 'password', username: 'David Stone Man')
+attach_avatar(david, 'https://images.pexels.com/photos/220453/pexels-photo-220453.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500')
 peter = User.create(email: 'peter@internet.com', password: 'password', username: 'Peat ;)')
+attach_avatar(peter, 'https://image1.masterfile.com/getImage/NzAwLTAwMDU1NjQ2ZW4uMDAwMDAwMDA=ALrv8s/700-00055646en_Masterfile.jpg')
 gertrude = User.create(email: 'gertrude@internet.com', password: 'password', username: 'Gertie')
+attach_avatar(gertrude, 'https://t4.ftcdn.net/jpg/03/16/16/21/360_F_316162176_3SEzHnxKzb8EUDTnfKGXePmQ6Em2xaaq.jpg')
 photoadmin = User.create(email: 'photographer@test.com', password: 'password', username: 'Stone cold Snapper')
 
 dorset_file_relative = "./seed-play/Dorset-v3-latlong-formatted.json"
