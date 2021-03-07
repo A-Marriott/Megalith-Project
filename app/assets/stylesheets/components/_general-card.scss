@@ -1,5 +1,5 @@
 .card-general {
-  overflow: auto;
+  overflow: hidden;
   height: fit-content;
   background: #F4F4F4;
   box-shadow: 0 0 5px rgba(0,0,0,0.2);
@@ -9,12 +9,11 @@
   .card-general-image-container {
     height: 233px;
     width: 24vw;
-  }
-
-  .card-general-image {
-    min-height:100%;
-    width: 100%;
-    object-fit: cover;
+    .card-general-image {
+      min-height:100%;
+      width: 100%;
+      object-fit: cover;
+    }
   }
 
   h2 {
@@ -73,6 +72,7 @@
 
 @media screen and (max-width: 992px) {
   .card-general {
+    overflow: auto;
     max-height: none;
     box-shadow: 0 0 5px rgba(0,0,0,0.2);
     display: flex;
