@@ -10,7 +10,7 @@ Rails.application.routes.draw do
     resources :megalith_photos, only: :create
   end
   get "users/search", to: "users#search", as: :users_search
-  get "megalith_photos/:id/upvote", to: "megalith_photos#upvote", as: :megalith_photos_upvote
+  post "megalith_photos/:id/upvote", to: "megalith_photos#upvote", as: :megalith_photos_upvote
   resources :users, only: [:index, :show, :edit, :update]
   resources :trips, only: [:edit, :update, :show, :destroy]
   resources :trip_users, only: [:create, :destroy]
