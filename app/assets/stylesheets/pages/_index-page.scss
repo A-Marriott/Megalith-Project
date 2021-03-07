@@ -8,18 +8,21 @@
   margin: 8px;
 }
 
-#map {
-  background: grey;
-  margin-top: 66px;
-  height: 100vh;
-  position: sticky;
-  top: 0;
-  padding-right: 0px;
-  padding-left: 0px;
+.index-page-map {
+  #map {
+    background: grey;
+    height: 100vh;
+    position: sticky;
+    top: 0;
+    padding-right: 0px;
+    padding-left: 0px;
+  }
 }
 
 @media only screen and (max-width: 959px) {
-  #map {
-    height: 80vh;
+  .index-page-map {
+    #map {
+      height: 80vh;
+    }
   }
 }
