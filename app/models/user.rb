@@ -20,6 +20,17 @@ class User < ApplicationRecord
     self.favourites.map(&:megalith)
   end
 
+  def recalculate_badge_scores
+    upvotes = megalith_photos.map { |photo| photo.get_likes }.flatten.length
+    self.photographer_score = megalith_photos.length + upvotes
+    upvotes = comments.map { |comment| comment.get_likes }.flatten.length
+    self.commenter_score = comments.length + upvotes
+    upvotes = trips.map { |trip| trip.get_likes }.flatten.length
+    self.tour_guide_score = trips.length + upvotes
+    self.save
+  end
+
+
   include PgSearch::Model
   pg_search_scope :search_users,
     against: [:email, :username],
