@@ -1,0 +1,28 @@
+<% if current_user %>
+  <% if current_user.favourited.include? megalith %>
+    <%= link_to 'Unfavourite', megalith_favourite_path(megalith), method: :delete, class: type, remote: true %>
+  <% else %>
+    <%= link_to 'Favourite', megalith_favourites_path(megalith), method: :post, class: type, remote: true %>
+  <% end %>
+  <% if current_user.visited.include? megalith %>
+    <button class=<%= type %> id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+      Upload Photos
+    </button>
+    <div class="dropdown-menu" aria-labelledby="dropdownMenu2" id="dropdownPhotoUpload">
+      <div class="dropdown-form p-3">
+        <%= simple_form_for([megalith, megalith_photo]) do |f| %>
+          <%= f.input :photo, as: :file %>
+          <%= f.submit "Upload", class: "btn btn-light" %>
+        <% end %>
+      </div>
+    </div>
+  <% else %>
+    <%= link_to 'Mark as visited', megalith_visiteds_path(megalith), method: :post, class: type, remote: true %>
+  <% end %>
+  <%= link_to "Plan a trip", new_megalith_trip_path(megalith), class: type %>
+<% else %>
+  <%= link_to "Favourite", new_user_session_path, class: type %>
+  <%= link_to "Plan a trip", new_user_session_path, class: type %>
+  <%= link_to "Upload Photo", new_user_session_path, class: type %>
+<% end %>
+

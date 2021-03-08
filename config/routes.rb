@@ -4,7 +4,7 @@ Rails.application.routes.draw do
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
   resources :megaliths, only: [:index, :show, :new, :create, :update] do
     resources :trips, only: [:new, :create]
-    resources :favourites, only: :create
+    resources :favourites, only: [:create, :destroy]
     resources :comments, only: :create
     resources :visiteds, only: :create
     resources :megalith_photos, only: :create
