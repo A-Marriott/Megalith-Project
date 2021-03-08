@@ -26,13 +26,14 @@
       </div>
       <div class="comment-container">
         <h2>holding text, comments here</h2>
-        <% @user.comments.each do |comment| %>
+        <% @comments.each do |comment| %>
           <!-- Todd, agree/get format for comment cards -->
+          <%= comment.text %>
         <% end %>
       </div>
       <div class="photo-container">
         <h2>holding text, photos here</h2>
-        <% @user.megalith_photos.each do |mega_photo| %>
+        <% @photos.each do |mega_photo| %>
           <div class="profile-megalith-photos">
             <%= mega_photo.megalith.name %> Upvotes: <%= mega_photo.upvote_score %>
             <%= cl_image_tag mega_photo.photo.key, alt: mega_photo.megalith.name %>
@@ -53,7 +54,7 @@
         <div class="tab-pane fade show active" id="favourites" role="tabpanel" aria-labelledby="favourites-tab">
           <h2>Delete me I'm holding text</h2>
           <p>Delete me too: Stonehenge, Eggardon Hill, Barrows aplenty</p>
-          <% @user.favourited.each do |megalith| %>
+          <% @favourites.each do |megalith| %>
             <p><%= megalith.name %></p>
             <!-- get megalith cards from Todd -->
           <% end %>
@@ -61,7 +62,7 @@
         <div class="tab-pane fade" id="visited" role="tabpanel" aria-labelledby="visited-tab">
           <h2>Delete me I'm holding text</h2>
           <p>Delete me too: Stonehenge, Eggardon Hill, Barrows aplenty</p>
-          <% @user.visited.each do |megalith| %>
+          <% @visiteds.each do |megalith| %>
             <p><%= megalith.name %></p>
             <!-- get megalith cards from Todd -->
           <% end %>
