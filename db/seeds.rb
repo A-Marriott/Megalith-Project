@@ -59,11 +59,28 @@ MegalithPhoto.destroy_all
 Trip.destroy_all
 User.destroy_all
 Megalith.destroy_all
-p 'some new ones:'
+p 'some new users:'
 
 def attach_avatar(user, img_url)
   avatar_img = URI.open(img_url)
   user.photo.attach(io: avatar_img, filename: "avatar.jpg", content_type: 'image/png')
+end
+
+def make_ratings_and_comments_and_upvotes(user)
+  megaliths = Megalith.all
+  megaliths.sample(megaliths.size * 0.6).floor.each do |lith|
+    Visited.create(user: user, megalith: lith)
+    Rating.create(score: rand(1..5), user: user, megalith: lith)
+    Comment.create(text: "#{Faker::Music::RockBand.name}. #{Faker::Hipster.paragraph(sentence_count: 3)}", user: user, megalith: lith )
+    comments = Comment.all
+    comments.sample(comments.size * 0.7).floor.each do |comment|
+      comment.liked_by user
+    end
+    photos = MegalithPhoto.all
+    photos.sample(photos.size * 0.5).floor.each do |photo|
+      photo.liked_by user
+    end
+  end
 end
 
 brian = User.create(email: 'brian@internet.com', password: 'password', username: 'Brian LithLegend')
@@ -77,6 +94,14 @@ attach_avatar(peter, 'https://image1.masterfile.com/getImage/NzAwLTAwMDU1NjQ2ZW4
 gertrude = User.create(email: 'gertrude@internet.com', password: 'password', username: 'Gertie')
 attach_avatar(gertrude, 'https://t4.ftcdn.net/jpg/03/16/16/21/360_F_316162176_3SEzHnxKzb8EUDTnfKGXePmQ6Em2xaaq.jpg')
 @photoadmin = User.create(email: 'photographer@test.com', password: 'password', username: 'Stone cold Snapper')
+attach_avatar(@photoadmin, 'https://www.davidnoton.com/public/images/Home/david-new.jpg')
+
+p 'users in the bag. time for some ratings, comments, etc'
+
+make_ratings_and_comments_and_upvotes(david)
+make_ratings_and_comments_and_upvotes(peter)
+make_ratings_and_comments_and_upvotes(gertrude)
+make_ratings_and_comments_and_upvotes(@photoadmin)
 
 dorset_file_relative = "./seed-play/Dorset-v3-latlong-formatted.json"
 devon_file_relative = "./seed-play/Devon-v3-latlong-formatted.json"
