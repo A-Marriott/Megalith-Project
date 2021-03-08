@@ -106,7 +106,7 @@
             <% if @completed_trips[0] %>
               <% @completed_trips.each do |trip| %>
                 <%= link_to trip_path(trip) do %>
-                  <%= render 'shared/trip_card', trip: trip %>
+                  <%= render 'shared/trip_card', trip: trip, redirect: 'none' %>
                 <% end %>
               <% end %>
             <% else %>
