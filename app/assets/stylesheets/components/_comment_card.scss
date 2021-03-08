@@ -1,0 +1,14 @@
+.comment {
+  margin: 8px;
+  padding: 16px;
+  border: 1px solid $softish-stone;
+  border-radius: 2px;
+  display: flex;
+  align-items: center;
+  .comment-content {
+    flex-grow: 1;
+  }
+  p {
+    margin-bottom: 0;
+  }
+}
