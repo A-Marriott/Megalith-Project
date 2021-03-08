@@ -23,6 +23,9 @@
     <div class="tab-pane fade show active" id="profile" role="tabpanel" aria-labelledby="profile-tab">
       <div class="badge-container">
         <h2>holding text, badges here</h2>
+        <p>Photographer: <%= @user.photographer_score %></p>
+        <p>Commenter: <%= @user.commenter_score %></p>
+        <p>Tour Guide: <%= @user.tour_guide_score %></p>
       </div>
       <div class="comment-container">
         <h2>Comments</h2>
