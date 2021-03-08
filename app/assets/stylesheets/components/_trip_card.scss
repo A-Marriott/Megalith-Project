@@ -7,6 +7,7 @@
 
 .trip-profile-image {
   text-align: center;
+  width: 60px;
   margin-right: 8px;
 }
 
@@ -27,4 +28,16 @@
 .card-trip-top-left {
   text-align: right;
   align-items: none;
+}
+
+.trip-card-hr {
+  margin-top: 8px;
+  margin-bottom: 8px;
+}
+
+@media screen and (max-width: 992px) {
+  .card-trip-image {
+    height: 24vh;
+    width: 100%;
+  }
 }
