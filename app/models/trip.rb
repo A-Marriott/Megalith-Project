@@ -5,4 +5,5 @@ class Trip < ApplicationRecord
   has_many :trip_photos, dependent: :destroy
   has_many :users, through: :trip_users
   has_many :megaliths, through: :trip_megaliths
+  acts_as_votable
 end
