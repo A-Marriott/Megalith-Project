@@ -11,6 +11,8 @@ Rails.application.routes.draw do
   end
   get "users/search", to: "users#search", as: :users_search
   post "megalith_photos/:id/upvote", to: "megalith_photos#upvote", as: :megalith_photos_upvote
+  post "trips/:id/upvote", to: "trips#upvote", as: :trips_upvote
+  post "comments/:id/upvote", to: "comments#upvote", as: :comments_upvote
   resources :users, only: [:index, :show, :edit, :update]
   resources :trips, only: [:edit, :update, :show, :destroy]
   resources :trip_users, only: [:create, :destroy]

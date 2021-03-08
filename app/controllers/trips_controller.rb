@@ -29,6 +29,18 @@ class TripsController < ApplicationController
     end
   end
 
+  def upvote
+    @trip = Trip.find params[:id]
+    @trip.liked_by current_user
+    if params[:redirect_type] == 'megalith'
+      redirect_to megalith_path(params[:redirect], anchor: 'trips')
+    elsif params[:redirect_type] == 'home'
+      redirect_to root_path(anchor: 'popular-trips')
+      # this if is so that upvoting sends the user back to the megalith show page if that is where they upvoted
+      # if the tirp card shows elsewhere they need a different redirect.
+    end
+  end
+
   def edit
     @main_megalith = @trip.trip_megaliths.where(main: true).first.megalith
     @search_users = User.search_users(params[:user_query]) if params[:user_query]
