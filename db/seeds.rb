@@ -49,6 +49,11 @@ def load_lith_with_fake_photo(lith)
 end
 
 p 'deleting users, liths and trips'
+Favourite.destroy_all
+Visited.destroy_all
+OtherLocation.destroy_all
+Comment.destroy_all
+Rating.destroy_all
 TripPhoto.destroy_all
 MegalithPhoto.destroy_all
 Trip.destroy_all
