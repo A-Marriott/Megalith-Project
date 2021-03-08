@@ -37,7 +37,7 @@ ActiveRecord::Schema.define(version: 2021_03_07_151433) do
   end
 
   create_table "comments", force: :cascade do |t|
-    t.text "text"
+    t.text "body"
     t.integer "upvotes"
     t.bigint "user_id", null: false
     t.bigint "megalith_id", null: false
