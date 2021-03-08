@@ -1,7 +1,7 @@
 <div class="comment" id=<%= "comment-#{comment.id}" %>>
   <div class="comment-content">
     <p><%= comment.text %></p>
-    <p><small><em>Posted <%= distance_of_time_in_words(comment.created_at, Time.now) %> ago by </em></small><strong><%= comment.user.username %></strong></p>
+    <p><small><em>Posted <%= distance_of_time_in_words(comment.created_at, Time.now) %> ago by </em></small><strong><%= comment.user.username %></strong><%= cl_image_tag comment.user.photo.key, alt: "profile avatar", class: "avatar ml-3" %></p>
   </div>
   <div class="upvoting">
     <%= link_to comments_upvote_path(comment, redirect: comment.megalith, redirect_type: 'megalith'), method: :post, remote: true do %>
