@@ -1,6 +1,9 @@
 import mapboxgl from 'mapbox-gl';
 import 'mapbox-gl/dist/mapbox-gl.css';
 import MapboxGeocoder from '@mapbox/mapbox-gl-geocoder';
+import MapboxDirections from '@mapbox/mapbox-gl-directions/dist/mapbox-gl-directions'
+import '@mapbox/mapbox-gl-directions/dist/mapbox-gl-directions.css'
+
 
 const initMapbox = () => {
   const mapElement = document.getElementById('map');
@@ -29,6 +32,12 @@ const initMapbox = () => {
     });
   };
 
+  const directions = new MapboxDirections({
+    accessToken: process.env.MAPBOX_API_KEY,
+    unit: 'imperial',
+    profile: 'mapbox/walking'
+  });
+
   if (mapElement) { // only build a map if there's a div#map to inject into
     mapboxgl.accessToken = mapElement.dataset.mapboxApiKey;
     const map = new mapboxgl.Map({
@@ -41,8 +50,10 @@ const initMapbox = () => {
     // map.addControl(new MapboxGeocoder({ accessToken: mapboxgl.accessToken,
     //                                  mapboxgl: mapboxgl }));
     map.addControl(new mapboxgl.NavigationControl());
+    if (document.querySelector('.direction-map')) {
+      map.addControl(directions, 'top-left');
+    };
   }
-
 };
 
 const initGeocoder = () => {
@@ -61,10 +72,7 @@ const initGeocoder = () => {
        })
 };
 
-
-
 export { initMapbox, initGeocoder };
-
 
 // if (mapElement) {
 //   // [ ... ]

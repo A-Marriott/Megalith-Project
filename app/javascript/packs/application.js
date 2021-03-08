@@ -35,8 +35,6 @@ import { previewImageOnFileSelect } from '../plugins/init_image_preview.js';
 // import { initSelect2 } from '../components/init_select2';
 
 document.addEventListener('turbolinks:load', () => {
-  // Call your functions here, e.g:
-  // initSelect2();
   initUpdateNavbarOnScroll();
   initGeocoder();
   initMapbox();

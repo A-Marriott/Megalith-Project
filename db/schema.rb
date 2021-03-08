@@ -10,6 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
+
 ActiveRecord::Schema.define(version: 2021_03_07_151433) do
 
   # These are extensions that must be enabled in order to support this database
@@ -76,6 +77,7 @@ ActiveRecord::Schema.define(version: 2021_03_07_151433) do
     t.float "average_rating"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.string "fake_photo_key"
   end
 
   create_table "other_locations", force: :cascade do |t|

@@ -11,7 +11,7 @@ class MegalithsController < ApplicationController
       {
         lat: megalith.latitude,
         lng: megalith.longitude,
-        infoWindow: render_to_string(partial: "info_window", locals: { megalith: megalith })
+        infoWindow: render_to_string(partial: "shared/info_window", locals: { megalith: megalith })
       }
     end
   end
