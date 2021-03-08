@@ -1,11 +1,16 @@
 <div class="card-general mt-3">
   <div class="card-trip-image">
-    <%= cl_image_tag trip.megaliths.first.megalith_photos.first.photo.key, class:"trip-card-thumbnail" %>
+    <% if trip.trip_photos[0] %>
+      <%= cl_image_tag trip.trip_photos.first.photo.key, class:"trip-card-thumbnail" %>
+    <% else %>
+      <%= cl_image_tag trip.megaliths.first.megalith_photos.first.photo.key, class:"trip-card-thumbnail" %>
+    <% end %>
   </div>
   <div class="card-general-infos">
     <div class="card-general-top">
       <div class="card-general-title">
         <h2><%= trip.name %></h2>
+        <h3><%= trip.tagline %></h3>
       </div>
       <div class="card-general-top-left card-trip-top-left">
         <p><%= trip.date_visited %></p>
@@ -18,11 +23,27 @@
     </div>
     <HR>
     <div class="card-general-tagline">
-        <p><%= trip.tagline %><p>
+        <p><%= trip.description %><p>
     </div>
     <HR>
     <div class="card-general-bottom">
       <div class="card-general-location trip-profiles-container">
+        <% trip.users.each do |user| %>
+        <%= link_to user_path(user) do %>
+          <div class="trip-profile-image">
+            <% if user.photo %>
+              <%= cl_image_tag user.photo.key, class:"trip-avatar" %>
+            <% else %>
+              <%= image_tag "https://upload.wikimedia.org/wikipedia/commons/7/7c/Profile_avatar_placeholder_large.png", class: "trip-avatar" %>
+            <% end %>
+            <% if user.username %>
+              <p><%= user.username %></p>
+            <% else %>
+              <p>Anon</p>
+            <% end %>
+          </div>
+        <% end %>
+        <% end %>
         <div class="trip-profile-image">
             <%= image_tag "https://upload.wikimedia.org/wikipedia/commons/7/7c/Profile_avatar_placeholder_large.png", class: "trip-avatar" %>
           <p>User Name</p>
