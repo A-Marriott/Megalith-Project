@@ -28,7 +28,6 @@
         <h2>holding text, comments here</h2>
         <% @comments.each do |comment| %>
           <!-- Todd, agree/get format for comment cards -->
-          <%= comment.text %>
         <% end %>
       </div>
       <div class="photo-container">
@@ -79,8 +78,19 @@
         </li>
       </ul>
       <div class="tab-content" id="myTabContent">
-        <div class="tab-pane fade show active" id="in-planning" role="tabpanel" aria-labelledby="in-planning-tab">...</div>
-        <div class="tab-pane fade" id="completed" role="tabpanel" aria-labelledby="completed-tab">...</div>
+        <div class="tab-pane fade show active" id="in-planning" role="tabpanel" aria-labelledby="in-planning-tab">
+          <div class="planned-trips-container">
+            <h2>holding text, planned trips here</h2>
+            <% @planned_trips.each do |trip| %>
+            <% end %>
+        </div>
+        <div class="tab-pane fade" id="completed" role="tabpanel" aria-labelledby="completed-tab">
+          <div class="completed-trips-container">
+            <h2>holding text, completed trips here</h2>
+            <% @completed_trips.each do |trip| %>
+            <% end %>
+          </div>
+        </div>
       </div>
     </div>
   </div>
