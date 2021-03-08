@@ -22,7 +22,21 @@
 
       <div class="subheading-elements mt-3">
         <div class="rating">
-          <p>★<%= @megalith.average_rating %> </p>
+          <% if current_user.visited.include? @megalith %>
+            <% if @my_rating %>
+              <p><small>You rated:</small>★<%= @my_rating.score %></p>
+            <% else %>
+              <%= simple_form_for [@megalith, @rating] do |f| %>
+                <%= f.input :score, collection: 1..5 %>
+                <%= f.submit "Rate", class: "btn btn-light" %>
+              <% end %>
+            <% end %>
+          <% end %>
+          <% if @average_rating %>
+            <p>★<%= @megalith.average_rating %> </p>
+          <% else %>
+            <p>★ Be the first to rate this megalith</p>
+          <% end %>
         </div>
         <div class="category">
           <h5><%= @megalith.category %></h5>

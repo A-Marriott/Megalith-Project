@@ -7,6 +7,7 @@ Rails.application.routes.draw do
     resources :favourites, only: [:create, :destroy]
     resources :comments, only: :create
     resources :visiteds, only: :create
+    resources :ratings, only: :create
     resources :megalith_photos, only: :create
   end
   get "users/search", to: "users#search", as: :users_search
