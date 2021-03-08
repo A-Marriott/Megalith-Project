@@ -25,9 +25,10 @@
         <h2>holding text, badges here</h2>
       </div>
       <div class="comment-container">
-        <h2>holding text, comments here</h2>
+        <h2>Comments</h2>
         <% @comments.each do |comment| %>
-          <!-- Todd, agree/get format for comment cards -->
+          <p class="comment"><%= comment.text %></p>
+          <p><small><em>Posted <%= distance_of_time_in_words(comment.created_at, Time.now) %> ago</em></small></p>
         <% end %>
       </div>
       <div class="photo-container">
@@ -51,19 +52,25 @@
       </ul>
       <div class="tab-content" id="myTabContent">
         <div class="tab-pane fade show active" id="favourites" role="tabpanel" aria-labelledby="favourites-tab">
-          <h2>Delete me I'm holding text</h2>
-          <p>Delete me too: Stonehenge, Eggardon Hill, Barrows aplenty</p>
-          <% @favourites.each do |megalith| %>
-            <p><%= megalith.name %></p>
-            <!-- get megalith cards from Todd -->
+          <% if @favourites[0] %>
+            <% @favourites.each do |megalith| %>
+              <%= link_to megalith_path(megalith) do %>
+                <%= render 'shared/card', megalith: megalith %>
+              <% end %>
+            <% end %>
+          <% else %>
+            <h2 class="mt-3 text-center">Favourite a megalith to display it here</h2>
           <% end %>
         </div>
         <div class="tab-pane fade" id="visited" role="tabpanel" aria-labelledby="visited-tab">
-          <h2>Delete me I'm holding text</h2>
-          <p>Delete me too: Stonehenge, Eggardon Hill, Barrows aplenty</p>
-          <% @visiteds.each do |megalith| %>
-            <p><%= megalith.name %></p>
-            <!-- get megalith cards from Todd -->
+          <% if @visiteds[0] %>
+            <% @visiteds.each do |megalith| %>
+              <%= link_to megalith_path(megalith) do %>
+                <%= render 'shared/card', megalith: megalith %>
+              <% end %>
+            <% end %>
+          <% else %>
+            <h2 class="mt-3 text-center">Visit a megalith to display it here</h2>
           <% end %>
         </div>
       </div>
@@ -80,14 +87,27 @@
       <div class="tab-content" id="myTabContent">
         <div class="tab-pane fade show active" id="in-planning" role="tabpanel" aria-labelledby="in-planning-tab">
           <div class="planned-trips-container">
-            <h2>holding text, planned trips here</h2>
-            <% @planned_trips.each do |trip| %>
+            <% if @planned_trips[0] %>
+              <% @planned_trips.each do |trip| %>
+                <%= link_to trip_path(trip) do %>
+                  <%= render 'shared/trip_card', trip: trip %>
+                <% end %>
+              <% end %>
+            <% else %>
+              <h2 class="mt-3 text-center">Plan a trip to display it here</h2>
             <% end %>
+          </div>
         </div>
         <div class="tab-pane fade" id="completed" role="tabpanel" aria-labelledby="completed-tab">
           <div class="completed-trips-container">
-            <h2>holding text, completed trips here</h2>
-            <% @completed_trips.each do |trip| %>
+            <% if @completed_trips[0] %>
+              <% @completed_trips.each do |trip| %>
+                <%= link_to trip_path(trip) do %>
+                  <%= render 'shared/trip_card', trip: trip %>
+                <% end %>
+              <% end %>
+            <% else %>
+              <h2 class="mt-3 text-center">Complete a trip to display it here</h2>
             <% end %>
           </div>
         </div>
