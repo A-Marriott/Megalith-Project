@@ -16,7 +16,6 @@ class Trip < ApplicationRecord
   def update_visiteds
     users.each do |user|
       megaliths.each do |megalith|
-        raise
         Visited.create(user: user, megalith: megalith)
       end
     end
