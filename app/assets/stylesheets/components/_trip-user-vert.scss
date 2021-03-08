@@ -1,0 +1,29 @@
+.trip-user-vert {
+  overflow: hidden;
+  background: white;
+  width: 15vw;
+  margin: 8px;
+  box-shadow: 0 0 15px rgba(0,0,0,0.2);
+}
+
+.trip-user-vert > img {
+  height: 12vh;
+  width: 15vw;
+  object-fit: cover;
+}
+
+.trip-user-vert p {
+  font-size: 12px;
+  opacity: .7;
+  margin: 0;
+  text-align: center;
+}
+
+
+.trip-user-vert .trip-user-info {
+  padding: 16px;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  position: relative;
+}
