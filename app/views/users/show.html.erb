@@ -1,7 +1,7 @@
 <div class="container">
   <div class="profile-details my-3 p-2">
-    <% if @user %>
-      <%= cl_image_tag '553o7l389jwb8060qxkf9hezyart', alt: "profile picture", class: "profile-picture my-2" %>
+    <% if @user.photo.attached? %>
+      <%= cl_image_tag @user.photo.key, alt: "profile picture", class: "profile-picture my-2" %>
     <% else %>
       <div class="profile-substitute my-2"></div>
     <% end %>

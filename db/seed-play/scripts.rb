@@ -37,3 +37,7 @@ require 'json'
 # puts all_urls.select { |url| url.match /https:\/\/megalithic.co.uk\/a558\/.*/ }
 # p v1.size
 # p all_urls.size
+
+# p JSON.parse(File.read('Devon-v3-latlong-formatted.json')).size
+# p JSON.parse(File.read('Somerset-v3-latlong-formatted.json')).size
+# p JSON.parse(File.read('Dorset-v3-latlong-formatted.json')).size

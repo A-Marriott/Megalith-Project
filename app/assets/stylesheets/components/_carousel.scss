@@ -1,0 +1,14 @@
+.show-page-images {
+  .carousel-inner {
+    overflow: hidden;
+    height: 472px;
+    width: 100%;
+  }
+
+  @media screen and (max-width: 992px) {
+    .carousel-inner {
+      width: auto;
+      height: 310px;
+    }
+  }
+}

@@ -36,6 +36,7 @@ gem 'simple_form'
 gem 'cloudinary', '~> 1.16.0'
 gem 'geocoder'
 gem 'pg_search', '~> 2.3.0'
+gem 'acts_as_votable'
 
 group :development, :test do
   gem 'pry-byebug'

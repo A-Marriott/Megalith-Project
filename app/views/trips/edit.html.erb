@@ -1,7 +1,16 @@
-<div class="container mt-5">
+<div class="container mt-4">
   <h1 class="text-center"><%= @trip.name %></h1>
-  <div class="row">
-    <div class="trip-edit-form col-12 col-md-6">
+
+  <nav>
+    <div class="nav nav-tabs justify-content-center" id="nav-tab" role="tablist">
+      <button class="nav-link active" id="nav-form-tab" data-toggle="tab" data-target="#nav-form" type="button" role="tab" aria-controls="nav-form" aria-selected="true">Details</button>
+      <button class="nav-link" id="nav-users-tab" data-toggle="tab" data-target="#nav-users" type="button" role="tab" aria-controls="nav-users" aria-selected="false">Friends</button>
+      <button class="nav-link" id="nav-megaliths-tab" data-toggle="tab" data-target="#nav-megaliths" type="button" role="tab" aria-controls="nav-megaliths" aria-selected="false">Megaliths</button>
+      <button class="nav-link" id="nav-photos-tab" data-toggle="tab" data-target="#nav-photos" type="button" role="tab" aria-controls="nav-photos" aria-selected="false">Photos</button>
+    </div>
+  </nav>
+  <div class="tab-content" id="nav-tabContent">
+    <div class="tab-pane fade show active" id="nav-form" role="tabpanel" aria-labelledby="nav-form-tab">
       <%= simple_form_for @trip do |f| %>
         <%= f.input :name %>
         <%= f.input :tagline %>
@@ -9,8 +18,7 @@
         <%= f.button :submit, class: "btn btn-outline-secondary" %>
       <% end %>
     </div>
-
-    <div class="trip-users col-12 col-md-6">
+    <div class="tab-pane fade" id="nav-users" role="tabpanel" aria-labelledby="nav-users-tab">
       <div class="current-trip-users">
         <% @trip_users.each do |tripper| %>
           <%= render 'shared/user_card', user: tripper, button: 'delete', trip: @trip %>
@@ -32,8 +40,7 @@
       <div class="trip-user-search-results">
       </div>
     </div>
-
-    <div class="trip-megaliths col-12 col-md-6">
+    <div class="tab-pane fade" id="nav-megaliths" role="tabpanel" aria-labelledby="nav-megaliths-tab">
       <div class="current-trip-megaliths">
         <h2>Current Megaliths</h2>
           <%= render 'shared/trip_megalith_card', megalith: @main_megalith, button: 'none' %>
@@ -46,14 +53,28 @@
         <% end %>
       </div>
     </div>
-
-    <div class="trip-photos col-12 col-md-6">
+    <div class="tab-pane fade" id="nav-photos" role="tabpanel" aria-labelledby="nav-photos-tab">
       <h2 class="pt-3">Add photos</h2>
-        <%= simple_form_for @trip, html: { id: :photo_upload } do |f| %>
-          <%= f.input :photos, as: :file, input_html: { multiple: true, class: 'hidden', id: 'photo-input' } %>
-          <%= f.button :submit, class: "sub-btn btn btn-outline-secondary" %>
-        <% end %>
+      <%= simple_form_for @trip, html: { id: :photo_upload } do |f| %>
+        <%= f.input :photos, as: :file, input_html: { multiple: true, class: 'hidden', id: 'photo-input' } %>
+        <%= f.button :submit, class: "sub-btn btn btn-outline-secondary" %>
+      <% end %>
     </div>
   </div>
   <h4><%= link_to 'Back', trip_path(@trip), class: "btn btn-outline-secondary" %></h4>
+
+
+  <div class="row">
+    <div class="trip-edit-form col-12 col-md-6">
+    </div>
+
+    <div class="trip-users col-12 col-md-6">
+    </div>
+
+    <div class="trip-megaliths col-12 col-md-6">
+    </div>
+
+    <div class="trip-photos col-12 col-md-6">
+    </div>
+  </div>
 </div>

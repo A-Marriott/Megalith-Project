@@ -35,26 +35,89 @@ def load_lith_without_photo(lith)
 end
 
 # THIS WILL ONLY WORK IF ON ARFA.CAMBLE CLOUDINARY
-def give_lith_fake_photo_key(lith)
-  lith.update(fake_photo_key: FAKE_PHOTO_KEYS.sample)
+def load_lith_with_fake_photo(lith)
+  new_lith = Megalith.new(
+    name: lith['name'],
+    category: lith['category'],
+    description: lith['description'],
+    latitude: lith['latitude'],
+    longitude: lith['longitude']
+  )
+  p new_lith.name
+  new_lith.fake_photo_key = FAKE_PHOTO_KEYS.sample
+  p new_lith.save
 end
 
-p 'deleting users and liths'
+p 'deleting users, liths and trips'
+TripPhoto.destroy_all
 MegalithPhoto.destroy_all
+Trip.destroy_all
 User.destroy_all
 Megalith.destroy_all
 p 'some new ones:'
 
+def attach_avatar(user, img_url)
+  avatar_img = URI.open(img_url)
+  user.photo.attach(io: avatar_img, filename: "avatar.jpg", content_type: 'image/png')
+end
+
 brian = User.create(email: 'brian@internet.com', password: 'password', username: 'Brian LithLegend')
+attach_avatar(brian, 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcReSqEhw-txJbZQc80W8nIJkrm848vAAYUb6Q&usqp=CAU')
 noobles = User.create(email: 'rocknoob@test.com', password: 'password', username: 'Noob on the Rocks')
+attach_avatar(noobles, 'https://i.dailymail.co.uk/i/pix/2017/04/20/13/3F6B966D00000578-4428630-image-m-80_1492690622006.jpg')
+david = User.create(email: 'david@test.com', password: 'password', username: 'David Stone Man')
+attach_avatar(david, 'https://images.pexels.com/photos/220453/pexels-photo-220453.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500')
+peter = User.create(email: 'peter@internet.com', password: 'password', username: 'Peat ;)')
+attach_avatar(peter, 'https://image1.masterfile.com/getImage/NzAwLTAwMDU1NjQ2ZW4uMDAwMDAwMDA=ALrv8s/700-00055646en_Masterfile.jpg')
+gertrude = User.create(email: 'gertrude@internet.com', password: 'password', username: 'Gertie')
+attach_avatar(gertrude, 'https://t4.ftcdn.net/jpg/03/16/16/21/360_F_316162176_3SEzHnxKzb8EUDTnfKGXePmQ6Em2xaaq.jpg')
 photoadmin = User.create(email: 'photographer@test.com', password: 'password', username: 'Stone cold Snapper')
 
 dorset_file_relative = "./seed-play/Dorset-v3-latlong-formatted.json"
 devon_file_relative = "./seed-play/Devon-v3-latlong-formatted.json"
 somerset_file_relative = "./seed-play/Somerset-v3-latlong-formatted.json"
-json_file = File.join(File.dirname(__FILE__), dorset_file_relative)
-liths = JSON.parse(File.read(json_file))
-# load 20 with photos
-liths.first(20).each { |lith| load_lith_with_photo(lith) }
+all_three = [dorset_file_relative, devon_file_relative, somerset_file_relative]
+def hash_of_liths_from_json(relative_filepath)
+  json_file = File.join(File.dirname(__FILE__), relative_filepath)
+  liths = JSON.parse(File.read(json_file))
+end
+# # # OPTIONS --- PICK ONE ONLY
+# 1 load 20 with photos
+# hash_of_liths_from_json(dorset_file_relative).first(20).each { |lith| load_lith_with_photo(lith) }
+
+# 2 load all with photos - expensive for cloudinary, will take a long time
+# all_three.each do |filepath|
+#   hash_of_liths_from_json(filepath).each { |lith| load_lith_with_photo(lith) }
+# end
+
+# 3 load all without photos - good to practise with pagination and lots of stuff on the map
+# all_three.each do |filepath|
+#   hash_of_liths_from_json(filepath).each { |lith| load_lith_without_photo(lith) }
+# end
+
+# 4 load somerset with photos and devon/dorset without - maybe a good balance for the final presentation?
+# hash_of_liths_from_json(somerset_file_relative).each { |lith| load_lith_with_photo(lith) }
+# hash_of_liths_from_json(devon_file_relative).each { |lith| load_lith_without_photo(lith) }
+# hash_of_liths_from_json(dorset_file_relative).each { |lith| load_lith_without_photo(lith) }
+
+# 5 load somerset with photos and devon/dorset with fakes - WILL ONLY WORK WITH ARFA.CAMBLE CLOUDINARY
+# hash_of_liths_from_json(somerset_file_relative).each { |lith| load_lith_with_photo(lith) }
+# hash_of_liths_from_json(devon_file_relative).each { |lith| load_lith_with_fake_photo(lith) }
+# hash_of_liths_from_json(dorset_file_relative).each { |lith| load_lith_with_fake_photo(lith) }
+
+p 'liths loaded'
+
+# trips and comments should be auto-generated once we know which megaliths
+# we want to use in our demo OR we make some ourselves leading up to the demo
+
+p 'creating random favourites and visiteds for brian'
+
+all_liths = Megalith.all
+all_liths.sample(5).each do |megalith|
+  Favourite.create(megalith: megalith, user: brian)
+end
+all_liths.sample(15).each do |megalith|
+  Visited.create(megalith: megalith, user: brian)
+end
 
 p 'done'

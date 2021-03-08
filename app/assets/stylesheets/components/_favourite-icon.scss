@@ -1,0 +1,41 @@
+label {
+  /* Presentation */
+  font-size: 48px
+}
+
+/* Required Styling */
+
+label input[type="checkbox"] {
+  display: none;
+}
+
+.custom-checkbox {
+  margin-left: 2em;
+  position: relative;
+  cursor: pointer;
+}
+
+.custom-checkbox .bi {
+  color: #FFC65A;
+  position: absolute;
+  top: -15px;
+  left: -35px;
+  font-size: 5px;
+}
+
+.custom-checkbox .bi-bookmark-plus {
+  color: #8B4633;
+}
+
+.custom-checkbox .bi-bookmark-plus-fill {
+  opacity: 0;
+  transition: opacity 0.2s ease-in-out;
+}
+
+.custom-checkbox:hover .bi-bookmark-plus-fill{
+  opacity: 0.5;
+}
+
+.custom-checkbox input[type="checkbox"]:checked ~ .bi-bookmark-plus-fill {
+  opacity: 1;
+}
