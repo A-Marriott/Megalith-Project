@@ -23,7 +23,7 @@ class MegalithsController < ApplicationController
       @megalith = Megalith.find(params[:id])
       @trips = @megalith.trips.where(published: true)
       @markers = [{lat:@megalith.latitude, lng:@megalith.longitude}]
-      @favourites = Favourite.create(user_id: current_user.id, megalith_id: @megalith.id)
+      @favourites = Favourite.create(user_id: current_user.id, megalith_id: @megalith.id) if current_user
       @comment = Comment.new
       @comment.megalith_id = @megalith.id
     end
