@@ -1,24 +1,73 @@
-<div class="container mt-4">
-  <h1 class="text-center"><%= @trip.name %></h1>
+<div class="container">
+  <div class="trip-show-buttons d-flex justify-content-center mt-3">
+      <%= link_to 'Back', trip_path(@trip), data: { confirm: "Unsaved changes will be lost, Are you sure?" }, class: "btn btn-outline-secondary mx-2" %>
+      <%= link_to 'Delete',
+                  trip_path(@trip),
+                  method: :delete,
+                  data: { confirm: "Are you sure?" }, class: "btn btn-outline-danger mx-2" %>
+      <%= link_to 'Mark trip as visited?', finalise_trip_edit_path(@trip), class: "btn btn-outline-warning mx-2" %>
+      <%= link_to 'Save changes', trip_path(@trip), class: "btn btn-outline-success mx-2" %>
 
-  <nav>
+  </div>
+  <!-- top section -->
+  <div class="trip-edit-top mt-3">
+    <div class="container trip-edit-text">
+      <div class="title-elements">
+        <h1><%= @trip.name %></h1>
+
+        <div class="title mt-3">
+          <%= simple_form_for @trip do |f| %>
+            <%= f.input :name %>
+          <% end %>
+        </div>
+      </div>
+
+    <div class="tab-pane fade show active" id="nav-form" role="tabpanel" aria-labelledby="nav-form-tab">
+    </div>
+      <div class="subheading-elements mt-3">
+        <div class="category">
+          <h5><%= @trip.date_visited %></h5>
+        </div>
+      </div>
+      <div class="visited-sites-pills">
+        <% @trip.megaliths.each do |megalith| %>
+          <span class="badge badge-pill badge-secondary mr-2"><%= megalith.name.truncate(20) %></span>
+        <% end %>
+      </div>
+      <HR> </HR>
+      <div class="edit-text-box">
+        <div class="tagline">
+          <%= simple_form_for @trip do |f| %>
+            <%= f.input :tagline %>
+            <% end %>
+        </div>
+        <%= simple_form_for @trip do |f| %>
+          <p><%= f.input :top_tip %> </p>
+        <% end %>
+        <div class="Description">
+          <%= simple_form_for @trip do |f| %>
+            <%= f.input :description, :input_html => {:rows => 10} %>
+            <%= f.button :submit, class: "btn btn-outline-secondary" %>
+          <% end %>
+        </div>
+        <div class="trip-description-bottom mt-3">
+          <% @trip.users.each do |tripper| %>
+            <%= render 'shared/trip-user-tiny', user: tripper %>
+          <% end %>
+        </div>
+      </div>
+    </div>
+
+    <div class="trip-edit-tabs">
+      <nav>
     <div class="nav nav-tabs justify-content-center" id="nav-tab" role="tablist">
-      <button class="nav-link active" id="nav-form-tab" data-toggle="tab" data-target="#nav-form" type="button" role="tab" aria-controls="nav-form" aria-selected="true">Details</button>
-      <button class="nav-link" id="nav-users-tab" data-toggle="tab" data-target="#nav-users" type="button" role="tab" aria-controls="nav-users" aria-selected="false">Friends</button>
+      <button class="nav-link active" id="nav-users-tab" data-toggle="tab" data-target="#nav-users" type="button" role="tab" aria-controls="nav-users" aria-selected="false">Friends</button>
       <button class="nav-link" id="nav-megaliths-tab" data-toggle="tab" data-target="#nav-megaliths" type="button" role="tab" aria-controls="nav-megaliths" aria-selected="false">Megaliths</button>
       <button class="nav-link" id="nav-photos-tab" data-toggle="tab" data-target="#nav-photos" type="button" role="tab" aria-controls="nav-photos" aria-selected="false">Photos</button>
     </div>
   </nav>
   <div class="tab-content" id="nav-tabContent">
-    <div class="tab-pane fade show active" id="nav-form" role="tabpanel" aria-labelledby="nav-form-tab">
-      <%= simple_form_for @trip do |f| %>
-        <%= f.input :name %>
-        <%= f.input :tagline %>
-        <%= f.input :description %>
-        <%= f.button :submit, class: "btn btn-outline-secondary" %>
-      <% end %>
-    </div>
-    <div class="tab-pane fade" id="nav-users" role="tabpanel" aria-labelledby="nav-users-tab">
+    <div class="tab-pane fade show active container" id="nav-users" role="tabpanel" aria-labelledby="nav-users-tab">
       <div class="current-trip-users">
         <% @trip_users.each do |tripper| %>
           <%= render 'shared/user_card', user: tripper, button: 'delete', trip: @trip %>
@@ -35,46 +84,47 @@
           <%= hidden_field_tag 'trip_id', @trip.id.to_s %>
           <%= submit_tag "Search", class: "btn btn-outline-secondary ml-2" %>
         <% end %>
-      </div>
+        </div>
 
-      <div class="trip-user-search-results">
+        <div class="trip-user-search-results">
+        </div>
+      </div>
+      <div class="tab-pane fade" id="nav-megaliths" role="tabpanel" aria-labelledby="nav-megaliths-tab">
+        <div class="current-trip-megaliths">
+            <div class="edit-page-map">
+              <div id="map"
+                 data-markers="<%= @markers.to_json %>"
+                 data-mapbox-api-key="<%= ENV['MAPBOX_API_KEY'] %>"></div>
+              </div>
+          <h4 class="mt-2">Current Megaliths</h4>
+          <div class="current-edit-megaliths">
+              <%= render 'shared/trip_megalith_card', megalith: @main_megalith, button: 'none' %>
+            <% @trip_megaliths.reject{ |meg| meg.megalith == @main_megalith }.each do |trip_megalith| %>
+              <%= render 'shared/trip_megalith_card', megalith: trip_megalith.megalith, button: 'delete' %>
+            <% end %>
+          </div>
+          <h4 class="mt-2">Other megaliths within 5 miles</h4>
+          <div class="other-edit-megaliths">
+            <% @search_megaliths.each do |megalith| %>
+              <%= render 'shared/trip_megalith_card', megalith: megalith, button: 'add', trip: @trip %>
+            <% end %>
+          </div>
+        </div>
+      </div>
+      <div class="tab-pane fade" id="nav-photos" role="tabpanel" aria-labelledby="nav-photos-tab">
+        <div class="container">
+          <h2 class="pt-3">Add photos</h2>
+          <%= simple_form_for @trip, html: { id: :photo_upload } do |f| %>
+            <%= f.input :photos, as: :file, input_html: { multiple: true, class: 'hidden', id: 'photo-input' } %>
+            <%= f.button :submit, class: "sub-btn btn btn-outline-secondary" %>
+          <% end %>
+        </div>
       </div>
     </div>
-    <div class="tab-pane fade" id="nav-megaliths" role="tabpanel" aria-labelledby="nav-megaliths-tab">
-      <div class="current-trip-megaliths">
-        <h2>Current Megaliths</h2>
-          <%= render 'shared/trip_megalith_card', megalith: @main_megalith, button: 'none' %>
-        <% @trip_megaliths.reject{ |meg| meg.megalith == @main_megalith }.each do |trip_megalith| %>
-          <%= render 'shared/trip_megalith_card', megalith: trip_megalith.megalith, button: 'delete' %>
-        <% end %>
-        <h4>Other megaliths within 5 miles</h4>
-        <% @search_megaliths.each do |megalith| %>
-          <%= render 'shared/trip_megalith_card', megalith: megalith, button: 'add', trip: @trip %>
-        <% end %>
-      </div>
-    </div>
-    <div class="tab-pane fade" id="nav-photos" role="tabpanel" aria-labelledby="nav-photos-tab">
-      <h2 class="pt-3">Add photos</h2>
-      <%= simple_form_for @trip, html: { id: :photo_upload } do |f| %>
-        <%= f.input :photos, as: :file, input_html: { multiple: true, class: 'hidden', id: 'photo-input' } %>
-        <%= f.button :submit, class: "sub-btn btn btn-outline-secondary" %>
-      <% end %>
     </div>
   </div>
-  <h4><%= link_to 'Back', trip_path(@trip), class: "btn btn-outline-secondary" %></h4>
 
+  <!-- Map -->
 
-  <div class="row">
-    <div class="trip-edit-form col-12 col-md-6">
-    </div>
-
-    <div class="trip-users col-12 col-md-6">
-    </div>
-
-    <div class="trip-megaliths col-12 col-md-6">
-    </div>
-
-    <div class="trip-photos col-12 col-md-6">
-    </div>
-  </div>
+  <!-- Lower Section -->
 </div>

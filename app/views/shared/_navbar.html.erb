@@ -13,7 +13,7 @@
     </div>
 
     <% unless current_page? root_path %>
-      <div class="home-search">
+      <div class="navbar-extras home-search">
           <%= form_tag megaliths_path, class:"d-flex", method:"get" do %>
           <div id="geocoder"></div>
           <%= hidden_field_tag :query, nil, id: "geocoder-query" %>
