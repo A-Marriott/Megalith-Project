@@ -24,6 +24,8 @@ class MegalithsController < ApplicationController
       @trips = @megalith.trips.where(published: true)
       @markers = [{lat:@megalith.latitude, lng:@megalith.longitude}]
       @favourites = Favourite.create(user_id: current_user.id, megalith_id: @megalith.id)
+      @comment = Comment.new
+      @comment.megalith_id = @megalith.id
     end
 
   end

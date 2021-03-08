@@ -73,6 +73,20 @@
           <span class="sr-only">Next</span>
         </a>
       </div>
+      <div class="upvote-overlay">
+        <div class="photo-by">
+          <p><small><em>Photo by:</em></small></p>
+          <!-- the below should be inside an iteration for the photo and use megalith_photo.user.username -->
+          <p>Brian LithLegend</p>
+        </div>
+        <div class="upvoting">
+          <%= link_to megalith_photos_upvote_path(@megalith.megalith_photos.first), method: :post, remote: true do %>
+          <i class="fas fa-angle-up"></i>
+          <% end %>
+          <!-- the below should be inside an iteration for the photo and use megalith_photo.get_likes.size -->
+          <p><%= @megalith.megalith_photos.first.get_likes.size %></p>
+        </div>
+      </div>
     </div>
   </div>
 
@@ -87,7 +101,7 @@
   <div class="show-page-tabs mt-5">
     <ul class="nav nav-tabs" id="myTab" role="tablist">
       <li class="nav-item">
-        <a class="nav-link active" id="comments-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">Comments</a>
+        <a class="nav-link active" id="comments-tab" data-toggle="tab" href="#comments" role="tab" aria-controls="comments" aria-selected="true">Comments</a>
       </li>
       <li class="nav-item">
         <a class="nav-link" id="trips-tab" data-toggle="tab" href="#trips" role="tab" aria-controls="trips" aria-selected="false">Trips</a>
@@ -97,66 +111,13 @@
       </li>
     </ul>
     <div class="tab-content" id="myTabContent">
-      <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+      <div class="tab-pane fade show active" id="comments" role="tabpanel" aria-labelledby="comments-tab">
         <!-- comments section -->
-        <section class="content-item" id="comments">
-            <div class="container">
-              <div class="row">
-                    <div class="container">
-                        <form>
-                          <h3 class="pull-left">New Comment</h3>
-                            <fieldset>
-                                <div class="row">
-                                    <div class="form-group col-xs-12 col-sm-12 col-lg-12">
-                                        <textarea class="form-control" id="message" placeholder="Your message" required=""></textarea>
-                                    </div>
-                                </div>
-                                <button type="submit" class="btn btn-secondary pull-right">Submit</button>
-                            </fieldset>
-                        </form>
 
-                        <h3>2 Comments</h3>
-
-                        <!-- COMMENT 2 - START -->
-                        <div class="media">
-                            <a class="pull-left" href="#"><img class="media-object" src="https://upload.wikimedia.org/wikipedia/commons/7/7c/Profile_avatar_placeholder_large.png" alt=""></a>
-                            <div class="media-body">
-                                <h4 class="media-heading">Frederick Rock</h4>
-                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-                                <ul class="list-unstyled list-inline media-detail pull-left">
-                                    <li><i class="fa fa-calendar"></i>27/02/2014</li>
-                                    <li><i class="fa fa-thumbs-up"></i>13</li>
-                                </ul>
-                                <ul class="list-unstyled list-inline media-detail pull-right">
-                                    <li class=""><a href="">Like</a></li>
-                                    <li class=""><a href="">Reply</a></li>
-                                </ul>
-                            </div>
-                        </div>
-                        <!-- COMMENT 2 - END -->
-
-                        <!-- COMMENT 3 - START -->
-                        <div class="media">
-                            <a class="pull-left" href="#"><img class="media-object" src="https://upload.wikimedia.org/wikipedia/commons/7/7c/Profile_avatar_placeholder_large.png" alt=""></a>
-                            <div class="media-body">
-                                <h4 class="media-heading">Stanley Stone</h4>
-                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-                                <ul class="list-unstyled list-inline media-detail pull-left">
-                                    <li><i class="fa fa-calendar"></i>27/02/2014</li>
-                                    <li><i class="fa fa-thumbs-up"></i>13</li>
-                                </ul>
-                                <ul class="list-unstyled list-inline media-detail pull-right">
-                                    <li class=""><a href="">Like</a></li>
-                                    <li class=""><a href="">Reply</a></li>
-                                </ul>
-                            </div>
-                        </div>
-                        <!-- COMMENT 3 - END -->
-
-                    </div>
-                </div>
-            </div>
-        </section>
+        <div class="container">
+            <%= render partial: 'comments/form' %>
+            <%= render partial: 'comments/comment', collection: @megalith.comments.reverse %>
+        </div>
 
         <!-- comments section -->
       </div>
