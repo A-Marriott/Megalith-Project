@@ -1,0 +1,11 @@
+<h3>Post a Comment</h3>
+
+<%= form_for [ @megalith, @comment ] do |f| %>
+  <p>
+    <%= f.label :body %><br/>
+    <%= f.text_area :body %>
+  </p>
+  <p>
+    <%= f.submit 'Submit', remote: true %>
+  </p>
+<% end %>
