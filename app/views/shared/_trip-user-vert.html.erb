@@ -1,0 +1,10 @@
+<div class="trip-user-vert">
+  <% if user.photo.attached? %>
+    <%= cl_image_tag trip_user.photo.key, alt: "alttext" %>
+    <% else %>
+      <%= image_tag "https://upload.wikimedia.org/wikipedia/commons/7/7c/Profile_avatar_placeholder_large.png" %>
+    <% end %>
+  <div class="trip-user-info">
+    <p><%= user.username %></p>
+  </div>
+</div>
