@@ -18,7 +18,7 @@ def load_lith_with_photo(lith)
   img = MegalithPhoto.new
   img.photo.attach(io: img_file, filename: "lith.#{filetype}", content_type: 'image/png')
   img.megalith = new_lith
-  img.user = photoadmin
+  img.user = @photoadmin
   p img.save
 end
 
@@ -71,7 +71,7 @@ peter = User.create(email: 'peter@internet.com', password: 'password', username:
 attach_avatar(peter, 'https://image1.masterfile.com/getImage/NzAwLTAwMDU1NjQ2ZW4uMDAwMDAwMDA=ALrv8s/700-00055646en_Masterfile.jpg')
 gertrude = User.create(email: 'gertrude@internet.com', password: 'password', username: 'Gertie')
 attach_avatar(gertrude, 'https://t4.ftcdn.net/jpg/03/16/16/21/360_F_316162176_3SEzHnxKzb8EUDTnfKGXePmQ6Em2xaaq.jpg')
-photoadmin = User.create(email: 'photographer@test.com', password: 'password', username: 'Stone cold Snapper')
+@photoadmin = User.create(email: 'photographer@test.com', password: 'password', username: 'Stone cold Snapper')
 
 dorset_file_relative = "./seed-play/Dorset-v3-latlong-formatted.json"
 devon_file_relative = "./seed-play/Devon-v3-latlong-formatted.json"
@@ -83,7 +83,7 @@ def hash_of_liths_from_json(relative_filepath)
 end
 # # # OPTIONS --- PICK ONE ONLY
 # 1 load 20 with photos
-# hash_of_liths_from_json(dorset_file_relative).first(20).each { |lith| load_lith_with_photo(lith) }
+hash_of_liths_from_json(dorset_file_relative).first(20).each { |lith| load_lith_with_photo(lith) }
 
 # 2 load all with photos - expensive for cloudinary, will take a long time
 # all_three.each do |filepath|
