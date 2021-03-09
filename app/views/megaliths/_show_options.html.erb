@@ -1,8 +1,12 @@
 <% if current_user %>
   <% if current_user.favourited.include? megalith %>
-    <%= link_to 'Unfavourite', megalith_favourite_path(megalith), method: :delete, class: type, remote: true %>
+    <%= link_to megalith_favourite_path(megalith), method: :delete, class: type, remote: true do %>
+      <i class="fas fa-heart"></i>
+    <% end %>
   <% else %>
-    <%= link_to 'Favourite', megalith_favourites_path(megalith), method: :post, class: type, remote: true %>
+    <%= link_to megalith_favourites_path(megalith), method: :post, class: type, remote: true do %>
+      <i class="far fa-heart"></i>
+    <% end %>
   <% end %>
   <% if current_user.visited.include? megalith %>
     <button class=<%= type %> id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
