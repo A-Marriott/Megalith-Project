@@ -51,8 +51,8 @@
       <% unless redirect == 'none' %>
       <div class="card-general-bottom-left upvoting">
         <%= link_to trips_upvote_path(trip, redirect: redirect, redirect_type: redirect_type), method: :post, remote: true do %>
+          <i class="fas fa-angle-up"></i>
         <% end %>
-        <i class="fas fa-angle-up"></i>
         <!-- the below should be inside an iteration for the photo and use megalith_photo.get_likes.size -->
         <p><%= trip.get_likes.size %></p>
       </div>
