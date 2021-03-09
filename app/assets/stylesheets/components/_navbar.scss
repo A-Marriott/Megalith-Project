@@ -44,3 +44,13 @@ body {
     display: none;
   }
 }
+
+.go-btn {
+  width: 60px;
+  margin-left: 50px;
+}
+
+.mapboxgl-ctrl-geocoder--icon-search {
+  left: unset;
+  right: 10px;
+}
