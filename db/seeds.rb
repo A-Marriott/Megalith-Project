@@ -68,16 +68,16 @@ end
 
 def make_ratings_and_comments_and_upvotes(user)
   megaliths = Megalith.all
-  megaliths.sample(megaliths.size * 0.6).floor.each do |lith|
+  megaliths.sample(megaliths.size * 0.6).each do |lith|
     Visited.create(user: user, megalith: lith)
     Rating.create(score: rand(1..5), user: user, megalith: lith)
     Comment.create(text: "#{Faker::Music::RockBand.name}. #{Faker::Hipster.paragraph(sentence_count: 3)}", user: user, megalith: lith )
     comments = Comment.all
-    comments.sample(comments.size * 0.7).floor.each do |comment|
+    comments.sample(comments.size * 0.7).each do |comment|
       comment.liked_by user
     end
     photos = MegalithPhoto.all
-    photos.sample(photos.size * 0.5).floor.each do |photo|
+    photos.sample(photos.size * 0.5).each do |photo|
       photo.liked_by user
     end
   end
@@ -96,12 +96,7 @@ attach_avatar(gertrude, 'https://t4.ftcdn.net/jpg/03/16/16/21/360_F_316162176_3S
 @photoadmin = User.create(email: 'photographer@test.com', password: 'password', username: 'Stone cold Snapper')
 attach_avatar(@photoadmin, 'https://www.davidnoton.com/public/images/Home/david-new.jpg')
 
-p 'users in the bag. time for some ratings, comments, etc'
-
-make_ratings_and_comments_and_upvotes(david)
-make_ratings_and_comments_and_upvotes(peter)
-make_ratings_and_comments_and_upvotes(gertrude)
-make_ratings_and_comments_and_upvotes(@photoadmin)
+p 'users in the bag. time for some liths'
 
 dorset_file_relative = "./seed-play/Dorset-v3-latlong-formatted.json"
 devon_file_relative = "./seed-play/Devon-v3-latlong-formatted.json"
@@ -113,7 +108,7 @@ def hash_of_liths_from_json(relative_filepath)
 end
 # # # OPTIONS --- PICK ONE ONLY
 # 1 load 20 with photos
-hash_of_liths_from_json(dorset_file_relative).first(20).each { |lith| load_lith_with_photo(lith) }
+# hash_of_liths_from_json(dorset_file_relative).first(20).each { |lith| load_lith_with_photo(lith) }
 
 # 2 load all with photos - expensive for cloudinary, will take a long time
 # all_three.each do |filepath|
@@ -149,5 +144,11 @@ end
 all_liths.sample(15).each do |megalith|
   Visited.create(megalith: megalith, user: brian)
 end
+
+p 'ratings/comments/upvotes'
+make_ratings_and_comments_and_upvotes(david)
+make_ratings_and_comments_and_upvotes(peter)
+make_ratings_and_comments_and_upvotes(gertrude)
+make_ratings_and_comments_and_upvotes(@photoadmin)
 
 p 'done'
