@@ -1,9 +1,9 @@
-<div class="container mt-5">
+<div class="container mt-3">
   <h1>New Trip</h1>
   <%= simple_form_for [ @megalith, @trip ] do |f| %>
-    <%= f.input :name %>
-    <%= f.input :tagline %>
-    <%= f.input :description %>
+    <%= f.input :name, hint: "Give your trip a title" %>
+    <%= f.input :tagline, hint: "One sentence to describe your trip" %>
+    <%= f.input :description, label: "Notes", :input_html => {:rows => 5}, hint: "Describe and plan your walk with your fellow enthusiasts!" %>
     <%= f.button :submit, class: "btn btn-primary" %>
   <% end %>
 </div>

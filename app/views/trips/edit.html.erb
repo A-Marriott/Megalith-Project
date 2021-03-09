@@ -5,46 +5,38 @@
                   trip_path(@trip),
                   method: :delete,
                   data: { confirm: "Are you sure?" }, class: "btn btn-outline-danger mx-2" %>
-      <%= link_to 'Mark trip as visited?', finalise_trip_edit_path(@trip), class: "btn btn-outline-warning mx-2" %>
-      <%= link_to 'Save changes', trip_path(@trip), class: "btn btn-outline-success mx-2" %>
+      <% if !@trip.date_visited %>
+      <%= link_to 'Trip Completed', finalise_trip_edit_path(@trip), class: "btn btn-outline-warning mx-2" %>
+      <% elsif @trip.published %>
+      <% else %>
+      <%= link_to 'Publish Trip', trip_path(@trip, commit: "Publish Trip"), method: :patch, class: "btn btn-outline-success mx-2" %>
+      <% end %>
 
   </div>
   <!-- top section -->
   <div class="trip-edit-top mt-3">
     <div class="container trip-edit-text">
       <div class="title-elements">
-        <h1><%= @trip.name %></h1>
-
+        <h1 id="trip-edit-title"><%= @trip.name %></h1>
+        <% if @trip.date_visited %>
+        <p><em><%= @trip.date_visited.strftime('%A %-d %B %Y') %></em></p>
+        <% end %>
         <div class="title mt-3">
           <%= simple_form_for @trip do |f| %>
-            <%= f.input :name %>
-          <%= f.button :submit, class: "btn btn-outline-secondary" %>
+            <%= f.input :name, hint: "Give your trip a title" %>
+            <%= f.input :tagline, hint: "One sentence to describe your trip" %>
+            <% if @trip.date_visited %>
+            <%= f.input :top_tip, hint: "What made your trip special?" %>
+            <%= f.input :description, :input_html => {:rows => 10}, hint: "Give as much detail as you like!" %>
+            <% else %>
+            <%= f.input :description, label: "Notes", :input_html => {:rows => 10}, hint: "Describe and plan your walk with your fellow enthusiasts!" %>
+            <% end %>
+          <%= f.button :submit, value: 'Update Details', class: "btn btn-outline-secondary", remote: true %>
           <% end %>
         </div>
       </div>
 
-    <div class="tab-pane fade show active" id="nav-form" role="tabpanel" aria-labelledby="nav-form-tab">
-    </div>
-      <div class="subheading-elements mt-3">
-        <div class="category">
-          <h5><%= @trip.date_visited %></h5>
-        </div>
-      </div>
-      <div class="visited-sites-pills">
-        <% @trip.megaliths.each do |megalith| %>
-          <span class="badge badge-pill badge-secondary mr-2"><%= megalith.name.truncate(20) %></span>
-        <% end %>
-      </div>
-      <HR> </HR>
       <div class="edit-text-box">
-        <div class="tagline">
-          <%= simple_form_for @trip do |f| %>
-            <%= f.input :tagline %>
-            <%= f.input :top_tip %>
-            <%= f.input :description, :input_html => {:rows => 10} %>
-            <%= f.button :submit, class: "btn btn-outline-secondary" %>
-          <% end %>
-        </div>
         <div class="trip-description-bottom mt-3">
           <% @trip.users.each do |tripper| %>
             <%= render 'shared/trip-user-tiny', user: tripper %>
@@ -55,10 +47,12 @@
 
     <div class="trip-edit-tabs">
       <nav>
-    <div class="nav nav-tabs justify-content-center" id="nav-tab" role="tablist">
+    <div class="nav nav-tabs justify-content-center mt-3" id="nav-tab" role="tablist">
       <button class="nav-link active" id="nav-users-tab" data-toggle="tab" data-target="#nav-users" type="button" role="tab" aria-controls="nav-users" aria-selected="false">Friends</button>
       <button class="nav-link" id="nav-megaliths-tab" data-toggle="tab" data-target="#nav-megaliths" type="button" role="tab" aria-controls="nav-megaliths" aria-selected="false">Megaliths</button>
-      <button class="nav-link" id="nav-photos-tab" data-toggle="tab" data-target="#nav-photos" type="button" role="tab" aria-controls="nav-photos" aria-selected="false">Photos</button>
+      <% if @trip.date_visited %>
+        <button class="nav-link" id="nav-photos-tab" data-toggle="tab" data-target="#nav-photos" type="button" role="tab" aria-controls="nav-photos" aria-selected="false">Photos</button>
+      <% end %>
     </div>
   </nav>
   <div class="tab-content" id="nav-tabContent">
@@ -111,7 +105,7 @@
           <h2 class="pt-3">Add photos</h2>
           <%= simple_form_for @trip, html: { id: :photo_upload } do |f| %>
             <%= f.input :photos, as: :file, input_html: { multiple: true, class: 'hidden', id: 'photo-input' } %>
-            <%= f.button :submit, class: "sub-btn btn btn-outline-secondary" %>
+            <%= f.button :submit, value: "Upload Photos", class: "btn btn-outline-secondary" %>
           <% end %>
         </div>
       </div>

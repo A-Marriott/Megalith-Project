@@ -57,15 +57,20 @@ class TripsController < ApplicationController
   end
 
   def update
-    if params[:trip] && params[:trip][:photos]
+    if params[:commit] == "Upload Photos"
       params[:trip][:photos].each do |photo|
         TripPhoto.create(trip: @trip, photo: photo)
       end
-    elsif params[:trip]
+      redirect_to edit_trip_path(@trip, anchor: 'trip-edit-title'), notice: "Trip updated"
+    elsif params[:commit] == "Update Details" || params[:commit] == "Confirm Date"
       @trip.update(trip_params)
+      redirect_to edit_trip_path(@trip, anchor: 'trip-edit-title'), notice: "Trip updated"
+    elsif params[:commit] == "Publish Trip"
+      # @trip.update(published: true)
+      @trip.published = true
+      @trip.save
+      redirect_to trip_path(@trip), notice: "Trip published"
     end
-
-    redirect_to edit_trip_path(@trip), notice: "Trip updated"
   end
 
   def destroy
