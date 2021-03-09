@@ -18,7 +18,7 @@ const displayPreview = (input) => {
       const reader = new FileReader();
 
       reader.onload = (event) => {
-        document.querySelector('.photo_insert').insertAdjacentHTML('beforeend', `<img src="" class="hidden" width="100" height="100" style="margin-right: 10px; margin-bottom: 10px;">`);
+        document.querySelector('.photo_insert').insertAdjacentHTML('beforeend', `<img src="" class="hidden" width="100" height="100" style="margin-right: 10px; margin-bottom: 14px;">`);
         document.querySelector(`.photo_insert`).children[document.querySelector(`.photo_insert`).children.length - 1].src = event.currentTarget.result;
         document.querySelector(`.photo_insert`).children[document.querySelector(`.photo_insert`).children.length - 1].classList.remove('hidden');
       }
