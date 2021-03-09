@@ -1,0 +1,23 @@
+.step-card {
+  display: flex;
+  box-shadow: 0 0 15px rgba(0,0,0,0.2);
+  background-color: white;
+}
+
+.step-description-card {
+  width: 50%;
+  margin-left: 8px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+}
+
+
+.step-image-card {
+  // background-color: white;
+  width: 50%;
+  img {
+    width: 100%;
+  }
+}
