@@ -18,6 +18,7 @@
         <div class="title mt-3">
           <%= simple_form_for @trip do |f| %>
             <%= f.input :name %>
+          <%= f.button :submit, class: "btn btn-outline-secondary" %>
           <% end %>
         </div>
       </div>
@@ -39,13 +40,7 @@
         <div class="tagline">
           <%= simple_form_for @trip do |f| %>
             <%= f.input :tagline %>
-            <% end %>
-        </div>
-        <%= simple_form_for @trip do |f| %>
-          <p><%= f.input :top_tip %> </p>
-        <% end %>
-        <div class="Description">
-          <%= simple_form_for @trip do |f| %>
+            <%= f.input :top_tip %>
             <%= f.input :description, :input_html => {:rows => 10} %>
             <%= f.button :submit, class: "btn btn-outline-secondary" %>
           <% end %>

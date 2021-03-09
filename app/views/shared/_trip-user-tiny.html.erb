@@ -1,6 +1,6 @@
 <div class="trip-tiny-image">
     <% if user.photo.attached? %>
-      <%= cl_image_tag trip_user.photo.key, alt: "alttext", class: "avatar" %>
+      <%= cl_image_tag user.photo.key, alt: "alttext", class: "avatar" %>
     <% else %>
       <%= image_tag "https://upload.wikimedia.org/wikipedia/commons/7/7c/Profile_avatar_placeholder_large.png", class: "avatar" %>
     <% end %>
