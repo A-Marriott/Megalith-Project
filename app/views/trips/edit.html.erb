@@ -83,8 +83,9 @@
             <div class="edit-page-map">
               <div id="map"
                  data-markers="<%= @markers.to_json %>"
-                 data-mapbox-api-key="<%= ENV['MAPBOX_API_KEY'] %>"></div>
+                 data-mapbox-api-key="<%= ENV['MAPBOX_API_KEY'] %>">
               </div>
+            </div>
           <h4 class="mt-2">Current Megaliths</h4>
           <div class="current-edit-megaliths">
               <%= render 'shared/trip_megalith_card', megalith: @main_megalith, button: 'none' %>

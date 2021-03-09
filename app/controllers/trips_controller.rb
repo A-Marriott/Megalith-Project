@@ -48,6 +48,14 @@ class TripsController < ApplicationController
     @search_megaliths = Megalith.near([@main_megalith.latitude, @main_megalith.longitude], 5)
                                 .reject { |megalith| @trip.megaliths.include? megalith }
                                 .first(5)
+    @markers = @search_megaliths.map do |megalith|
+      {
+        lat: megalith.latitude,
+        lng: megalith.longitude,
+        infoWindow: render_to_string(partial: "shared/info_window", locals: { megalith: megalith }),
+        image_url: helpers.asset_url('logo.png')
+      }
+    end
     @trip_users = @trip.users
     respond_to do |format|
       format.html
