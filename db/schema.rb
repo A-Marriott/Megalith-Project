@@ -148,10 +148,10 @@ ActiveRecord::Schema.define(version: 2021_03_07_151433) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.string "username"
-    t.integer "overall_rating"
-    t.integer "photographer_score"
-    t.integer "commenter_score"
-    t.integer "tour_guide_score"
+    t.integer "overall_rating", default: 0
+    t.integer "photographer_score", default: 0
+    t.integer "commenter_score", default: 0
+    t.integer "tour_guide_score", default: 0
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
