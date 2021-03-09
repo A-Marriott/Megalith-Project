@@ -26,6 +26,7 @@ class MegalithsController < ApplicationController
         @rating = Rating.new
       end
       @average_rating = @megalith.average_rating
+      @trip = Trip.new
       @trips = @megalith.trips.where(published: true)
       @markers = [{lat:@megalith.latitude, lng:@megalith.longitude}]
       @comment = Comment.new

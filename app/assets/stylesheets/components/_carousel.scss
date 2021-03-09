@@ -3,6 +3,10 @@
     overflow: hidden;
     height: 472px;
     width: 100%;
+  img {
+    height: 472px;
+    object-fit: cover;
+  }
   }
 
   @media screen and (max-width: 992px) {
@@ -12,6 +16,26 @@
     }
   }
 }
+
+.trip-page-images {
+  .carousel-inner {
+    overflow: hidden;
+    height: 472px;
+    width: 100%;
+  img {
+    height: 472px;
+    object-fit: cover;
+  }
+  }
+
+  @media screen and (max-width: 992px) {
+    .carousel-inner {
+      width: auto;
+      height: 310px;
+    }
+  }
+}
+
 
 .carousel {
   margin-top: 14px;
