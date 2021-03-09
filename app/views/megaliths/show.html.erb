@@ -114,9 +114,11 @@
       <div class="tab-pane fade show active" id="comments" role="tabpanel" aria-labelledby="comments-tab">
         <!-- comments section -->
 
-        <div class="container">
-            <%= render partial: 'comments/form' %>
-            <%= render partial: 'comments/comment', collection: @megalith.comments.reverse %>
+        <div class="container" style="padding-bottom: 16px;">
+          <div class="comment-form">
+          <%= render partial: 'comments/form' %>
+          </div>
+          <%= render partial: 'comments/comment', collection: @megalith.comments.reverse %>
         </div>
 
         <!-- comments section -->

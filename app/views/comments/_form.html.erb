@@ -1,10 +1,5 @@
-<h3>Post a Comment</h3>
-
-<%= form_for [ @megalith, @comment ] do |f| %>
-  <p>
-    <%= f.text_area :text %>
-  </p>
-  <p>
-    <%= f.submit 'Submit', remote: true %>
-  </p>
+<h4>Post a Comment</h4>
+<%= simple_form_for [ @megalith, @comment ] do |f| %>
+  <%= f.input :text, label: false %>
+  <%= f.button :submit, remote: true, class: "btn btn-light" %>
 <% end %>
