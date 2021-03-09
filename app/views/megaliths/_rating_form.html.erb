@@ -1,0 +1,4 @@
+<%= simple_form_for [megalith, rating] do |f| %>
+  <%= f.input :score, collection: 1..5 %>
+  <%= f.submit "Rate", class: "btn btn-light" %>
+<% end %>

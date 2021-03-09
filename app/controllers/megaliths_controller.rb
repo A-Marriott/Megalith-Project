@@ -21,9 +21,13 @@ class MegalithsController < ApplicationController
       redirect_to megalith_path Megalith.all.sample
     else
       @megalith = Megalith.find(params[:id])
+      @megalith_photo = MegalithPhoto.new
+      unless @my_rating = Rating.where(user: current_user, megalith: @megalith).first
+        @rating = Rating.new
+      end
+      @average_rating = @megalith.average_rating
       @trips = @megalith.trips.where(published: true)
       @markers = [{lat:@megalith.latitude, lng:@megalith.longitude}]
-      @favourites = Favourite.create(user_id: current_user.id, megalith_id: @megalith.id) if current_user
       @comment = Comment.new
       @comment.megalith_id = @megalith.id
     end

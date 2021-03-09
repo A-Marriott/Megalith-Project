@@ -1,8 +1,14 @@
 class FavouritesController < ApplicationController
   def create
-    @favourite = Favourite.new
+    @megalith = Megalith.find params[:megalith_id]
+    Favourite.create(megalith: @megalith, user: current_user)
+    redirect_to megalith_path(@megalith)
+  end
 
-    @favourite.save
-      redirect_to megalith_path(@megalith)
-      flash[:alert] = "Ooops! something went wrong" unless @favorite.save
+  def destroy
+    @megalith = Megalith.find params[:megalith_id]
+    @favourite = Favourite.where(megalith: @megalith, user: current_user).first
+    @favourite.destroy
+    redirect_to megalith_path(@megalith)
+  end
 end
