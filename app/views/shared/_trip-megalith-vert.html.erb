@@ -1,0 +1,15 @@
+<div class="megalith-vert">
+  <div class="trip-megalith-vert-image-container">
+    <%= cl_image_tag megalith.megalith_photos.first.photo.key, alt: megalith.name %>
+  </div>
+  <div class="megalith-info">
+    <p><strong><%= megalith.name %></strong></p>
+    <p><small><%= megalith.category %></small></p>
+  </div>
+  <div class="buttons-on-bottom">
+    <% if button == 'add' %>
+      <%= link_to "Add to trip", trip_megaliths_path(megalith: megalith, trip: trip), method: :post, remote: true, class: "btn btn-outline-secondary btn-sm" %>
+    <% end %>
+  </div>
+</div>
+
