@@ -29,6 +29,8 @@ import { initMapbox, initGeocoder } from '../plugins/init_mapbox';
 import collapse from "../plugins/init_collapse.js" ;
 import { initUpdateNavbarOnScroll } from '../plugins/init_navbar.js';
 import { previewImageOnFileSelect } from '../plugins/init_image_preview.js';
+import { initFlatpickr } from "../plugins/flatpickr";
+
 
 
 // Internal imports, e.g:
@@ -36,6 +38,7 @@ import { previewImageOnFileSelect } from '../plugins/init_image_preview.js';
 
 document.addEventListener('turbolinks:load', () => {
   initUpdateNavbarOnScroll();
+  initFlatpickr();
   initGeocoder();
   initMapbox();
   previewImageOnFileSelect();
