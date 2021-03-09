@@ -13,7 +13,6 @@
     </div>
     <div class="card-general-extras">
       <div class="mr-5">
-        <p>★ Favourites</p>
       </div>
     </div>
     <HR>
@@ -29,12 +28,19 @@
     <HR>
     <div class="card-general-bottom">
       <div class="card-general-location">
+        <% if current_user %>
+          <% if current_user.favourited.include? megalith %>
+              <i class="fas fa-heart" style="font-size: 10px"></i>
+          <% else %>
+              <i class="far fa-heart" style="font-size: 10px"></i>
+          <% end %>
+        <% end %>
         <!-- <p>location</p> -->
       </div>
       <div class="card-general-bottom-left">
         <p>
           <% if megalith.average_rating %>
-          <%= megalith.average_rating %> ★<p>
+            <%= megalith.average_rating %> ★<p>
           <% else %>
           — ★
           <% end %>
@@ -44,5 +50,4 @@
   </div>
 </div>
 
-<!-- avg rating -->
 <!-- your favourites? -->
