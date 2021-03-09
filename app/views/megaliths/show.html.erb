@@ -137,20 +137,24 @@
       <div class="tab-pane fade" id="nearby" role="tabpanel" aria-labelledby="nearby-tab">
         <div class="nearby-sites mt-3">
           <p>Nearby Sites:</p>
-            <%= render 'shared/card', megalith: @megalith %>
+          <% @other_megaliths.each do |megalith| %>
+            <%= link_to megalith_path(megalith) do %>
+              <%= render 'shared/card', megalith: megalith, button: 'add', trip: @trip %>
+            <% end %>
+          <% end %>
         </div>
-        <div class="nearby-pubs mt-3">
-          <p>Nearby Pubs & Restaurants:</p>
+        <!-- <div class="nearby-pubs mt-3"> -->
+          <!-- <p>Nearby Pubs & Restaurants:</p> -->
           <!-- carousel of divs -->
 
           <!-- end of carousel -->
-        </div>
-        <div class="nearby-accomodation mt-3">
-          <p>Nearby Accomodation:</p>
+        <!-- </div> -->
+        <!-- <div class="nearby-accomodation mt-3"> -->
+          <!-- <p>Nearby Accomodation:</p> -->
           <!-- carousel of divs -->
 
           <!-- end of carousel -->
-        </div>
+        <!-- </div> -->
         <div id="showpage-map">
         <!-- insert map -->
         </div>

@@ -25,6 +25,9 @@ class MegalithsController < ApplicationController
       unless @my_rating = Rating.where(user: current_user, megalith: @megalith).first
         @rating = Rating.new
       end
+      @other_megaliths = Megalith.near([@megalith.latitude, @megalith.longitude], 5)
+                                  .reject { |megalith| megalith == @megalith }
+                                  .first(5)
       @average_rating = @megalith.average_rating
       @trips = @megalith.trips.where(published: true)
       @markers = [{lat:@megalith.latitude, lng:@megalith.longitude}]
