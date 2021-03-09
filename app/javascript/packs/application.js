@@ -30,6 +30,7 @@ import collapse from "../plugins/init_collapse.js" ;
 import { initUpdateNavbarOnScroll } from '../plugins/init_navbar.js';
 import { previewImageOnFileSelect } from '../plugins/init_image_preview.js';
 import { initFlatpickr } from "../plugins/flatpickr";
+import { initBarRating } from '../plugins/init_bar_rating';
 
 
 
@@ -39,6 +40,7 @@ import { initFlatpickr } from "../plugins/flatpickr";
 document.addEventListener('turbolinks:load', () => {
   initUpdateNavbarOnScroll();
   initFlatpickr();
+  initBarRating();
   initGeocoder();
   initMapbox();
   previewImageOnFileSelect();
