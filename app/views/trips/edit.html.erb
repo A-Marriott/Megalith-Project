@@ -1,17 +1,16 @@
 <div class="container">
   <div class="trip-show-buttons d-flex justify-content-center mt-3">
-      <%= link_to 'Back', trip_path(@trip), data: { confirm: "Unsaved changes will be lost, Are you sure?" }, class: "btn btn-outline-secondary mx-2" %>
-      <%= link_to 'Delete',
-                  trip_path(@trip),
-                  method: :delete,
-                  data: { confirm: "Are you sure?" }, class: "btn btn-outline-danger mx-2" %>
-      <% if !@trip.date_visited %>
-      <%= link_to 'Trip Completed', finalise_trip_edit_path(@trip), class: "btn btn-outline-warning mx-2" %>
-      <% elsif @trip.published %>
-      <% else %>
-      <%= link_to 'Publish Trip', trip_path(@trip, commit: "Publish Trip"), method: :patch, class: "btn btn-outline-success mx-2" %>
-      <% end %>
-
+    <%= link_to 'Back', trip_path(@trip), class: "btn btn-outline-secondary mx-2" %>
+    <%= link_to 'Delete',
+                trip_path(@trip),
+                method: :delete,
+                data: { confirm: "Are you sure?" }, class: "btn btn-outline-danger mx-2" %>
+    <% if !@trip.date_visited %>
+    <%= link_to 'Trip Completed', finalise_trip_edit_path(@trip), class: "btn btn-outline-success mx-2" %>
+    <% elsif @trip.published %>
+    <% else %>
+    <%= link_to 'Publish Trip', trip_path(@trip, commit: "Publish Trip"), method: :patch, class: "btn btn-outline-success mx-2" %>
+    <% end %>
   </div>
   <!-- top section -->
   <div class="trip-edit-top mt-3">
@@ -48,15 +47,27 @@
     <div class="trip-edit-tabs">
       <nav>
     <div class="nav nav-tabs justify-content-center mt-3" id="nav-tab" role="tablist">
+      <% if !(@active_tab == 'megaliths') %>
       <button class="nav-link active" id="nav-users-tab" data-toggle="tab" data-target="#nav-users" type="button" role="tab" aria-controls="nav-users" aria-selected="false">Friends</button>
+      <% else %>
+      <button class="nav-link" id="nav-users-tab" data-toggle="tab" data-target="#nav-users" type="button" role="tab" aria-controls="nav-users" aria-selected="false">Friends</button>
+      <% end %>
+      <% if @active_tab == 'megaliths' %>
+      <button class="nav-link active" id="nav-megaliths-tab" data-toggle="tab" data-target="#nav-megaliths" type="button" role="tab" aria-controls="nav-megaliths" aria-selected="false">Megaliths</button>
+      <% else %>
       <button class="nav-link" id="nav-megaliths-tab" data-toggle="tab" data-target="#nav-megaliths" type="button" role="tab" aria-controls="nav-megaliths" aria-selected="false">Megaliths</button>
+      <% end %>
       <% if @trip.date_visited %>
         <button class="nav-link" id="nav-photos-tab" data-toggle="tab" data-target="#nav-photos" type="button" role="tab" aria-controls="nav-photos" aria-selected="false">Photos</button>
       <% end %>
     </div>
   </nav>
   <div class="tab-content" id="nav-tabContent">
+    <% if !(@active_tab == 'megaliths') %>
     <div class="tab-pane fade show active container" id="nav-users" role="tabpanel" aria-labelledby="nav-users-tab">
+    <% else %>
+    <div class="tab-pane fade container" id="nav-users" role="tabpanel" aria-labelledby="nav-users-tab">
+    <% end %>
       <div class="current-trip-users">
         <% @trip_users.each do |tripper| %>
           <%= render 'shared/user_card', user: tripper, button: 'delete', trip: @trip %>
@@ -78,7 +89,11 @@
         <div class="trip-user-search-results">
         </div>
       </div>
+      <% if @active_tab == 'megaliths' %>
+      <div class="tab-pane fade show active" id="nav-megaliths" role="tabpanel" aria-labelledby="nav-megaliths-tab">
+      <% else %>
       <div class="tab-pane fade" id="nav-megaliths" role="tabpanel" aria-labelledby="nav-megaliths-tab">
+      <% end %>
         <div class="current-trip-megaliths">
             <div class="edit-page-map">
               <div id="map"
@@ -86,11 +101,11 @@
                  data-mapbox-api-key="<%= ENV['MAPBOX_API_KEY'] %>">
               </div>
             </div>
-          <h4 class="mt-2">Current Megaliths</h4>
+          <h4 class="mt-2" id="megaliths-anchor">Current Megaliths</h4>
           <div class="current-edit-megaliths">
               <%= render 'shared/trip_megalith_card', megalith: @main_megalith, button: 'none' %>
             <% @trip_megaliths.reject{ |meg| meg.megalith == @main_megalith }.each do |trip_megalith| %>
-              <%= render 'shared/trip_megalith_card', megalith: trip_megalith.megalith, button: 'delete' %>
+              <%= render 'shared/trip_megalith_card', megalith: trip_megalith.megalith, button: 'delete', trip: @trip %>
             <% end %>
           </div>
           <h4 class="mt-2">Other megaliths within 5 miles</h4>

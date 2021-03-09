@@ -1,11 +1,16 @@
 <div class="container">
   <div class="trip-show-buttons d-flex justify-content-center mt-3">
-      <%= link_to 'Edit', edit_trip_path(@trip), class: "btn btn-outline-secondary mx-2" %>
-      <%= link_to 'Delete',
-                  trip_path(@trip),
-                  method: :delete,
-                  data: { confirm: "Are you sure?" }, class: "btn btn-outline-danger mx-2" %>
-      <%= link_to 'Add trip to visited?', finalise_trip_edit_path(@trip), class: "btn btn-outline-secondary mx-2" %>
+    <%= link_to 'Edit', edit_trip_path(@trip), class: "btn btn-outline-secondary mx-2" %>
+    <%= link_to 'Delete',
+                trip_path(@trip),
+                method: :delete,
+                data: { confirm: "Are you sure?" }, class: "btn btn-outline-danger mx-2" %>
+    <% if !@trip.date_visited %>
+    <%= link_to 'Trip Completed', finalise_trip_edit_path(@trip), class: "btn btn-outline-success mx-2" %>
+    <% elsif @trip.published %>
+    <% else %>
+    <%= link_to 'Publish Trip', trip_path(@trip, commit: "Publish Trip"), method: :patch, class: "btn btn-outline-success mx-2" %>
+    <% end %>
   </div>
   <!-- top section -->
   <div class="trip-page-top mt-2">
@@ -14,52 +19,39 @@
         <div class="title mt-3">
           <h1><%= @trip.name %></h1>
         </div>
-        <div class="title-elements-line-two">
-          <div class="dropdown more-options-button">
-            <button class="btn btn-outline-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">+</button>
-            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-              <a class="dropdown-item" href="#">Add to existing Trip</a>
-              <a class="dropdown-item" href="#">Add to existing Trip</a>
-              <a class="dropdown-item" href="#">Share this page 🚀</a>
-            </div>
-          </div>
-
-          <div class="btn-group more-options-nav" role="group" aria-label="Basic example">
-            <button type="button" class="btn btn-light">Something to do</button>
-            <!-- <button type="button" class="btn btn-light">Center</button> -->
-            <button type="button" class="btn btn-light">Share <i class="far fa-share-square ml-1"></i></button>
-          </div>
-        </div>
       </div>
 
       <div class="subheading-elements mt-3">
-        <div class="rating">
-          <p><%= "Upvote?" %> </p>
+        <div class="trip-show-details mb-2">
+          <p>Date:</p>
+          <p><em><%= @trip.date_visited ? @trip.date_visited.strftime('%A %-d %B %Y') : "Hopefully soon" %></em></p>
         </div>
-        <div class="category">
-          <h5><%= @trip.date_visited %></h5>
+        <div class="trip-show-details">
+          <p>Upvotes:</p>
+          <p><em><%= @trip.published ? @trip.get_likes.size : "Publish your trip first!" %></em></p>
         </div>
       </div>
-      <div class="visited-sites-pills">
+      <div class="visited-sites-pills my-2">
         <% @trip.megaliths.each do |megalith| %>
           <span class="badge badge-pill badge-secondary mr-2"><%= megalith.name.truncate(20) %></span>
+        <% end %>
+      </div>
+      <div class="trip-description-bottom">
+        <% @trip.users.each do |tripper| %>
+          <%= render 'shared/trip-user-tiny', user: tripper %>
         <% end %>
       </div>
       <HR> </HR>
       <div class="description-text-box">
         <div class="tagline">
-          <h5><%= @trip.tagline %> </h5>
+          <p>Tagline: <%= @trip.tagline %> </p>
         </div>
         <% if @trip.top_tip %>
           <p>Top Tip: <%= @trip.top_tip %> </p>
         <% end %>
         <div class="Description"><p>
-          <strong>Description:</strong> <br> <%= @trip.description %></p>
-        </div>
-        <div class="trip-description-bottom">
-          <% @trip.users.each do |tripper| %>
-            <%= render 'shared/trip-user-tiny', user: tripper %>
-          <% end %>
+          <p><small>Description:</small></p>
+          <p><%= @trip.description %></p>
         </div>
       </div>
     </div>
