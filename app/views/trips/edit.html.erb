@@ -121,6 +121,7 @@
           <h2 class="pt-3">Add photos</h2>
           <%= simple_form_for @trip, html: { id: :photo_upload } do |f| %>
             <%= f.input :photos, as: :file, input_html: { multiple: true, class: 'hidden', id: 'photo-input' } %>
+              <div class="photo_insert"></div>
             <%= f.button :submit, value: "Upload Photos", class: "btn btn-outline-secondary" %>
           <% end %>
         </div>
