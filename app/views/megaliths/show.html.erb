@@ -35,10 +35,10 @@
           <% if @average_rating %>
             <p>★<%= @megalith.average_rating %> </p>
           <% else %>
-            <p>★ Be the first to rate this megalith</p>
+            <p><small>★ Be the first to rate this megalith</small></p>
           <% end %>
         </div>
-        <div class="category">
+        <div id="category">
           <h5><%= @megalith.category %></h5>
         </div>
       </div>
