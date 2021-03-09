@@ -33,7 +33,6 @@ import { initFlatpickr } from "../plugins/flatpickr";
 import { initBarRating } from '../plugins/init_bar_rating';
 
 
-
 // Internal imports, e.g:
 // import { initSelect2 } from '../components/init_select2';
 

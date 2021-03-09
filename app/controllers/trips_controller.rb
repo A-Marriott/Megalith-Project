@@ -20,11 +20,12 @@ class TripsController < ApplicationController
   def show
     @main_megalith = @trip.trip_megaliths.where(main: true).first.megalith
     @other_megaliths = @trip.megaliths.reject { |lith| lith == @main_megalith }
-    @markers = @trip.megaliths.geocoded.map do |megalith|
+    @markers = @trip.megaliths.map do |megalith|
       {
         lat: megalith.latitude,
         lng: megalith.longitude,
-        infoWindow: render_to_string(partial: "shared/info_window", locals: { megalith: megalith })
+        infoWindow: render_to_string(partial: "shared/info_window", locals: { megalith: megalith }),
+        image_url: helpers.asset_url('logo.png')
       }
     end
   end
@@ -45,15 +46,23 @@ class TripsController < ApplicationController
     @main_megalith = @trip.trip_megaliths.where(main: true).first.megalith
     @search_users = User.search_users(params[:user_query]) if params[:user_query]
     @trip_megaliths = @trip.trip_megaliths.includes(:megalith)
+    @active_tab = params[:active_tab] if params[:active_tab]
     @search_megaliths = Megalith.near([@main_megalith.latitude, @main_megalith.longitude], 5)
                                 .reject { |megalith| @trip.megaliths.include? megalith }
                                 .first(5)
+    @markers = (@search_megaliths+@trip_megaliths.map(&:megalith)).map do |megalith|
+      {
+        lat: megalith.latitude,
+        lng: megalith.longitude,
+        infoWindow: render_to_string(partial: "shared/info_window", locals: { megalith: megalith }),
+        image_url: helpers.asset_url('logo.png')
+      }
+    end
     @trip_users = @trip.users
     respond_to do |format|
       format.html
       format.js
     end
-    @megalith = @trip.trip_megaliths.find_by(main: true).megalith
   end
 
   def update
@@ -69,7 +78,7 @@ class TripsController < ApplicationController
       # @trip.update(published: true)
       @trip.published = true
       @trip.save
-      redirect_to trip_path(@trip), notice: "Trip published"
+      redirect_to trip_path(@trip), notice: "Congratulations, other megalithusiasts can see and upvote your trip now"
     end
   end
 

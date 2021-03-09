@@ -8,7 +8,7 @@
             <%= form_tag megaliths_path, class:"d-flex", method:"get" do %>
             <div id="geocoder"></div>
             <%= hidden_field_tag :query, nil, id: "geocoder-query" %>
-              <%= submit_tag "Go", class:"btn btn-secondary" %>
+              <%= submit_tag "Go", class:"btn btn-secondary go-btn" %>
             <% end %>
         </div>
       <%else%>
@@ -23,11 +23,15 @@
 <div class="home-page-mission-statement">
   <div class="container">
     <h1>Mission Statement</h1>
-    <p>
-      We started this project to share our passion for the world of megalithic sites. Many of these site are free to access and tell stories of a past long forgotten.
+    <h5><b>mega·​lith | \ ˈme-gə-ˌlith :</b> a very large usually rough stone used in prehistoric cultures as a monument or building block (Merriam-Webster)</h5>
+    <h6> Many people don’t know what Megaliths are and don’t realise  these sites of ancient history are literally scattered all across the countryside.
+    There is much speculation as to why these sites exist.  <b>Who made them? For what reason? Why in this particular location?</b>
+    There are many different (yet overlapping) theories ranging from ley lines to celestial and astronomical to ritual and spiritual significance that perhaps give us insight into the culture of the people who lived on this land so many years ago.</h6>
 
-      Discover new and exciting places and share photos of your discoveries with friends.
-    </p>
+    <h5>We started this project to share our passion for the world of megalithic sites. Many of these site are free to access and tell stories of a past long forgotten.
+
+    Discover new and exciting places and share photos of your discoveries with friends.
+    </h5>
 
   </div>
 </div>
@@ -39,17 +43,19 @@
         <%= image_tag "stonehenge-noun.png" %>
       </div>
       <div class="step-description-card col-lg-6">
-        <h2>Discover Sites</h2>
-        <h6>●Browse through all Megaliths</h6>
+        <h2>Discover Sites</h2><hr>
+        <h5>We invite you to learn about megalithic sites around you.</h5>
+        <!-- <h6>●Browse through all Megaliths</h6>
         <h6>●Click on individual Megaliths to learn more</h6>
-        <h6>●Use our search function to provide listings of Megaliths in a given location and display them on a map</h6>
+        <h6>●Use our search function to provide listings of Megaliths in a given location and display them on a map</h6> -->
       </div>
     </div>
     <div class="step-card mt-3">
       <div class="step-description-card col-lg-6">
-        <h2>Discuss and learn about them with the community</h2>
-        <h6>●Each individual Megalith page has a comments section</h6>
-        <h6>●Members can discuss facts about the Megalith or their own personal experiences</h6>
+        <h2>Discuss and learn about them with the community</h2><hr>
+        <h5>Connect with our online community, discuss facts, insights and personal experiences of Megaliths.</h5>
+        <!-- <h6>●Each individual Megalith page has a comments section</h6>
+        <h6>●Members can discuss facts about the Megalith or their own personal experiences</h6> -->
       </div>
       <div class="step-image-card">
         <img src="https://images.unsplash.com/photo-1516321497487-e288fb19713f?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=750&q=80">
@@ -60,12 +66,13 @@
         <img src="https://media.timeout.com/images/105416355/image.jpg">
       </div>
       <div class="step-description-card col-lg-6">
-        <h2>See & Plan Trips</h2>
-        <h6>●See trips taken by other users</h6>
+        <h2>See & Plan Trips</h2><hr>
+        <h5>Plan your own trip across megalithic sites with likeminded enthusiasts and then share your experience and photos of your journey online.  You can also view past trips taken by other site members.</h5>
+        <!-- <h6>●See trips taken by other users</h6>
         <h6>●Create & Plan your own trip with like minded enthusiasts</h6>
         <h6>●Add several megaliths to your planned trip</h6>
         <h6>●Add other members to your planned trip</h6>
-        <h6>●Upload images, descriptions and top-tips to your trip page after you've been on your trip. Make the trip visible to other site users</h6>
+        <h6>●Upload images, descriptions and top-tips to your trip page after you've been on your trip. Make the trip visible to other site users</h6> -->
 
       </div>
     </div>
