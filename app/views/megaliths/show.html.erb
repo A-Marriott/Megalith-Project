@@ -9,36 +9,34 @@
           <div class="dropdown more-options-button">
             <button class="btn btn-outline-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">+</button>
             <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-              <%= link_to 'Make a trip', new_megalith_trip_path(@megalith), class:"dropdown-item" %>
-              <a class="dropdown-item" href="#">Add to existing Trip</a>
-              <a class="dropdown-item" href="#">Share this page 🚀</a>
+              <%= render 'show_options', megalith: @megalith, megalith_photo: @megalith_photo, type: "dropdown-item" %>
             </div>
           </div>
 
           <div class="btn-group more-options-nav" role="group" aria-label="Basic example">
-            <%= link_to 'Make a trip', new_megalith_trip_path(@megalith), type:"button", class:"btn btn-light" %>
-            <!-- <button type="button" class="btn btn-light">Center</button> -->
-            <button type="button" class="btn btn-light">Share <i class="far fa-share-square ml-1"></i></button>
+            <%= render 'show_options', megalith: @megalith, megalith_photo: @megalith_photo, type: "btn btn-light" %>
           </div>
 
-          <div class="favourites-icon topright">
-            <label for="id-of-input" class="custom-checkbox">
-              <input type="checkbox" id="id-of-input"/>
-                <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" fill="currentColor" class="bi bi-bookmark-plus" viewBox="0 0 16 16">
-                  <path fill-rule="evenodd" d="M8 4a.5.5 0 0 1 .5.5V6H10a.5.5 0 0 1 0 1H8.5v1.5a.5.5 0 0 1-1 0V7H6a.5.5 0 0 1 0-1h1.5V4.5A.5.5 0 0 1 8 4z"/>
-                  <path d="M2 2a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v13.5a.5.5 0 0 1-.777.416L8 13.101l-5.223 2.815A.5.5 0 0 1 2 15.5V2zm2-1a1 1 0 0 0-1 1v12.566l4.723-2.482a.5.5 0 0 1 .554 0L13 14.566V2a1 1 0 0 0-1-1H4z"/>
-                </svg>
-                <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" fill="currentColor" class="bi bi-bookmark-plus-fill" viewBox="0 0 16 16">
-                  <path fill-rule="evenodd" d="M2 15.5V2a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v13.5a.5.5 0 0 1-.74.439L8 13.069l-5.26 2.87A.5.5 0 0 1 2 15.5zm6.5-11a.5.5 0 0 0-1 0V6H6a.5.5 0 0 0 0 1h1.5v1.5a.5.5 0 0 0 1 0V7H10a.5.5 0 0 0 0-1H8.5V4.5z"/>
-                </svg>
-            </label>
-          </div>
         </div>
       </div>
 
       <div class="subheading-elements mt-3">
         <div class="rating">
-          <p>★<%= @megalith.average_rating %> </p>
+          <% if current_user.visited.include? @megalith %>
+            <% if @my_rating %>
+              <p><small>You rated:</small>★<%= @my_rating.score %></p>
+            <% else %>
+              <%= simple_form_for [@megalith, @rating] do |f| %>
+                <%= f.input :score, collection: 1..5 %>
+                <%= f.submit "Rate", class: "btn btn-light" %>
+              <% end %>
+            <% end %>
+          <% end %>
+          <% if @average_rating %>
+            <p>★<%= @megalith.average_rating %> </p>
+          <% else %>
+            <p>★ Be the first to rate this megalith</p>
+          <% end %>
         </div>
         <div class="category">
           <h5><%= @megalith.category %></h5>
@@ -114,17 +112,25 @@
       <div class="tab-pane fade show active" id="comments" role="tabpanel" aria-labelledby="comments-tab">
         <!-- comments section -->
 
-        <div class="container">
-            <%= render partial: 'comments/form' %>
-            <%= render partial: 'comments/comment', collection: @megalith.comments.reverse %>
+        <div class="container" style="padding-bottom: 16px;">
+          <div class="comment-form">
+          <%= render partial: 'comments/form' %>
+          </div>
+          <%= render partial: 'comments/comment', collection: @megalith.comments.reverse %>
         </div>
 
         <!-- comments section -->
       </div>
       <div class="tab-pane fade" id="trips" role="tabpanel" aria-labelledby="trips-tab">
         <!-- Placeholder for trip cards -->
-        <% @megalith.trips.each do |trip| %>
-          <%= render 'shared/trip_card', trip: trip %>
+        <% if @trips[0] %>
+          <% @trips.each do |trip| %>
+            <%= render 'shared/trip_card', trip: trip, redirect: @megalith, redirect_type: 'megalith' %>
+          <% end %>
+        <% else %>
+          <%= link_to new_megalith_trip_path(@megalith) do %>
+            <h2 class="text-center mt-3">Be the first to add a trip</h2>
+          <% end %>
         <% end %>
         <!-- placeholder for trip cards -->
       </div>

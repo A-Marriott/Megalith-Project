@@ -1,45 +1,130 @@
 <div class="container">
-  <h1 class="text-center mt-3"><%= @trip.name %></h1>
-  <div class="trip-show-buttons d-flex justify-content-center mb-3">
-    <%= link_to 'Edit', edit_trip_path(@trip), class: "btn btn-outline-secondary mx-2" %>
-    <%= link_to 'Delete',
-                trip_path(@trip),
-                method: :delete,
-                data: { confirm: "Are you sure?" }, class: "btn btn-outline-danger mx-2" %>
-    <%= link_to 'Add trip to visited?', finalise_trip_edit_path(@trip), class: "btn btn-outline-secondary mx-2" %>
+  <div class="trip-show-buttons d-flex justify-content-center mt-3">
+      <%= link_to 'Edit', edit_trip_path(@trip), class: "btn btn-outline-secondary mx-2" %>
+      <%= link_to 'Delete',
+                  trip_path(@trip),
+                  method: :delete,
+                  data: { confirm: "Are you sure?" }, class: "btn btn-outline-danger mx-2" %>
+      <%= link_to 'Add trip to visited?', finalise_trip_edit_path(@trip), class: "btn btn-outline-secondary mx-2" %>
   </div>
-  <div class="row">
-    <div class="trip-basics col-12 col-md-6">
-      <p>tagline: <%= @trip.tagline %></p>
-      <p>description: <%= @trip.description %></p>
-      <% if @trip.top_tip %>
-        <p>top_tip: <%= @trip.top_tip %> </p>
-      <% end %>
-      <% if @trip.date_visited %>
-        <p>date_visited: <%= @trip.date_visited %></p>
-      <% end %>
-    </div>
-    <div class="trip-show-photos col-12 col-md-6">
-      <% if @trip.trip_photos.empty? %>
-        <h3>No photos yet. Upload some!</h3>
-      <% else %>
-        <% @trip.trip_photos.each do |photo| %>
-          <%= cl_image_tag photo.photo.key, height: 200, width: 200, crop: :fill  %>
+  <!-- top section -->
+  <div class="trip-page-top mt-2">
+    <div class="trip-page-text">
+      <div class="title-elements mt-3">
+        <div class="title mt-3">
+          <h1><%= @trip.name %></h1>
+        </div>
+        <div class="title-elements-line-two">
+          <div class="dropdown more-options-button">
+            <button class="btn btn-outline-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">+</button>
+            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+              <a class="dropdown-item" href="#">Add to existing Trip</a>
+              <a class="dropdown-item" href="#">Add to existing Trip</a>
+              <a class="dropdown-item" href="#">Share this page 🚀</a>
+            </div>
+          </div>
+
+          <div class="btn-group more-options-nav" role="group" aria-label="Basic example">
+            <button type="button" class="btn btn-light">Something to do</button>
+            <!-- <button type="button" class="btn btn-light">Center</button> -->
+            <button type="button" class="btn btn-light">Share <i class="far fa-share-square ml-1"></i></button>
+          </div>
+        </div>
+      </div>
+
+      <div class="subheading-elements mt-3">
+        <div class="rating">
+          <p><%= "Upvote?" %> </p>
+        </div>
+        <div class="category">
+          <h5><%= @trip.date_visited %></h5>
+        </div>
+      </div>
+      <div class="visited-sites-pills">
+        <% @trip.megaliths.each do |megalith| %>
+          <span class="badge badge-pill badge-secondary mr-2"><%= megalith.name.truncate(20) %></span>
         <% end %>
-      <% end %>
+      </div>
+      <HR> </HR>
+      <div class="description-text-box">
+        <div class="tagline">
+          <h5><%= @trip.tagline %> </h5>
+        </div>
+        <% if @trip.top_tip %>
+          <p>Top Tip: <%= @trip.top_tip %> </p>
+        <% end %>
+        <div class="Description"><p>
+          <strong>Description:</strong> <br> <%= @trip.description %></p>
+        </div>
+        <div class="trip-description-bottom">
+          <% @trip.users.each do |tripper| %>
+            <%= render 'shared/trip-user-tiny', user: tripper %>
+          <% end %>
+        </div>
+      </div>
     </div>
-    <div class="trip-show-megaliths col-12 col-md-6">
-      <%= render 'shared/trip_megalith_card', megalith: @main_megalith, button: 'none' %>
-      <% @other_megaliths.each do |megalith| %>
-      <%= render 'shared/trip_megalith_card', megalith: megalith, button: 'none' %>
+
+    <div class="trip-page-images">
+      <div id="trip-page-carousel" class="carousel slide" data-ride="false">
+        <div class="carousel-inner">
+          <% if @trip.trip_photos.empty? %>
+            <div class="carousel-item active">
+              <%= image_tag "placeholder-megalith", class:"d-block w-100", alt:"Megalith"%>
+            </div>
+            <% else %>
+            <% @trip.trip_photos.each do |photo| %>
+              <div class="carousel-item active">
+                <%= cl_image_tag photo.photo.key, class:"d-block w-100"%>
+              </div>
+            <% end %>
+          <% end %>
+          <a class="carousel-control-prev" href="#trip-page-carousel" role="button" data-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="sr-only">Previous</span>
+          </a>
+          <a class="carousel-control-next" href="#trip-page-carousel" role="button" data-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="sr-only">Next</span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Map -->
+  <div class="trip-page-map">
+    <div id="map"
+         class="direction-map"
+         data-markers="<%= @markers.to_json %>"
+         data-mapbox-api-key="<%= ENV['MAPBOX_API_KEY'] %>"></div>
+  </div>
+
+  <!-- Lower Section -->
+  <div class="container mt-5">
+    <!-- Placeholder for trip cards -->
+    <div class="trip-basics">
+      <div class="trip-show-megaliths">
+        <h2 class="mt-2"> Megaliths Visited </h2>
+        <%= link_to megalith_path(@main_megalith) do %>
+          <%= render 'shared/trip_megalith_card', megalith: @main_megalith, button: 'none' %>
+        <% end %>
+            <% @other_megaliths.each do |megalith| %>
+              <%= link_to megalith_path(megalith) do %>
+                <%= render 'shared/trip_megalith_card', megalith: megalith, button: 'none' %>
+          <% end %>
+        <% end %>
+      </div>
+    </div>
+    <!-- placeholder for trip cards -->
+    <!-- users that came along -->
+    <h2 class="mt-2"> Users </h2>
+    <div class="trip-users-container-bottom">
+      <% @trip.users.each do |tripper| %>
+        <%= render 'shared/trip-user-vert', user: tripper %>
       <% end %>
+    <!-- end of users that came along -->
     </div>
   </div>
 </div>
 
-<h3>Plan your route</h3>
-<div id="map"
-     class="direction-map"
-     style="width: 100%; height: 600px;"
-     data-markers="<%= @markers.to_json %>"
-     data-mapbox-api-key="<%= ENV['MAPBOX_API_KEY'] %>"></div>
+
