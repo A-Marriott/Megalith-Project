@@ -123,8 +123,14 @@
       </div>
       <div class="tab-pane fade" id="trips" role="tabpanel" aria-labelledby="trips-tab">
         <!-- Placeholder for trip cards -->
-        <% @megalith.trips.each do |trip| %>
-          <%= render 'shared/trip_card', trip: trip, redirect: @megalith, redirect_type: 'megalith' %>
+        <% if @trips[0] %>
+          <% @trips.each do |trip| %>
+            <%= render 'shared/trip_card', trip: trip, redirect: @megalith, redirect_type: 'megalith' %>
+          <% end %>
+        <% else %>
+          <%= link_to new_megalith_trip_path(@megalith) do %>
+            <h2 class="text-center mt-3">Be the first to add a trip</h2>
+          <% end %>
         <% end %>
         <!-- placeholder for trip cards -->
       </div>
