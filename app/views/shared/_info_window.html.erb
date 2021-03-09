@@ -1,6 +1,10 @@
 <div class="card-map mt-3">
   <div class="card-map-image-container">
-    <%= cl_image_tag megalith.megalith_photos.first.photo.key, class: "card-map-image" %>
+    <% if megalith.megalith_photos.first %>
+      <%= cl_image_tag megalith.megalith_photos.first.photo.key, class: "card-map-image" %>
+    <% else %>
+      <%= cl_image_tag megalith.fake_photo_key, class: "card-map-image" %>
+    <% end %>
   </div>
   <div class="card-map-infos">
         <h2><%= megalith.name.truncate(40) %></h2>

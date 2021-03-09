@@ -1,6 +1,10 @@
 <div class="card-general mt-3">
   <div class="card-general-image-container">
-    <%= cl_image_tag megalith.megalith_photos.first.photo.key, class:"card-general-image" %>
+    <% if megalith.megalith_photos.first %>
+      <%= cl_image_tag megalith.megalith_photos.first.photo.key, class: "card-general-image" %>
+    <% else %>
+      <%= cl_image_tag megalith.fake_photo_key, class: "card-general-image" %>
+    <% end %>
   </div>
   <div class="card-general-infos">
     <div class="card-general-top">
@@ -20,7 +24,7 @@
       <p>
         <% if megalith.tagline? %>
           <%= megalith.tagline %><p>
-        <% else %>
+        <% elsif megalith.description %>
           <%= megalith.description.truncate(240) %>
         <% end %>
       </p>

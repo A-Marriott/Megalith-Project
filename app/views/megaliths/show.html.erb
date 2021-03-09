@@ -22,7 +22,7 @@
 
       <div class="subheading-elements mt-3">
         <div class="rating">
-          <% if current_user.visited.include? @megalith %>
+          <% if current_user&.visited&.include? @megalith %>
             <% if @my_rating %>
               <p><small>You rated: ★ <%= @my_rating.score %></small></p>
             <% else %>
@@ -53,10 +53,16 @@
       <div id="show-page-carousel" class="carousel slide" data-ride="false">
         <div class="carousel-inner">
           <% if @megalith.megalith_photos.empty? %>
+            <% if @megalith.fake_photo_key %>
+            <div class="carousel-item active">
+              <%= cl_image_tag @megalith.fake_photo_key, class:"d-block w-100", alt:"Megalith"%>
+            </div>
+            <% else %>
             <div class="carousel-item active">
               <%= image_tag "placeholder-megalith", class:"d-block w-100", alt:"Megalith"%>
             </div>
-            <% else %>
+            <% end %>
+          <% else %>
             <% @megalith.megalith_photos.each_with_index do |photo, index| %>
               <div class="carousel-item <%= 'active' if index == 0  %>">
                 <%= cl_image_tag photo.photo.key, class:"d-block w-100"%>
@@ -79,13 +85,15 @@
           <!-- the below should be inside an iteration for the photo and use megalith_photo.user.username -->
           <p>Brian LithLegend</p>
         </div>
-        <div class="upvoting">
-          <%= link_to megalith_photos_upvote_path(@megalith.megalith_photos.first), method: :post, remote: true do %>
-          <i class="fas fa-angle-up"></i>
-          <% end %>
-          <!-- the below should be inside an iteration for the photo and use megalith_photo.get_likes.size -->
-          <p><%= @megalith.megalith_photos.first.get_likes.size %></p>
-        </div>
+        <% if @megalith.megalith_photos.first %>
+          <div class="upvoting">
+            <%= link_to megalith_photos_upvote_path(@megalith.megalith_photos.first), method: :post, remote: true do %>
+            <i class="fas fa-angle-up"></i>
+            <% end %>
+            <!-- the below should be inside an iteration for the photo and use megalith_photo.get_likes.size -->
+            <p><%= @megalith.megalith_photos.first.get_likes.size %></p>
+          </div>
+        <% end %>
       </div>
     </div>
   </div>
