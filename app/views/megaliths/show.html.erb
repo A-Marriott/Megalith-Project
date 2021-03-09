@@ -24,7 +24,7 @@
         <div class="rating">
           <% if current_user.visited.include? @megalith %>
             <% if @my_rating %>
-              <p><small>You rated:</small>★<%= @my_rating.score %></p>
+              <p><small>You rated: ★ <%= @my_rating.score %></small></p>
             <% else %>
               <%= simple_form_for( [@megalith, @rating], html: { class: "review_form" }) do |f| %>
                 <%= f.input :score, collection: 1..5 %>
@@ -33,7 +33,7 @@
             <% end %>
           <% end %>
           <% if @average_rating %>
-            <p>★<%= @megalith.average_rating %> </p>
+            <p>★<%= @megalith.average_rating %></p>
           <% else %>
             <p><small>★ Be the first to rate this megalith</small></p>
           <% end %>
