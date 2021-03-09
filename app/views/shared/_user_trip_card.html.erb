@@ -1,0 +1,18 @@
+<div class="user-trip-card my-2">
+  <div class="user-trip-card-image-container">
+    <% if trip.trip_photos[0] %>
+      <%= cl_image_tag trip.trip_photos.first.photo.key, class:"trip-card-thumbnail" %>
+    <% else %>
+      <%= cl_image_tag trip.megaliths.first.megalith_photos.first.photo.key, class:"trip-card-thumbnail" %>
+    <% end %>
+  </div>
+  <div class="user-trip-card-details mx-3">
+    <p><strong><%= trip.name %></strong><br>
+    <small><%= trip.tagline.truncate(30) %></small></p>
+    <% trip.megaliths.each do |megalith| %>
+      <%= link_to megalith_path(megalith) do %>
+        <span class="badge badge-pill badge-secondary mr-2"><%= megalith.name.truncate(20) %></span>
+      <% end %>
+    <% end %>
+  </div>
+</div>

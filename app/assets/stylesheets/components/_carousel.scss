@@ -36,6 +36,24 @@
   }
 }
 
+.user-photo-container {
+  .carousel-inner {
+    overflow: hidden;
+    height: 200px;
+    width: 100%;
+  img {
+    height: 200px;
+    object-fit: cover;
+  }
+  }
+
+  @media screen and (max-width: 992px) {
+    .carousel-inner {
+      width: auto;
+      height: 310px;
+    }
+  }
+}
 
 .carousel {
   margin-top: 14px;

@@ -1,4 +1,5 @@
 .profile-details {
+  background-color: #F4F4F4;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -17,37 +18,128 @@
     width: 150px;
     border-radius: 50%;
   }
+}
 
-  a {
-    position: absolute;
-    top: 0;
-    right: 0;
+.user-text {
+  h5 {
+    font-size: 14px
+  }
+  h1 {
+    font-size: 24px;
+  }
+
+  .title-elements-line-two {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .subheading-elements {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .description-text-box {
+    background-color: white;
+    padding: 5px;
+    margin-top: 16px;
+    margin-bottom: 16px;
   }
 }
 
-.badge-container {
-  height: 200px;
-  // to remove:
+.user-top {
+  background-color: #F4F4F4;
+}
+
+.user-photo {
   display: flex;
-  justify-content: center;
-  align-items: center;
+  flex-direction: column;
+}
+
+
+@media screen and (min-width: 992px) {
+  .user-top {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    padding: 8px;
+
+    .user-tabs {
+      width: 66%;
+    }
+    .user-text {
+      width: 33%;
+      padding: 16px;
+    }
+  }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.badge-container {
   border: 1px solid black;
+}
+
+.favourites-container {
+  border: 1px solid black;
+  padding: 8px;
 }
 
 .comment-container {
-  height: 200px;
-  // to remove:
-  // display: flex;
-  // justify-content: center;
-  // align-items: center;
-  border: 1px solid black;
-}
-
-.photo-container {
-  height: 200px;
-  // to remove:
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  border: 1px solid black;
+  background-color: #F4F4F4;
+  padding: 8px;
+  .user-comment-content {
+    padding: 8px;
+    border: 1px solid grey;
+  }
 }
