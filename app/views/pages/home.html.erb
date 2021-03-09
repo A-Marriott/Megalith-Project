@@ -8,7 +8,7 @@
             <%= form_tag megaliths_path, class:"d-flex", method:"get" do %>
             <div id="geocoder"></div>
             <%= hidden_field_tag :query, nil, id: "geocoder-query" %>
-              <%= submit_tag "Go", class:"btn btn-secondary" %>
+              <%= submit_tag "Go", class:"btn btn-secondary go-btn" %>
             <% end %>
         </div>
       <%else%>
