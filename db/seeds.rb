@@ -86,8 +86,8 @@ def hash_of_liths_from_json(relative_filepath)
   json_file = File.join(File.dirname(__FILE__), relative_filepath)
   liths = JSON.parse(File.read(json_file))
 end
-# # OPTIONS --- PICK ONE ONLY
-# # 1 load 20 with photos
+# # # OPTIONS --- PICK ONE ONLY
+# 1 load 20 with photos
 hash_of_liths_from_json(dorset_file_relative).first(20).each { |lith| load_lith_with_photo(lith) }
 
 # 2 load all with photos - expensive for cloudinary, will take a long time

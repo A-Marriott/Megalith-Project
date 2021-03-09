@@ -98,9 +98,9 @@
 
 <div class="container mt-3">
   <h2>Most popular trips</h2>
-  <div class="most-visited-container">
+  <div id="popular-trips" class="most-visited-container">
     <% Trip.all.first(3).each do |trip| %>
-        <%= render 'shared/trip_card', trip: trip %>
+        <%= render 'shared/trip_card', trip: trip, redirect: '_', redirect_type: 'home' %>
     <%end%>
   </div>
 </div>
