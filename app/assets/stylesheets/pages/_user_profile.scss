@@ -20,6 +20,20 @@
   }
 }
 
+.favourites-container {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+}
+
+.visited-container {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+}
+
 .user-text {
   h5 {
     font-size: 14px
@@ -52,12 +66,6 @@
   background-color: #F4F4F4;
 }
 
-.user-photo {
-  display: flex;
-  flex-direction: column;
-}
-
-
 @media screen and (min-width: 992px) {
   .user-top {
     display: flex;
@@ -75,64 +83,8 @@
   }
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 .badge-container {
   border: 1px solid black;
-}
-
-.favourites-container {
-  border: 1px solid black;
-  padding: 8px;
 }
 
 .comment-container {

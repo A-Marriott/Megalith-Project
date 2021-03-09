@@ -13,26 +13,38 @@
     </div>
     <div class="card-general-extras">
       <div class="mr-5">
-      <p>★ Favourites</p>
-      </div>
-      <div class="mr-5">
-      <p>☭ Commy Points</p>
       </div>
     </div>
     <HR>
     <div class="card-general-tagline">
-      <p><% if megalith.tagline? %>
-        <%= megalith.tagline %><p>
+      <p>
+        <% if megalith.tagline? %>
+          <%= megalith.tagline %><p>
         <% else %>
-        <%= megalith.description.truncate(240) %>
-      <%end%></p>
+          <%= megalith.description.truncate(240) %>
+        <% end %>
+      </p>
     </div>
+    <HR>
     <div class="card-general-bottom">
       <div class="card-general-location">
-        <p>location</p>
+        <% if current_user %>
+          <% if current_user.favourited.include? megalith %>
+              <i class="fas fa-heart" style="font-size: 10px"></i>
+          <% else %>
+              <i class="far fa-heart" style="font-size: 10px"></i>
+          <% end %>
+        <% end %>
+        <!-- <p>location</p> -->
       </div>
       <div class="card-general-bottom-left">
-        <p>★ <%= megalith.average_rating %> </p>
+        <p>
+          <% if megalith.average_rating %>
+            <%= megalith.average_rating %> ★<p>
+          <% else %>
+          — ★
+          <% end %>
+        </p>
       </div>
     </div>
   </div>
