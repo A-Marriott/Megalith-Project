@@ -118,11 +118,26 @@
       </div>
       <div class="tab-pane fade" id="nav-photos" role="tabpanel" aria-labelledby="nav-photos-tab">
         <div class="container">
-          <h2 class="pt-3">Add photos</h2>
+          <h4 class="pt-3 mb-0">Current photos</h4>
+          <p class="mb-0" style="color: #6c757d"><small><em>Make sure your photos are assigned to megaliths so you can get upvotes!</em></small></p>
+          <div class="trip-photo-edit-container">
+            <% @trip.trip_photos.each do |photo_obj| %>
+              <div class="trip-photo-edit-display" style="background-image: url('<%= cl_image_path photo_obj.photo.key %>')">
+                <%= simple_form_for([photo_obj, @megalith_photo]) do |f| %>
+                  <div class="megalith-form">
+                    <%= f.input :megalith, collection: @trip.megaliths, label: false, input_html: { class: 'select-megalith' } %>
+                    <%= hidden_field_tag(:active_tab, 'megaliths') %>
+                    <%= f.button :submit, '✓', class: 'p-0 px-1 ml-1 btn btn-outline-secondary', style: "height: 30.8px" %>
+                  </div>
+                <% end %>
+              </div>
+            <% end %>
+          </div>
+          <h4 class="pt-1">Add photos</h4>
           <%= simple_form_for @trip, html: { id: :photo_upload } do |f| %>
             <%= f.input :photos, as: :file, input_html: { multiple: true, class: 'hidden', id: 'photo-input' } %>
               <div class="photo_insert"></div>
-            <%= f.button :submit, value: "Upload Photos", class: "btn btn-outline-secondary" %>
+            <%= f.button :submit, value: "Upload Photos", active_tab: "megaliths", class: "btn btn-outline-secondary" %>
           <% end %>
         </div>
       </div>

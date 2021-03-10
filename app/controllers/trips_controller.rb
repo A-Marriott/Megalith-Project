@@ -47,6 +47,7 @@ class TripsController < ApplicationController
     @search_users = User.search_users(params[:user_query]) if params[:user_query]
     @trip_megaliths = @trip.trip_megaliths.includes(:megalith)
     @active_tab = params[:active_tab] if params[:active_tab]
+    @megalith_photo = MegalithPhoto.new
     @search_megaliths = Megalith.near([@main_megalith.latitude, @main_megalith.longitude], 5)
                                 .reject { |megalith| @trip.megaliths.include? megalith }
                                 .first(5)

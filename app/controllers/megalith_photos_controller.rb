@@ -14,6 +14,14 @@ class MegalithPhotosController < ApplicationController
     redirect_to megalith_path(@megalith)
   end
 
+  def create_from_trip_photo
+    @trip_photo = TripPhoto.find params[:id]
+    @photo_key = @trip_photo.photo.key
+    @megalith = Megalith.find params[:megalith_photo][:megalith]
+    @active_tab = params[:active_tab]
+    @megalith_photo = MegalithPhoto.new(megalith: @megalith, user: current_user, photo_key: @photo_key)
+  end
+
   private
 
   def megalith_photo_params
