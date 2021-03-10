@@ -156,7 +156,7 @@ all_liths.sample(15).each do |megalith|
 end
 
 p 'some photo uploads for big bri and likes from chums'
-clandon = Megalith.find_by_name "Clandon Barrow"
+clandon = Megalith.find_by_name("Clandon Barrow")
 clandon_img_file = URI.open('https://historicengland.org.uk/etl/1015781/5cd574d0-bb2a-496b-a244-4a3931482917.jpg')
 img = MegalithPhoto.new
 img.photo.attach(io: clandon_img_file, filename: "lith.jpg", content_type: 'image/png')
@@ -165,7 +165,7 @@ img.user = brian
 p img.save
 [noobles, david, peter, gertrude].each { |u| img.liked_by u }
 
-maiden_castle = Megalith.find_by_name "Maiden Castle (Dorset)"
+maiden_castle = Megalith.find_by_name("Maiden Castle (Dorset)")
 maiden_img_file = URI.open("https://assets.simpleview-europe.com/dorset2016/imageresizer/?image=%2Fdmsimgs%2FMaiden_Castle_531161138.jpg&action=ProductDetail")
 img = MegalithPhoto.new
 img.photo.attach(io: maiden_img_file, filename: "lith.jpg", content_type: 'image/png')
@@ -174,7 +174,7 @@ img.user = brian
 p img.save
 [noobles, peter, gertrude].each { |u| img.liked_by u }
 
-hengistbury = Megalith.find_by_name "Hengistbury Head"
+hengistbury = Megalith.find_by_name("Hengistbury Head")
 img_file = URI.open("https://www.visitbournemouth.com/media/zoo/images/HengistburyHead_e6cfac90bf47ee0bb6d6c10edaae4a21.JPG")
 img = MegalithPhoto.new
 img.photo.attach(io: img_file, filename: "lith.jpg", content_type: 'image/png')
@@ -184,23 +184,32 @@ p img.save
 [noobles, gertrude].each { |u| img.liked_by u }
 
 p 'a couple of trips in the past'
-trip = Trip.create(name: "Stroll up Maiden Castle", tagline: "EPIC hillfort", top_tip: "The Red Lion nearby serves great ales", description: "There's no way to get a visit to this spectacular hillfort wrong. If you're lucky and it's a clear day you'll see a good distance. Don't forget your thermos, you can sit up on Maiden Castle drinking tea for hours.", date_visited: 'Tue, 02 Mar 2021', published: true)
+trip = Trip.new(name: "Stroll up Maiden Castle", tagline: "EPIC hillfort", top_tip: "The Red Lion nearby serves great ales", description: "There's no way to get a visit to this spectacular hillfort wrong. If you're lucky and it's a clear day you'll see a good distance. Don't forget your thermos, you can sit up on Maiden Castle drinking tea for hours.", date_visited: 'Tue, 02 Mar 2021', published: true)
+p 1
 TripUser.create(trip: trip, user: brian)
 TripUser.create(trip: trip, user: noobles)
 TripMegalith.create(trip: trip, megalith: maiden_castle)
-photo = TripPhoto.new(trip: trip)
-photo.photo.attach(io: maiden_img_file, filename: "lith.jpg", content_type: 'image/png')
-photo.save
+p 2
+maiden_img = TripPhoto.new(trip: trip)
+maiden_img.photo.attach(io: maiden_img_file, filename: "lith.jpg", content_type: 'image/png')
+# maiden_img.save
+p trip.save
 
 trip = Trip.create(name: "Around the Clandon Barrow", tagline: "Big historic mound", top_tip: "The White Hart down the road has great homemade sausage rolls", description: "This is a great big mound of earth and there's sure to be all sorts of history hidden inside. I took along my metal detector and found a ha'penny bit so I bet there's neolithic stone currency somewhere. Good luck!", date_visited: 'Tue, 09 Mar 2021', published: true)
 TripUser.create(trip: trip, user: brian)
 TripUser.create(trip: trip, user: peter)
 TripUser.create(trip: trip, user: gertrude)
 TripMegalith.create(trip: trip, megalith: clandon)
-TripMegalith.create(trip: trip, megalith: Megalith.find_by_name "Maumbury Rings")
-photo = TripPhoto.new(trip: trip)
-photo.photo.attach(io: clandon_img_file, filename: "lith.jpg", content_type: 'image/png')
-photo.save
+TripMegalith.create(trip: trip, megalith: Megalith.find_by_name("Maumbury Rings"))
+clandon_img = TripPhoto.new(trip: trip)
+clandon_img.photo.attach(io: clandon_img_file, filename: "lith.jpg", content_type: 'image/png')
+# clandon_img.save
+
+trip = Trip.create(name: "Marvel at the Cross and Hand Stone", tagline: "Pillar with Stunning Lichen", description: "Let's see the stone and then head to the pub")
+TripUser.create(trip: trip, user: brian)
+TripUser.create(trip: trip, user: gertrude)
+stone = Megalith.find_by_name('Cross and Hand Stone')
+TripMegalith.create(trip: trip, megalith: stone)
 
 p 'david ratings/comments/upvotes'
 make_ratings_and_comments_and_upvotes(david)

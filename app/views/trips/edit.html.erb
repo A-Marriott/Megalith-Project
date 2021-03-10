@@ -50,7 +50,9 @@
       <% if @active_tab == 'megaliths' %>
       <button class="nav-link" id="nav-users-tab" data-toggle="tab" data-target="#nav-users" type="button" role="tab" aria-controls="nav-users" aria-selected="false">Friends</button>
       <button class="nav-link active" id="nav-megaliths-tab" data-toggle="tab" data-target="#nav-megaliths" type="button" role="tab" aria-controls="nav-megaliths" aria-selected="false">Megaliths</button>
-      <button class="nav-link" id="nav-photos-tab" data-toggle="tab" data-target="#nav-photos" type="button" role="tab" aria-controls="nav-photos" aria-selected="false">Photos</button>
+        <% if @trip.date_visited %>
+        <button class="nav-link" id="nav-photos-tab" data-toggle="tab" data-target="#nav-photos" type="button" role="tab" aria-controls="nav-photos" aria-selected="false">Photos</button>
+        <% end %>
       <% elsif @active_tab == 'photos' %>
       <button class="nav-link" id="nav-users-tab" data-toggle="tab" data-target="#nav-users" type="button" role="tab" aria-controls="nav-users" aria-selected="false">Friends</button>
       <button class="nav-link" id="nav-megaliths-tab" data-toggle="tab" data-target="#nav-megaliths" type="button" role="tab" aria-controls="nav-megaliths" aria-selected="false">Megaliths</button>
@@ -58,7 +60,9 @@
       <% else %>
       <button class="nav-link active" id="nav-users-tab" data-toggle="tab" data-target="#nav-users" type="button" role="tab" aria-controls="nav-users" aria-selected="false">Friends</button>
       <button class="nav-link" id="nav-megaliths-tab" data-toggle="tab" data-target="#nav-megaliths" type="button" role="tab" aria-controls="nav-megaliths" aria-selected="false">Megaliths</button>
-      <button class="nav-link" id="nav-photos-tab" data-toggle="tab" data-target="#nav-photos" type="button" role="tab" aria-controls="nav-photos" aria-selected="false">Photos</button>
+        <% if @trip.date_visited %>
+        <button class="nav-link" id="nav-photos-tab" data-toggle="tab" data-target="#nav-photos" type="button" role="tab" aria-controls="nav-photos" aria-selected="false">Photos</button>
+        <% end %>
       <% end %>
     </div>
   </nav>
