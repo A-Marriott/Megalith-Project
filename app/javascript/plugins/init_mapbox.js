@@ -6,6 +6,8 @@ import '@mapbox/mapbox-gl-directions/dist/mapbox-gl-directions.css'
 
 
 const initMapbox = () => {
+  const params = document.querySelector(".show-page-map");
+
   const mapElement = document.getElementById('map');
 
   const fitMapToMarkers = (map, markers) => {
@@ -25,10 +27,18 @@ const initMapbox = () => {
     element.style.width = '25px';
     element.style.height = '15px';
 
-    new mapboxgl.Marker(element)
+    if (params) {
+      new mapboxgl.Marker(element)
+      .setLngLat([ marker.lng, marker.lat ])
+      .addTo(map);
+
+    } else {
+      new mapboxgl.Marker(element)
       .setLngLat([ marker.lng, marker.lat ])
       .setPopup(popup) // add this
       .addTo(map);
+
+    }
     });
   };
 
@@ -83,3 +93,4 @@ export { initMapbox, initGeocoder };
 //       .addTo(map);
 //   });
 // }
+

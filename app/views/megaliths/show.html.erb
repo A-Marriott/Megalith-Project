@@ -22,7 +22,7 @@
 
       <div class="subheading-elements mt-3">
         <div class="rating">
-          <% if current_user.visited.include? @megalith %>
+          <% if current_user&.visited&.include? @megalith %>
             <% if @my_rating %>
               <p><small>You rated: ★ <%= @my_rating.score %></small></p>
             <% else %>
