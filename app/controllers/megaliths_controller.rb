@@ -32,7 +32,7 @@ class MegalithsController < ApplicationController
       @average_rating = @megalith.average_rating
       @trip = Trip.new
       @trips = @megalith.trips.where(published: true)
-      @markers = [{lat:@megalith.latitude, lng:@megalith.longitude}]
+      @markers = [{lat:@megalith.latitude, lng:@megalith.longitude, image_url: helpers.asset_url('logo.png')}]
       @comment = Comment.new
       @comment.megalith_id = @megalith.id
     end
