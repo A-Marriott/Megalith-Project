@@ -22,17 +22,17 @@
     <div class="trip-page-text">
       <div class="title-elements mt-3">
         <div class="title mt-3">
-          <h1><%= @trip.name %></h1>
+          <h1><b><%= @trip.name %></b></h1>
         </div>
       </div>
 
       <div class="subheading-elements mt-3">
-        <div class="trip-show-details mb-2">
-          <p>Date:</p>
+        <div class="trip-show-details">
+          <p><b>Date:</b></p>
           <p><em><%= @trip.date_visited ? @trip.date_visited.strftime('%A %-d %B %Y') : "Hopefully soon" %></em></p>
         </div>
         <div class="trip-show-details">
-          <p>Upvotes:</p>
+          <p><b>Upvotes:</b></p>
           <p><em><%= @trip.published ? @trip.get_likes.size : "Publish your trip first!" %></em></p>
         </div>
       </div>
@@ -49,14 +49,13 @@
       <HR> </HR>
       <div class="description-text-box">
         <div class="tagline">
-          <p>Tagline: <%= @trip.tagline %> </p>
+          <p><b>Tagline:</b> <%= @trip.tagline %> </p>
         </div>
         <% if @trip.top_tip %>
-          <p>Top Tip: <%= @trip.top_tip %> </p>
+          <p><b>Top Tip:</b> <%= @trip.top_tip %> </p>
         <% end %>
         <div class="Description"><p>
-          <p><small>Description:</small></p>
-          <p><%= @trip.description %></p>
+          <p><b>Description:</b> <%= @trip.description %></p>
         </div>
       </div>
     </div>
@@ -89,7 +88,7 @@
   </div>
 
   <!-- Lower Section -->
-  <div class="container mt-4">
+  <div class="mt-4">
     <!-- Placeholder for trip cards -->
     <div class="trip-basics">
       <div class="trip-show-megaliths mb-4">

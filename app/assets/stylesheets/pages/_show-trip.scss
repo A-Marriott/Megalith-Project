@@ -8,8 +8,6 @@
   }
 
   .description-text-box {
-    background-color: white;
-    padding: 5px;
     margin-top: 16px;
     margin-bottom: 16px;
   }
@@ -19,12 +17,6 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 4px 12px;
-  // border: 1px solid $softish-stone;
-  border-radius: 2px;
-  p {
-    margin-bottom: 0;
-  }
 }
 
 .trip-page-top {
@@ -48,13 +40,14 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 16px;
+    padding: 20px;
 
     .trip-page-images {
       width: 66%;
     }
     .trip-page-text {
       width: 33%;
+      margin-right: 20px;
     }
     .more-options-button {
       display: none;
@@ -64,16 +57,12 @@
 
 @media screen and (max-width: 992px) {
   .trip-page-top {
-    display: flex;
-    flex-wrap: wrap-reverse;
-    align-items: center;
-    justify-content: space-between;
+    padding: 10px;
 
     .trip-page-images {
       width: none;
     }
     .trip-page-text {
-      width: none;
       padding: 8px;
     }
     .more-options-nav {
