@@ -17,6 +17,10 @@
   display: flex;
   align-items: center;
   border-radius: 5%;
+
+  .card-map:focus {
+    outline: none;
+  }
   .card-map-image-container {
     height: 50px;
     width: 50px;
