@@ -1,6 +1,10 @@
 <div class="trip-megalith-card my-2">
   <div class="trip-megalith-card-image-container">
+    <% if megalith.megalith_photos.first.photo.attached? %>
     <%= cl_image_tag megalith.megalith_photos.first.photo.key, alt: megalith.name %>
+    <% else %>
+    <%= cl_image_tag megalith.megalith_photos.first.photo_key, alt: megalith.name %>
+    <% end %>
   </div>
   <div class="trip-megalith-card-details mx-3">
     <strong><%= megalith.name %></strong>
