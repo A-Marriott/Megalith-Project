@@ -1,182 +1,135 @@
 <div class="homepage-banner banner-home mb-5" style="background-image: linear-gradient(rgba(0,0,0,0.1),rgba(0,0,0,0.1)), url(https://images.unsplash.com/photo-1601465364325-34b5b5fdb6c4?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80);">
   <div class="container">
-
     <h1>Megalithipedia</h1>
     <h2>The best online archive of megalithic sites in the world.</h2>
-      <% if user_signed_in? %>
-        <div class="home-search">
-            <%= form_tag megaliths_path, class:"d-flex", method:"get" do %>
-            <div id="geocoder"></div>
-            <%= hidden_field_tag :query, nil, id: "geocoder-query" %>
-              <%= submit_tag "Go", class:"btn btn-secondary go-btn" %>
-            <% end %>
-        </div>
-      <%else%>
-        <%= link_to "Sign Up", new_user_session_path, class: "btn btn-light", type: "submit"%>
-        <%= link_to "Login", new_user_session_path, class: "btn btn-outline-light", type: "submit"%>
-      <% end %>
-    </div>
-
+    <% if user_signed_in? %>
+      <div class="home-search">
+        <%= form_tag megaliths_path, class:"d-flex", method:"get" do %>
+          <div id="geocoder"></div>
+          <%= hidden_field_tag :query, nil, id: "geocoder-query" %>
+          <%= submit_tag "Go", class:"btn btn-secondary go-btn" %>
+        <% end %>
+      </div>
+    <% else %>
+      <%= link_to "Sign Up", new_user_session_path, class: "btn btn-light", type: "submit"%>
+      <%= link_to "Login", new_user_session_path, class: "btn btn-outline-light", type: "submit"%>
+    <% end %>
   </div>
 </div>
 
-<div class="home-page-mission-statement">
-  <div class="container">
-    <h1>Mission Statement</h1>
-    <h5><b>mega·​lith | \ ˈme-gə-ˌlith :</b> a very large usually rough stone used in prehistoric cultures as a monument or building block (Merriam-Webster)</h5>
-    <h6> Many people don’t know what Megaliths are and don’t realise  these sites of ancient history are literally scattered all across the countryside.
-    There is much speculation as to why these sites exist.  <b>Who made them? For what reason? Why in this particular location?</b>
-    There are many different (yet overlapping) theories ranging from ley lines to celestial and astronomical to ritual and spiritual significance that perhaps give us insight into the culture of the people who lived on this land so many years ago.</h6>
-
-    <h5>We started this project to share our passion for the world of megalithic sites. Many of these site are free to access and tell stories of a past long forgotten.
-
-    Discover new and exciting places and share photos of your discoveries with friends.
-    </h5>
-
+<div class="row mx-5">
+  <div class="col-12 col-md-6 mb-4">
+      <h3 style="line-height: 1.3;"><b>mega·​lith | \ ˈme-gə-ˌlith :</b> An ancient stone used to construct prehistoric monuments, held sacred by our ancestors for worship, the exchanging of ideas, and veneration of the dead</h3>
+      <p style="line-height: 1.3; font-size: 17px;">These ancient structures have endured for millennia, providing a glimpse into worlds long forgotten. At Megalithipedia, our goal is to provide a home for megalith enthusiasts to share knowledge and experiences.</p>
   </div>
-</div>
-<div class="homepage-card-container">
-<h2>What you can do</h2>
-  <div class="steps-cards">
-    <div class="step-card">
-      <div class="step-image-card">
-        <%= image_tag "stonehenge-noun.png" %>
-      </div>
-      <div class="step-description-card col-lg-6">
-        <h2>Discover Sites</h2><hr>
-        <h5>We invite you to learn about megalithic sites around you.</h5>
-        <!-- <h6>●Browse through all Megaliths</h6>
-        <h6>●Click on individual Megaliths to learn more</h6>
-        <h6>●Use our search function to provide listings of Megaliths in a given location and display them on a map</h6> -->
-      </div>
-    </div>
-    <div class="step-card mt-3">
-      <div class="step-description-card col-lg-6">
-        <h2>Discuss and learn about them with the community</h2><hr>
-        <h5>Connect with our online community, discuss facts, insights and personal experiences of Megaliths.</h5>
-        <!-- <h6>●Each individual Megalith page has a comments section</h6>
-        <h6>●Members can discuss facts about the Megalith or their own personal experiences</h6> -->
-      </div>
-      <div class="step-image-card">
-        <img src="https://images.unsplash.com/photo-1516321497487-e288fb19713f?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=750&q=80">
-      </div>
-    </div>
-    <div class="step-card mt-3">
-      <div class="step-image-card">
-        <img src="https://media.timeout.com/images/105416355/image.jpg">
-      </div>
-      <div class="step-description-card col-lg-6">
-        <h2>See & Plan Trips</h2><hr>
-        <h5>Plan your own trip across megalithic sites with likeminded enthusiasts and then share your experience and photos of your journey online.  You can also view past trips taken by other site members.</h5>
-        <!-- <h6>●See trips taken by other users</h6>
-        <h6>●Create & Plan your own trip with like minded enthusiasts</h6>
-        <h6>●Add several megaliths to your planned trip</h6>
-        <h6>●Add other members to your planned trip</h6>
-        <h6>●Upload images, descriptions and top-tips to your trip page after you've been on your trip. Make the trip visible to other site users</h6> -->
 
-      </div>
-    </div>
-  </div>
-</div>
-
-
-
-
-
-
-
-
-     <!-- <div class="introduction-cards">
-        <div class="card-category" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), 'stones.png'">
-          Discover Sites with Ancient History
-          <div class="card-trip-infos">
-            <div>
-              <h2>Title here</h2>
-              <p>Short description here!</p>
-            </div>
+  <div class="col-12 col-md-6">
+    <div class="home-page-images">
+      <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
+        <div class="carousel-inner">
+          <div class="carousel-item active">
+            <img class="d-block w-100" src="https://images.unsplash.com/photo-1591461712364-5fbdb038f8b0?ixlib=rb-1.2.1&ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&auto=format&fit=crop&w=1350&q=80" alt="First slide">
           </div>
-
+          <div class="carousel-item">
+            <img class="d-block w-100" src="https://images.unsplash.com/photo-1595878263687-3ed42bfa52a4?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1353&q=80" alt="Second slide">
+          </div>
+          <div class="carousel-item">
+            <img class="d-block w-100" src="https://images.unsplash.com/photo-1600184894932-4f5c2f02b170?ixlib=rb-1.2.1&ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&auto=format&fit=crop&w=1350&q=80" alt="Third slide">
+          </div>
         </div>
-
-        <div class="card-category" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url(https://raw.githubusercontent.com/lewagon/fullstack-images/master/uikit/lunch.jpg)">
-          Discuss and learn about them with the community
-        </div>
-
-        <div class="card-category" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url(https://media.timeout.com/images/105416355/image.jpg)">
-          See trips taken by other users and plan your own with like minded enthusiasts
-        </div>
-    </div> -->
+        <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
+          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+          <span class="sr-only">Previous</span>
+        </a>
+        <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
+          <span class="carousel-control-next-icon" aria-hidden="true"></span>
+          <span class="sr-only">Next</span>
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
 
 <div class="homepage-card-container">
-    <div class="homepage-card">
-      <%= image_tag "sustainability.png", alt: "sustanability", size: "70" %>
-      <h2>Sustanability</h2>
-      <p>This is a carbon neutral project</p>
+  <div class="step-card">
+    <div class="step-image-card">
+      <img src="https://images.unsplash.com/photo-1607541812763-a73cdc8d597b?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1351&q=80">
     </div>
-    <div class="homepage-card">
-      <%= image_tag "stones.png", alt: "community", size: "100" %>
-      <h2>Community</h2>
-      <p>Explore with our active community of over 1000+ members</p>
+    <div class="step-description-card col-lg-6">
+      <h2>Discover Ancient Monuments</h2><hr>
+      <p>From the scorching planes of Egypt to the rolling hills of England, there's always a new megalith to explore.</p>
     </div>
-    <div class="homepage-card">
-      <%= image_tag "patreon.png", alt: "patreon", size: "50", :style=>"padding-bottom: 7px;"%>
-      <h2>Support</h2>
-      <p>Support our project on Patreon</p>
+  </div>
+  <div class="step-card mt-3">
+    <div class="step-description-card col-lg-6">
+      <h2>Connect With a Growing Community</h2><hr>
+      <p>Whether you're a megalith master, intrepid explorer, or just an inquisitive onlooker, there's a place for you at Megalithipedia.</p>
     </div>
-
+    <div class="step-image-card">
+      <img src="https://images.unsplash.com/photo-1475483768296-6163e08872a1?ixlib=rb-1.2.1&ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&auto=format&fit=crop&w=1350&q=80">
+    </div>
+  </div>
+  <div class="step-card mt-3">
+    <div class="step-image-card">
+      <img src="https://media.timeout.com/images/105416355/image.jpg">
+    </div>
+    <div class="step-description-card col-lg-6">
+      <h2>Plan Excursions With Friends</h2><hr>
+      <p>Our handcrafted trip tool lets you plan your route, invite friends, upload photos, share your trip with the community and more. Spend less time planning, more time exploring.</p>
+    </div>
   </div>
 </div>
 
-
-<div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
-  <div class="carousel-inner">
-    <div class="carousel-item active">
-      <img class="d-block w-100" src="https://images.unsplash.com/photo-1591461712364-5fbdb038f8b0?ixlib=rb-1.2.1&ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&auto=format&fit=crop&w=1350&q=80" alt="First slide">
-    </div>
-    <div class="carousel-item">
-      <img class="d-block w-100" src="https://images.unsplash.com/photo-1595878263687-3ed42bfa52a4?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1353&q=80" alt="Second slide">
-    </div>
-    <div class="carousel-item">
-      <img class="d-block w-100" src="https://images.unsplash.com/photo-1600184894932-4f5c2f02b170?ixlib=rb-1.2.1&ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&auto=format&fit=crop&w=1350&q=80" alt="Third slide">
+<div class="homepage-card-container-temp mx-5">
+  <div class="homepage-card">
+    <img src="https://images.unsplash.com/photo-1607541812763-a73cdc8d597b?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1351&q=80">
+    <div class="homepage-card-text">
+      <h2>Discover Ancient Monuments</h2>
+      <p>From the scorching planes of Egypt to the rolling hills of England, there's always a new megalith to explore.</p>
     </div>
   </div>
-  <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
-    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-    <span class="sr-only">Previous</span>
-  </a>
-  <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
-    <span class="carousel-control-next-icon" aria-hidden="true"></span>
-    <span class="sr-only">Next</span>
-  </a>
+  <div class="homepage-card">
+    <img src="https://images.unsplash.com/photo-1475483768296-6163e08872a1?ixlib=rb-1.2.1&ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&auto=format&fit=crop&w=1350&q=80">
+    <div class="homepage-card-text">
+      <h2>Connect With a Growing Community</h2>
+      <p>Whether you're a megalith master, intrepid explorer, or just an inquisitive onlooker, there's a place for you at Megalithipedia.</p>
+    </div>
+  </div>
+  <div class="homepage-card">
+    <img src="https://media.timeout.com/images/105416355/image.jpg">
+    <div class="homepage-card-text">
+      <h2>Plan Excursions With Friends</h2>
+      <p>Our handcrafted trip tool lets you plan your route, invite friends, upload photos, share your trip with the community and more. Spend less time planning, more time exploring.</p>
+    </div>
+  </div>
 </div>
 
-<div class="container mt-3">
-  <h2>Top Sites</h2>
-  <div class="most-visited-container">
-    <% @megaliths.first(3).each do |megalith| %>
-      <%= link_to megalith_path(megalith) do %>
-        <%= render 'shared/card', megalith: megalith %>
-      <%end%>
-    <%end%>
-    <div class="collapse" id="collapseExample">
-      <% @megaliths.last(7).each do |megalith| %>
+<div class="row mx-5 my-3">
+  <div class="col-12 col-lg-6">
+    <h2>Top Sites</h2>
+    <div class="most-visited-container">
+      <% @megaliths.first(3).each do |megalith| %>
         <%= link_to megalith_path(megalith) do %>
           <%= render 'shared/card', megalith: megalith %>
         <%end%>
       <%end%>
+      <div class="collapse" id="collapseExample">
+        <% @megaliths.last(7).each do |megalith| %>
+          <%= link_to megalith_path(megalith) do %>
+            <%= render 'shared/card', megalith: megalith %>
+          <%end%>
+        <%end%>
+      </div>
+    </div>
+    <a class="btn btn-outline-secondary mt-3" id="view-more" data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">View More</a>
+  </div>
+
+  <div class="col-12 col-lg-6">
+    <h2>Most popular trips</h2>
+    <div id="popular-trips" class="most-visited-container">
+      <% Trip.all.first(3).each do |trip| %>
+          <%= render 'shared/trip_card', trip: trip, redirect: '_', redirect_type: 'home' %>
+      <%end%>
     </div>
   </div>
-  <a class="btn btn-outline-secondary mt-3" id="view-more" data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">View More</a>
 </div>
-
-
-
-<div class="container mt-3">
-  <h2>Most popular trips</h2>
-  <div id="popular-trips" class="most-visited-container">
-    <% Trip.all.first(3).each do |trip| %>
-        <%= render 'shared/trip_card', trip: trip, redirect: '_', redirect_type: 'home' %>
-    <%end%>
-  </div>
-</div>
-

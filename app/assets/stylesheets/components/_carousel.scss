@@ -64,7 +64,19 @@
   }
 }
 
+.home-page-images {
+  .carousel-inner {
+    overflow: hidden;
+    height: 350px;
+    width: 100%;
+  img {
+    height: 350px;
+    object-fit: cover;
+  }
+  }
+}
+
 .carousel {
-  margin-top: 14px;
+  // margin-top: 14px;
 }
 
