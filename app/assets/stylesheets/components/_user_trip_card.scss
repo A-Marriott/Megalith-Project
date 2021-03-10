@@ -44,6 +44,13 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
+
+  &-left {
+    display: flex;
+    align-items: center;
+    width: 150px;
+    padding: 16px;
+  }
 }
 
 .card-user-title {
