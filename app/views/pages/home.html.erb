@@ -57,25 +57,20 @@
   <div class="steps-cards">
     <div class="step-card">
       <div class="step-image-card">
-        <%= image_tag "stonehenge-noun.png" %>
+        <img src="https://images.unsplash.com/photo-1607541812763-a73cdc8d597b?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1351&q=80">
       </div>
       <div class="step-description-card col-lg-6">
         <h2>Discover Sites</h2><hr>
         <h5>We invite you to learn about megalithic sites around you.</h5>
-        <!-- <h6>●Browse through all Megaliths</h6>
-        <h6>●Click on individual Megaliths to learn more</h6>
-        <h6>●Use our search function to provide listings of Megaliths in a given location and display them on a map</h6> -->
       </div>
     </div>
     <div class="step-card mt-3">
       <div class="step-description-card col-lg-6">
         <h2>Discuss and learn about them with the community</h2><hr>
         <h5>Connect with our online community, discuss facts, insights and personal experiences of Megaliths.</h5>
-        <!-- <h6>●Each individual Megalith page has a comments section</h6>
-        <h6>●Members can discuss facts about the Megalith or their own personal experiences</h6> -->
       </div>
       <div class="step-image-card">
-        <img src="https://images.unsplash.com/photo-1516321497487-e288fb19713f?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=750&q=80">
+        <img src="https://images.unsplash.com/photo-1475483768296-6163e08872a1?ixlib=rb-1.2.1&ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&auto=format&fit=crop&w=1350&q=80">
       </div>
     </div>
     <div class="step-card mt-3">
@@ -85,12 +80,6 @@
       <div class="step-description-card col-lg-6">
         <h2>See & Plan Trips</h2><hr>
         <h5>Plan your own trip across megalithic sites with likeminded enthusiasts and then share your experience and photos of your journey online.  You can also view past trips taken by other site members.</h5>
-        <!-- <h6>●See trips taken by other users</h6>
-        <h6>●Create & Plan your own trip with like minded enthusiasts</h6>
-        <h6>●Add several megaliths to your planned trip</h6>
-        <h6>●Add other members to your planned trip</h6>
-        <h6>●Upload images, descriptions and top-tips to your trip page after you've been on your trip. Make the trip visible to other site users</h6> -->
-
       </div>
     </div>
   </div>
@@ -116,33 +105,32 @@
   </div>
 </div>
 
-<div class="container mt-3">
-  <h2>Top Sites</h2>
-  <div class="most-visited-container">
-    <% @megaliths.first(3).each do |megalith| %>
-      <%= link_to megalith_path(megalith) do %>
-        <%= render 'shared/card', megalith: megalith %>
-      <%end%>
-    <%end%>
-    <div class="collapse" id="collapseExample">
-      <% @megaliths.last(7).each do |megalith| %>
+<div class="row mx-5 my-3">
+  <div class="col-12 col-lg-6">
+    <h2>Top Sites</h2>
+    <div class="most-visited-container">
+      <% @megaliths.first(3).each do |megalith| %>
         <%= link_to megalith_path(megalith) do %>
           <%= render 'shared/card', megalith: megalith %>
         <%end%>
       <%end%>
+      <div class="collapse" id="collapseExample">
+        <% @megaliths.last(7).each do |megalith| %>
+          <%= link_to megalith_path(megalith) do %>
+            <%= render 'shared/card', megalith: megalith %>
+          <%end%>
+        <%end%>
+      </div>
+    </div>
+    <a class="btn btn-outline-secondary mt-3" id="view-more" data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">View More</a>
+  </div>
+
+  <div class="col-12 col-lg-6">
+    <h2>Most popular trips</h2>
+    <div id="popular-trips" class="most-visited-container">
+      <% Trip.all.first(3).each do |trip| %>
+          <%= render 'shared/trip_card', trip: trip, redirect: '_', redirect_type: 'home' %>
+      <%end%>
     </div>
   </div>
-  <a class="btn btn-outline-secondary mt-3" id="view-more" data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">View More</a>
 </div>
-
-
-
-<div class="container mt-3">
-  <h2>Most popular trips</h2>
-  <div id="popular-trips" class="most-visited-container">
-    <% Trip.all.first(3).each do |trip| %>
-        <%= render 'shared/trip_card', trip: trip, redirect: '_', redirect_type: 'home' %>
-    <%end%>
-  </div>
-</div>
-
