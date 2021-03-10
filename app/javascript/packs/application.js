@@ -44,4 +44,8 @@ document.addEventListener('turbolinks:load', () => {
   initMapbox();
   previewImageOnFileSelect();
   collapse();
+  $(function () {
+    $('[data-toggle="tooltip"]').tooltip()
+    $('[data-toggle="popover"]').popover()
+  })
 });

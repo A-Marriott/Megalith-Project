@@ -1,13 +1,17 @@
 <div class="card-map mt-3">
   <div class="card-map-image-container">
-    <% if megalith.megalith_photos.first.photo.attached? %>
-    <%= cl_image_tag megalith.megalith_photos.first.photo.key, class: "card-map-image" %>
-    <% else %>
-    <%= cl_image_tag megalith.megalith_photos.first.photo_key, class: "card-map-image" %>
+    <%= link_to megalith_path(megalith) do %>
+      <% if megalith.megalith_photos.first.photo.attached? %>
+      <%= cl_image_tag megalith.megalith_photos.first.photo.key, class: "card-map-image" %>
+      <% else %>
+      <%= cl_image_tag megalith.megalith_photos.first.photo_key, class: "card-map-image" %>
+      <% end %>
     <% end %>
   </div>
   <div class="card-map-infos">
-        <h2><%= megalith.name.truncate(40) %></h2>
-        <p><%= megalith.category %></p>
+    <%= link_to megalith_path(megalith) do %>
+      <h2><%= megalith.name.truncate(40) %></h2>
+    <% end %>
+    <p><%= megalith.category %></p>
   </div>
 </div>

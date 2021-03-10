@@ -6,7 +6,12 @@
                 method: :delete,
                 data: { confirm: "Are you sure?" }, class: "btn btn-outline-danger mx-2" %>
     <% if !@trip.date_visited %>
-    <%= link_to 'Trip Completed', finalise_trip_edit_path(@trip), class: "btn btn-outline-success mx-2" %>
+
+    <!-- Button trigger modal -->
+    <button type="button" class="btn btn-outline-success" data-toggle="modal" data-target="#exampleModalCenter">
+      Trip Completed
+    </button>
+
     <% elsif @trip.published %>
     <% else %>
     <%= link_to 'Publish Trip', trip_path(@trip, commit: "Publish Trip"), method: :patch, class: "btn btn-outline-success mx-2" %>
@@ -119,4 +124,24 @@
   </div>
 </div>
 
+<!-- Modal -->
+<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLongTitle">Finalise Trip</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <%= simple_form_for @trip do |f| %>
+          <%= f.input :date_visited, as: :string, required: false, input_html: {class: "datepicker"}, hint: "Select the date you completed your trip" %>
+          <%= f.button :submit, class: "btn btn-primary", value: "Confirm Date" %>
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>
 

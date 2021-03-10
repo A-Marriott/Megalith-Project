@@ -109,7 +109,7 @@ def hash_of_liths_from_json(relative_filepath)
 end
 # # # OPTIONS --- PICK ONE ONLY
 # 1 load 20 with photos
-hash_of_liths_from_json(dorset_file_relative).first(20).each { |lith| load_lith_with_photo(lith) }
+hash_of_liths_from_json(dorset_file_relative).first(50).each { |lith| load_lith_with_photo(lith) }
 
 # 2 load all with photos - expensive for cloudinary, will take a long time
 # all_three.each do |filepath|

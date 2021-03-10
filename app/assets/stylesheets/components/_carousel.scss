@@ -1,3 +1,11 @@
+.carousel-caption {
+    right: 5%;
+    text-align: right;
+    max-width: 300px;
+    left: auto;
+    padding:5px;
+}
+
 .show-page-images {
   .carousel-inner {
     overflow: hidden;
@@ -56,7 +64,19 @@
   }
 }
 
+.home-page-images {
+  .carousel-inner {
+    overflow: hidden;
+    height: 350px;
+    width: 100%;
+  img {
+    height: 350px;
+    object-fit: cover;
+  }
+  }
+}
+
 .carousel {
-  margin-top: 14px;
+  // margin-top: 14px;
 }
 

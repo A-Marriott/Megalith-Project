@@ -14,7 +14,7 @@
     <div class="card-general-top">
       <div class="card-general-title">
         <h2><%= trip.name %></h2>
-        <h3><%= trip.tagline %></h3>
+        <h3><%= trip.tagline.truncate(35) %></h3>
       </div>
       <div class="card-general-top-left card-trip-top-left">
         <p><%= trip.date_visited %></p>
@@ -29,24 +29,19 @@
     </div>
     <HR class="trip-card-hr">
     <div class="card-general-tagline">
-      <p>Top tip: <%= trip.top_tip %></p>
-      <p><%= trip.description %><p>
+      <p><%= trip.top_tip %></p>
+      <p><%= trip.description.truncate(240) %><p>
     </div>
     <HR class="trip-card-hr">
     <div class="card-general-bottom">
       <div class="card-general-location trip-profiles-container">
         <% trip.users.each do |user| %>
           <%= link_to user_path(user) do %>
-            <div class="trip-profile-image">
+            <div class="trip-profile-image" data-toggle="tooltip" data-placement="top" title=" <% if user.username %> <%= user.username %> <% else %> Anon <% end %>">
               <% if user.photo %>
                 <%= cl_image_tag user.photo.key, class:"trip-avatar" %>
               <% else %>
                 <%= image_tag "https://upload.wikimedia.org/wikipedia/commons/7/7c/Profile_avatar_placeholder_large.png", class: "trip-avatar" %>
-              <% end %>
-              <% if user.username %>
-                <p><%= user.username %></p>
-              <% else %>
-                <p>Anon</p>
               <% end %>
             </div>
           <% end %>
