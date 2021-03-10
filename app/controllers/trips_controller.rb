@@ -51,7 +51,7 @@ class TripsController < ApplicationController
     @search_megaliths = Megalith.near([@main_megalith.latitude, @main_megalith.longitude], 5)
                                 .reject { |megalith| @trip.megaliths.include? megalith }
                                 .first(5)
-    @markers = (@search_megaliths+@trip_megaliths.map(&:megalith)).map do |megalith|
+    @markers = @trip_megaliths.map(&:megalith).map do |megalith|
       {
         lat: megalith.latitude,
         lng: megalith.longitude,

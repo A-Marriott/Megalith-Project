@@ -62,7 +62,10 @@ const initMapbox = () => {
     // map.addControl(new MapboxGeocoder({ accessToken: mapboxgl.accessToken,
     //                                  mapboxgl: mapboxgl }));
     map.addControl(new mapboxgl.NavigationControl());
-    if (document.querySelector('.direction-map')) {
+    map.once('load', () => {
+      map.resize();
+    });
+    if (document.querySelector('.trip-page-map')) {
       map.addControl(directions, 'top-left');
     };
   }
