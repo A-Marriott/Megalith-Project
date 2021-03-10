@@ -12,6 +12,7 @@ class MegalithsController < ApplicationController
         lat: megalith.latitude,
         lng: megalith.longitude,
         infoWindow: render_to_string(partial: "shared/info_window", locals: { megalith: megalith })
+        image_url: helpers.asset_url('logo.png')
       }
     end
   end
