@@ -27,7 +27,7 @@
               <p><small>You rated: ★ <%= @my_rating.score %></small></p>
             <% else %>
               <%= simple_form_for( [@megalith, @rating], html: { class: "review_form" }) do |f| %>
-                <%= f.input :score, collection: 1..5 %>
+                <%= f.input :score, collection: 1..5, label: false %>
                 <%= f.submit "Rate", class: "d-none btn btn-light" %>
               <% end %>
             <% end %>
