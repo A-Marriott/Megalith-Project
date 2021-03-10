@@ -101,14 +101,14 @@
                  data-mapbox-api-key="<%= ENV['MAPBOX_API_KEY'] %>">
               </div>
             </div>
-          <h4 class="mt-2" id="megaliths-anchor">Current Megaliths</h4>
+          <h4 class="mt-4 mb-3" id="megaliths-anchor">Current Megaliths</h4>
           <div class="current-edit-megaliths">
               <%= render 'shared/trip_megalith_card', megalith: @main_megalith, button: 'none' %>
             <% @trip_megaliths.reject{ |meg| meg.megalith == @main_megalith }.each do |trip_megalith| %>
               <%= render 'shared/trip_megalith_card', megalith: trip_megalith.megalith, button: 'delete', trip: @trip %>
             <% end %>
           </div>
-          <h4 class="mt-2">Other megaliths within 5 miles</h4>
+          <h4 class="mt-4 mb-3">Other megaliths within 5 miles</h4>
           <div class="other-edit-megaliths">
             <% @search_megaliths.each do |megalith| %>
               <%= render 'shared/trip_megalith_card', megalith: megalith, button: 'add', trip: @trip %>
