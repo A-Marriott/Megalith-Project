@@ -1,0 +1,9 @@
+<div class="megalith-vert">
+  <div class="trip-megalith-vert-image-container">
+    <%= cl_image_tag megalith.megalith_photos.first.photo.key, alt: megalith.name %>
+  </div>
+  <div class="megalith-info">
+    <p><strong><%= megalith.name.truncate(45) %></strong></p>
+    <p><small><%= megalith.category %></small></p>
+  </div>
+</div>

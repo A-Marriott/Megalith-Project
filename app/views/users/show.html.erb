@@ -1,120 +1,168 @@
 <div class="container">
-  <div class="profile-details my-3 p-2">
-    <% if @user.photo.attached? %>
-      <%= cl_image_tag @user.photo.key, alt: "profile picture", class: "profile-picture my-2" %>
-    <% else %>
-      <div class="profile-substitute my-2"></div>
-    <% end %>
-    <h1 class="text-center my-2"><%= @user.username %></h1>
-    <%= link_to "edit", edit_user_registration_path, class: "btn btn-outline-secondary" %>
-  </div>
-    <ul class="nav nav-tabs justify-content-around" id="myTab" role="tablist">
-    <li class="nav-item" role="presentation">
-      <button class="nav-link active" id="profile-tab" data-toggle="tab" data-target="#profile" type="button" role="tab" aria-controls="profile" aria-selected="true">Profile</button>
-    </li>
-    <li class="nav-item" role="presentation">
-      <button class="nav-link" id="saved-tab" data-toggle="tab" data-target="#saved" type="button" role="tab" aria-controls="saved" aria-selected="false">Saved</button>
-    </li>
-    <li class="nav-item" role="presentation">
-      <button class="nav-link" id="trips-tab" data-toggle="tab" data-target="#trips" type="button" role="tab" aria-controls="trips" aria-selected="false">Trips</button>
-    </li>
-  </ul>
-  <div class="tab-content" id="myTabContent">
-    <div class="tab-pane fade show active" id="profile" role="tabpanel" aria-labelledby="profile-tab">
-      <div class="badge-container">
-        <h2>holding text, badges here</h2>
-        <p>Photographer: <%= @user.photographer_score %></p>
-        <p>Commenter: <%= @user.commenter_score %></p>
-        <p>Tour Guide: <%= @user.tour_guide_score %></p>
-      </div>
-      <div class="comment-container">
-        <h2>Comments</h2>
-        <% @comments.each do |comment| %>
-          <p class="comment"><%= comment.text %></p>
-          <p><small><em>Posted <%= distance_of_time_in_words(comment.created_at, Time.now) %> ago</em></small></p>
-        <% end %>
-      </div>
-      <div class="photo-container">
-        <h2>holding text, photos here</h2>
-        <% @photos.each do |mega_photo| %>
-          <div class="profile-megalith-photos">
-            <%= mega_photo.megalith.name %> Upvotes: <%= mega_photo.upvote_score %>
-            <%= cl_image_tag mega_photo.photo.key, alt: mega_photo.megalith.name %>
-          </div>
-        <% end %>
-      </div>
-    </div>
-    <div class="tab-pane fade" id="saved" role="tabpanel" aria-labelledby="saved-tab">
-      <ul class="nav nav-tabs justify-content-around" id="myTab" role="tablist">
-        <li class="nav-item" role="presentation">
-          <a class="nav-link active" id="favourites-tab" data-toggle="tab" href="#favourites" role="tab" aria-controls="favourites" aria-selected="true">Favourites</a>
-        </li>
-        <li class="nav-item" role="presentation">
-          <a class="nav-link" id="visited-tab" data-toggle="tab" href="#visited" role="tab" aria-controls="visited" aria-selected="false">Visited</a>
-        </li>
-      </ul>
-      <div class="tab-content" id="myTabContent">
-        <div class="tab-pane fade show active" id="favourites" role="tabpanel" aria-labelledby="favourites-tab">
-          <% if @favourites[0] %>
-            <% @favourites.each do |megalith| %>
-              <%= link_to megalith_path(megalith) do %>
-                <%= render 'shared/card', megalith: megalith %>
-              <% end %>
-            <% end %>
+  <!-- top section -->
+  <div class="user-top mt-3">
+    <div class="container user-text">
+        <div class="profile-details">
+          <% if @user.photo.attached? %>
+            <%= cl_image_tag @user.photo.key, alt: "profile picture", class: "profile-picture my-2" %>
           <% else %>
-            <h2 class="mt-3 text-center">Favourite a megalith to display it here</h2>
+            <div class="profile-substitute my-2"></div>
           <% end %>
+          <h3 class="text-center my-2"><%= @user.username %></h3>
+          <%= link_to "edit", edit_user_registration_path, class: "btn btn-outline-secondary" %>
         </div>
-        <div class="tab-pane fade" id="visited" role="tabpanel" aria-labelledby="visited-tab">
-          <% if @visiteds[0] %>
-            <% @visiteds.each do |megalith| %>
-              <%= link_to megalith_path(megalith) do %>
-                <%= render 'shared/card', megalith: megalith %>
-              <% end %>
-            <% end %>
-          <% else %>
-            <h2 class="mt-3 text-center">Visit a megalith to display it here</h2>
-          <% end %>
-        </div>
-      </div>
-    </div>
-    <div class="tab-pane fade" id="trips" role="tabpanel" aria-labelledby="trips-tab">
-      <ul class="nav nav-tabs justify-content-around" id="myTab" role="tablist">
-        <li class="nav-item" role="presentation">
-          <a class="nav-link active" id="in-planning-tab" data-toggle="tab" href="#in-planning" role="tab" aria-controls="in-planning" aria-selected="true">In Planning</a>
-        </li>
-        <li class="nav-item" role="presentation">
-          <a class="nav-link" id="completed-tab" data-toggle="tab" href="#completed" role="tab" aria-controls="completed" aria-selected="false">Completed</a>
-        </li>
-      </ul>
-      <div class="tab-content" id="myTabContent">
-        <div class="tab-pane fade show active" id="in-planning" role="tabpanel" aria-labelledby="in-planning-tab">
-          <div class="planned-trips-container">
-            <% if @planned_trips[0] %>
-              <% @planned_trips.each do |trip| %>
-                <%= link_to trip_path(trip) do %>
-                  <%= render 'shared/trip_card', trip: trip %>
-                <% end %>
-              <% end %>
-            <% else %>
-              <h2 class="mt-3 text-center">Plan a trip to display it here</h2>
-            <% end %>
-          </div>
-        </div>
-        <div class="tab-pane fade" id="completed" role="tabpanel" aria-labelledby="completed-tab">
-          <div class="completed-trips-container">
-            <% if @completed_trips[0] %>
-              <% @completed_trips.each do |trip| %>
-                <%= link_to trip_path(trip) do %>
-                  <%= render 'shared/trip_card', trip: trip, redirect: 'none' %>
-                <% end %>
-              <% end %>
-            <% else %>
-              <h2 class="mt-3 text-center">Complete a trip to display it here</h2>
-            <% end %>
+        <div class="badge-container mt-3">
+          <p>Badges:</p>
+          <div class="badges">
+            <p>Photographer: <%= @user.photographer_score %></p>
+            <p>Commenter: <%= @user.commenter_score %></p>
+            <p>Tour Guide: <%= @user.tour_guide_score %></p>
           </div>
         </div>
       </div>
+      <div class="user-tabs">
+        <nav>
+          <div class="nav nav-tabs justify-content-center mt-3" id="nav-tab" role="tablist">
+            <button class="nav-link active" id="nav-users-tab" data-toggle="tab" data-target="#nav-profile" type="button" role="tab" aria-controls="nav-profile" aria-selected="false">Profile</button>
+            <button class="nav-link" id="nav-megaliths-tab" data-toggle="tab" data-target="#nav-saved" type="button" role="tab" aria-controls="nav-megaliths" aria-selected="false">Saved</button>
+            <button class="nav-link" id="nav-photos-tab" data-toggle="tab" data-target="#nav-trips" type="button" role="tab" aria-controls="nav-trips" aria-selected="false">Trips</button>
+          </div>
+        </nav>
+        <div class="tab-content" id="nav-tabContent">
+          <!-- tab 1 -->
+          <div class="tab-pane fade show active container" id="nav-profile" role="tabpanel" aria-labelledby="nav-users-tab">
+            <!-- photos -->
+            <div class= "user-photo-container">
+              <div id="user-page-carousel" class="carousel slide" data-ride="false">
+                <div class="carousel-inner">
+                  <% if @photos.empty? %>
+                    <div class="carousel-item active">
+                      <%= image_tag "placeholder-megalith.png", class:"d-block w-100", alt:"Megalith"%>
+                    </div>
+                    <% else %>
+                    <% @photos.each_with_index do |mega_photo, index| %>
+                      <div class="carousel-item <%= 'active' if index == 0  %>">
+                        <%= cl_image_tag mega_photo.photo.key, alt: mega_photo.megalith.name %>
+                        <!-- not displaying -->
+                        <div class="user-photo-upvotes">
+                          <%= mega_photo.megalith.name %> Upvotes: <%= mega_photo.upvote_score %>
+                        </div>
+                        <!-- display on hover above images -->
+                      </div>
+                    <% end %>
+                  <% end %>
+                  <a class="carousel-control-prev" href="#user-page-carousel" role="button" data-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="sr-only">Previous</span>
+                  </a>
+                  <a class="carousel-control-next" href="#user-page-carousel" role="button" data-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="sr-only">Next</span>
+                  </a>
+                </div>
+              </div>
+            </div>
+            <!-- Comments -->
+            <div class="comment-container">
+              <h5>Recent comments</h5>
+              <% @comments.each do |comment| %>
+                <div class="user-comment-content">
+                  <p><%= comment.text %></p>
+                  <% if comment.user.photo.attached? %>
+                    <p><small><em>Posted <%= distance_of_time_in_words(comment.created_at, Time.now) %> ago on </em><strong><%= comment.megalith.name %></strong></small></p>
+                  <% else %>
+                    <p><small><em>Posted <%= distance_of_time_in_words(comment.created_at, Time.now) %> ago on </em><strong><%= comment.megalith.name %></strong></small></p>
+                  <% end %>
+                </div>
+              <% end %>
+            </div>
+          </div>
+          <!-- tab 2 -->
+          <div class="tab-pane fade" id="nav-saved" role="tabpanel" aria-labelledby="nav-megaliths-tab">
+            <ul class="nav nav-tabs justify-content-around" id="myTab" role="tablist">
+              <li class="nav-item" role="presentation">
+                <a class="nav-link active" id="favourites-tab" data-toggle="tab" href="#favourites" role="tab" aria-controls="favourites" aria-selected="true">Favourites</a>
+              </li>
+              <li class="nav-item" role="presentation">
+                <a class="nav-link" id="visited-tab" data-toggle="tab" href="#visited" role="tab" aria-controls="visited" aria-selected="false">Visited</a>
+              </li>
+            </ul>
+            <div class="tab-content" id="myTabContent">
+              <div class="tab-pane fade show active" id="favourites" role="tabpanel" aria-labelledby="favourites-tab">
+                <!-- favourites -->
+                <div class="favourites-container">
+                  <% if @favourites[0] %>
+                    <% @favourites.each do |megalith| %>
+                      <%= link_to megalith_path(megalith) do %>
+                        <%= render 'shared/user_mega_vert', megalith: megalith %>
+                      <% end %>
+                    <% end %>
+                    <% else %>
+                    <h2 class="mt-3 text-center">Favourite a megalith to display it here</h2>
+                  <% end %>
+                </div>
+              </div>
+              <div class="tab-pane fade" id="visited" role="tabpanel" aria-labelledby="visited-tab">
+                <!-- visited -->
+                <div class="visited-container">
+                  <% if @visiteds[0] %>
+                    <% @visiteds.each do |megalith| %>
+                      <%= link_to megalith_path(megalith) do %>
+                        <%= render 'shared/user_mega_vert', megalith: megalith %>
+                      <% end %>
+                    <% end %>
+                  <% else %>
+                    <h2 class="mt-3 text-center">Visit a megalith to display it here</h2>
+                  <% end %>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- tab 3 -->
+          <div class="tab-pane fade" id="nav-trips" role="tabpanel" aria-labelledby="nav-photos-tab">
+            <ul class="nav nav-tabs justify-content-around" id="myTab" role="tablist">
+              <li class="nav-item" role="presentation">
+                <a class="nav-link active" id="in-planning-tab" data-toggle="tab" href="#in-planning" role="tab" aria-controls="in-planning" aria-selected="true">In Planning</a>
+              </li>
+              <li class="nav-item" role="presentation">
+                <a class="nav-link" id="completed-tab" data-toggle="tab" href="#completed" role="tab" aria-controls="completed" aria-selected="false">Completed</a>
+              </li>
+            </ul>
+            <div class="tab-content" id="myTabContent">
+              <div class="tab-pane fade show active" id="in-planning" role="tabpanel" aria-labelledby="in-planning-tab">
+                <div class="planned-trips-container">
+                  <% if @planned_trips[0] %>
+                    <% @planned_trips.each do |trip| %>
+                      <%= link_to trip_path(trip) do %>
+                        <%= render 'shared/user_trip_card', trip: trip, redirect: 'none' %>
+                      <% end %>
+                    <% end %>
+                  <% else %>
+                    <h2 class="mt-3 text-center">Plan a trip to display it here</h2>
+                  <% end %>
+                </div>
+              </div>
+              <div class="tab-pane fade" id="completed" role="tabpanel" aria-labelledby="completed-tab">
+                <div class="completed-trips-container">
+                  <% if @completed_trips[0] %>
+                    <% @completed_trips.each do |trip| %>
+                      <%= link_to trip_path(trip) do %>
+                        <%= render 'shared/user_trip_card', trip: trip, redirect: 'none' %>
+                      <% end %>
+                    <% end %>
+                  <% else %>
+                    <h2 class="mt-3 text-center">Complete a trip to display it here</h2>
+                  <% end %>
+                </div>
+              </div>
+            </div>
+          </div>
     </div>
   </div>
 </div>
+
+
+
+
+

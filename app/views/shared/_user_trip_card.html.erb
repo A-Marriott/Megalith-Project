@@ -1,0 +1,51 @@
+<div class="card-user mt-3">
+  <div class="card-trip-image">
+    <% if trip.trip_photos[0] %>
+      <%= cl_image_tag trip.trip_photos.first.photo.key, class:"trip-card-thumbnail" %>
+    <% else %>
+      <%= cl_image_tag trip.megaliths.first.megalith_photos.first.photo.key, class:"trip-card-thumbnail" %>
+    <% end %>
+  </div>
+  <div class="card-user-infos">
+    <div class="card-user-top">
+      <div class="card-user-title">
+        <h2><%= trip.name %></h2>
+      </div>
+      <div class="card-user-top-left card-trip-top-left">
+        <p><%= trip.date_visited %></p>
+      </div>
+    </div>
+    <div class="card-user-extras">
+      <% trip.megaliths.each do |megalith| %>
+        <%= link_to megalith_path(megalith) do %>
+          <span class="badge badge-pill badge-secondary mr-2"><%= megalith.name.truncate(20) %></span>
+        <% end %>
+      <% end %>
+    </div>
+    <HR class="trip-card-hr">
+    <div class="card-user-bottom">
+      <div class="card-user-location trip-profiles-container">
+        <% trip.users.each do |user| %>
+          <%= link_to user_path(user) do %>
+            <div class="trip-profile-image">
+              <% if user.photo %>
+                <%= cl_image_tag user.photo.key, class:"trip-avatar" %>
+              <% else %>
+                <%= image_tag "https://upload.wikimedia.org/wikipedia/commons/7/7c/Profile_avatar_placeholder_large.png", class: "trip-avatar" %>
+              <% end %>
+            </div>
+          <% end %>
+        <% end %>
+      </div>
+      <% unless redirect == 'none' %>
+      <div class="card-user-bottom-left upvoting">
+        <%= link_to trips_upvote_path(trip, redirect: redirect, redirect_type: redirect_type), method: :post, remote: true do %>
+          <i class="fas fa-angle-up"></i>
+        <% end %>
+        <!-- the below should be inside an iteration for the photo and use megalith_photo.get_likes.size -->
+        <p><%= trip.get_likes.size %></p>
+      </div>
+      <% end %>
+    </div>
+  </div>
+</div>

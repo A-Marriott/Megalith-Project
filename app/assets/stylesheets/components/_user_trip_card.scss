@@ -1,15 +1,15 @@
-.card-general {
+.card-user {
   overflow: hidden;
-  height: fit-content;
+  height: 150px;
   background: #F4F4F4;
   box-shadow: 0 0 5px rgba(0,0,0,0.2);
   display: flex;
   align-items: center;
 
-  .card-general-image-container {
-    height: 233px;
-    width: 24vw;
-    .card-general-image {
+  .card-user-image-container {
+    height: 150px;
+    width: 150vw;
+    .card-user-image {
       min-height:100%;
       width: 100%;
       object-fit: cover;
@@ -34,13 +34,13 @@
   margin-bottom: 0;
   }
 
-  .card-general-infos {
+  .card-user-infos {
     padding: 16px;
     width:100%;
   }
 }
 
-.card-general-top {
+.card-user-top {
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -53,11 +53,11 @@
   }
 }
 
-.card-general-title {
+.card-user-title {
   flex-grow: 1;
 }
 
-.card-general-bottom {
+.card-user-bottom {
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -68,14 +68,14 @@
   }
 }
 
-.card-general-extras {
+.card-user-extras {
   display: flex;
   align-items: center;
   justify-content: flex-start;
 }
 
 @media screen and (max-width: 992px) {
-  .card-general {
+  .card-user {
     overflow: auto;
     max-height: none;
     box-shadow: 0 0 5px rgba(0,0,0,0.2);
@@ -83,12 +83,12 @@
     flex-direction: column;
     align-items: center;
 
-    .card-general-image-container {
-    height: 24vh;
-    width: 100%;
+    .card-user-image-container {
+    height: 150px;
+    width: 150px;
     }
 
-    .card-general-image {
+    .card-user-image {
     height:100%;
     width: 100%;
     object-fit: cover;
@@ -97,7 +97,7 @@
 }
 
 @media screen and (max-width: 600px) {
-  .card-general-extras {
+  .card-user-extras {
   display: none;
   }
 }

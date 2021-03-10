@@ -1,0 +1,9 @@
+<div class="user-megalith-card my-2">
+  <div class="user-megalith-card-image-container">
+    <%= cl_image_tag megalith.megalith_photos.first.photo.key, alt: megalith.name %>
+  </div>
+  <div class="user-megalith-card-details mx-3">
+    <p><strong><%= megalith.name.truncate(30) %></strong><br>
+    <small><%= megalith.category %></small></p>
+  </div>
+</div>

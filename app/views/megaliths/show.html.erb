@@ -22,7 +22,7 @@
 
       <div class="subheading-elements mt-3">
         <div class="rating">
-          <% if current_user.visited.include? @megalith %>
+          <% if current_user&.visited&.include? @megalith %>
             <% if @my_rating %>
               <p><small>You rated: ★ <%= @my_rating.score %></small></p>
             <% else %>
@@ -54,7 +54,7 @@
         <div class="carousel-inner">
           <% if @megalith.megalith_photos.empty? %>
             <div class="carousel-item active">
-              <%= image_tag "placeholder-megalith", class:"d-block w-100", alt:"Megalith"%>
+              <%= image_tag "placeholder-megalith.png", class:"d-block w-100", alt:"Megalith"%>
             </div>
             <% else %>
             <% @megalith.megalith_photos.each_with_index do |photo, index| %>
@@ -107,24 +107,19 @@
         <a class="nav-link" id="trips-tab" data-toggle="tab" href="#trips" role="tab" aria-controls="trips" aria-selected="false">Trips</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" id="nearby-tab" data-toggle="tab" href="#nearby" role="tab" aria-controls="nearby" aria-selected="false">Other Places</a>
+        <a class="nav-link" id="nearby-tab" data-toggle="tab" href="#nearby" role="tab" aria-controls="nearby" aria-selected="false">Nearby Megaliths</a>
       </li>
     </ul>
     <div class="tab-content" id="myTabContent">
       <div class="tab-pane fade show active" id="comments" role="tabpanel" aria-labelledby="comments-tab">
-        <!-- comments section -->
-
         <div class="container" style="padding-bottom: 16px;">
           <div class="comment-form">
           <%= render partial: 'comments/form' %>
           </div>
           <%= render partial: 'comments/comment', collection: @megalith.comments.reverse %>
         </div>
-
-        <!-- comments section -->
       </div>
       <div class="tab-pane fade" id="trips" role="tabpanel" aria-labelledby="trips-tab">
-        <!-- Placeholder for trip cards -->
         <% if @trips[0] %>
           <% @trips.each do |trip| %>
             <%= render 'shared/trip_card', trip: trip, redirect: @megalith, redirect_type: 'megalith' %>
@@ -134,11 +129,10 @@
             <h2 class="text-center mt-3">Be the first to add a trip</h2>
           <% end %>
         <% end %>
-        <!-- placeholder for trip cards -->
       </div>
       <div class="tab-pane fade" id="nearby" role="tabpanel" aria-labelledby="nearby-tab">
         <div class="nearby-sites mt-3">
-          <p>Nearby Sites:</p>
+          <!-- <p>Nearby Sites:</p> -->
           <% @other_megaliths.each do |megalith| %>
             <%= link_to megalith_path(megalith) do %>
               <%= render 'shared/card', megalith: megalith, button: 'add', trip: @trip %>
@@ -157,9 +151,6 @@
 
           <!-- end of carousel -->
         <!-- </div> -->
-        <div id="showpage-map">
-        <!-- insert map -->
-        </div>
       </div>
     </div>
   </div>

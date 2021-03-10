@@ -20,7 +20,7 @@
       <p>
         <% if megalith.tagline? %>
           <%= megalith.tagline %><p>
-        <% else %>
+        <% elsif megalith.description %>
           <%= megalith.description.truncate(240) %>
         <% end %>
       </p>
