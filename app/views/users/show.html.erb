@@ -13,11 +13,12 @@
         </div>
         <div class="badge-container mt-3">
           <p>Badges:</p>
-          <div class="badges">
-            <p>Photographer: <%= @user.photographer_score %></p>
-            <p>Commenter: <%= @user.commenter_score %></p>
-            <p>Tour Guide: <%= @user.tour_guide_score %></p>
-          </div>
+          <%= image_tag "photographer.png", alt: "sustanability", size: "70" %>
+          <p>Photographer Score: <%= @user.photographer_score %></p>
+          <%= image_tag "commentor.png", alt: "sustanability", size: "70" %>
+          <p>Commenter Score: <%= @user.commenter_score %></p>
+          <%= image_tag "tour_guide.png", alt: "sustanability", size: "70" %>
+          <p>Tour Guide Score: <%= @user.tour_guide_score %></p>
         </div>
       </div>
       <div class="user-tabs">
@@ -37,17 +38,18 @@
                 <div class="carousel-inner">
                   <% if @photos.empty? %>
                     <div class="carousel-item active">
-                      <%= image_tag "placeholder-megalith", class:"d-block w-100", alt:"Megalith"%>
+                      <%= image_tag "placeholder-megalith.png", class:"d-block w-100", alt:"Megalith"%>
                     </div>
                     <% else %>
                     <% @photos.each_with_index do |mega_photo, index| %>
                       <div class="carousel-item <%= 'active' if index == 0  %>">
                         <%= cl_image_tag mega_photo.photo.key, alt: mega_photo.megalith.name %>
-                        <!-- not displaying -->
-                        <div class="user-photo-upvotes">
-                          <%= mega_photo.megalith.name %> Upvotes: <%= mega_photo.upvote_score %>
-                        </div>
-                        <!-- display on hover above images -->
+                          <div class="carousel-caption d-none d-md-block">
+                            <h5><%= mega_photo.megalith.name %></h5>
+                            <% if mega_photo.upvote_score.present? %>
+                              <p>Upvotes: <%= mega_photo.upvote_score %></p>
+                            <% end %>
+                          </div>
                       </div>
                     <% end %>
                   <% end %>
@@ -158,6 +160,7 @@
               </div>
             </div>
           </div>
+        </div>
     </div>
   </div>
 </div>

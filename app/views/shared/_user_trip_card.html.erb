@@ -11,7 +11,7 @@
       <div class="card-user-title">
         <h2><%= trip.name %></h2>
       </div>
-      <div class="card-user-top-left card-trip-top-left">
+      <div >
         <p><%= trip.date_visited %></p>
       </div>
     </div>
@@ -27,7 +27,7 @@
       <div class="card-user-location trip-profiles-container">
         <% trip.users.each do |user| %>
           <%= link_to user_path(user) do %>
-            <div class="trip-profile-image">
+            <div class="trip-profile-image" data-toggle="tooltip" data-placement="top" title="<%= user.username %>">
               <% if user.photo %>
                 <%= cl_image_tag user.photo.key, class:"trip-avatar" %>
               <% else %>

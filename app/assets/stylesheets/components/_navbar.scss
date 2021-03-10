@@ -46,8 +46,9 @@ body {
 }
 
 .go-btn {
+  position: relative;
   width: 60px;
-  margin-left: 50px;
+  left: -25px;
 }
 
 .mapboxgl-ctrl-geocoder--icon-search {

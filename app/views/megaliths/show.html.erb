@@ -54,13 +54,21 @@
         <div class="carousel-inner">
           <% if @megalith.megalith_photos.empty? %>
             <div class="carousel-item active">
-              <%= image_tag "placeholder-megalith", class:"d-block w-100", alt:"Megalith"%>
+              <%= image_tag "placeholder-megalith.png", class:"d-block w-100", alt:"Megalith"%>
             </div>
             <% else %>
             <% @megalith.megalith_photos.each_with_index do |photo, index| %>
-              <div class="carousel-item <%= 'active' if index == 0  %>">
-                <%= cl_image_tag photo.photo.key, class:"d-block w-100"%>
-              </div>
+            <div class="carousel-item <%= 'active' if index == 0  %>">
+              <%= cl_image_tag photo.photo.key, class:"d-block w-100"%>
+                <div class="carousel-caption d-none d-md-block">
+                  <div class="upvoting">
+                    <%= link_to megalith_photos_upvote_path(photo), method: :post, remote: true do %>
+                      <i class="fas fa-angle-up"></i>
+                    <% end %>
+                    <p><%= photo.get_likes.size %></p>
+                  </div>
+                </div>
+            </div>
             <% end %>
           <% end %>
           <a class="carousel-control-prev" href="#show-page-carousel" role="button" data-slide="prev">
@@ -71,20 +79,6 @@
             <span class="carousel-control-next-icon" aria-hidden="true"></span>
             <span class="sr-only">Next</span>
           </a>
-        </div>
-      </div>
-      <div class="upvote-overlay">
-        <div class="photo-by">
-          <p><small><em>Photo by:</em></small></p>
-          <!-- the below should be inside an iteration for the photo and use megalith_photo.user.username -->
-          <p>Brian LithLegend</p>
-        </div>
-        <div class="upvoting">
-          <%= link_to megalith_photos_upvote_path(@megalith.megalith_photos.first), method: :post, remote: true do %>
-          <i class="fas fa-angle-up"></i>
-          <% end %>
-          <!-- the below should be inside an iteration for the photo and use megalith_photo.get_likes.size -->
-          <p><%= @megalith.megalith_photos.first.get_likes.size %></p>
         </div>
       </div>
     </div>
