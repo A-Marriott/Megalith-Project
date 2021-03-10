@@ -69,6 +69,7 @@ end
 def make_ratings_and_comments_and_upvotes(user)
   megaliths = Megalith.all
   megaliths.sample(megaliths.size * 0.6).each do |lith|
+    p lith.name
     Visited.create(user: user, megalith: lith)
     Rating.create(score: rand(1..5), user: user, megalith: lith)
     Comment.create(text: "#{Faker::Music::RockBand.name}. #{Faker::Hipster.paragraph(sentence_count: 3)}", user: user, megalith: lith )
@@ -130,6 +131,11 @@ hash_of_liths_from_json(dorset_file_relative).first(20).each { |lith| load_lith_
 # hash_of_liths_from_json(devon_file_relative).each { |lith| load_lith_with_fake_photo(lith) }
 # hash_of_liths_from_json(dorset_file_relative).each { |lith| load_lith_with_fake_photo(lith) }
 
+# # 6 load all with fakes - WILL ONLY WORK WITH ARFA.CAMBLE CLOUDINARY
+# hash_of_liths_from_json(somerset_file_relative).each { |lith| load_lith_with_fake_photo(lith) }
+# hash_of_liths_from_json(devon_file_relative).each { |lith| load_lith_with_fake_photo(lith) }
+# hash_of_liths_from_json(dorset_file_relative).each { |lith| load_lith_with_fake_photo(lith) }
+
 p 'liths loaded'
 
 # trips and comments should be auto-generated once we know which megaliths
@@ -145,10 +151,13 @@ all_liths.sample(15).each do |megalith|
   Visited.create(megalith: megalith, user: brian)
 end
 
-p 'ratings/comments/upvotes'
+p 'david ratings/comments/upvotes'
 make_ratings_and_comments_and_upvotes(david)
+p 'peter ratings/comments/upvotes'
 make_ratings_and_comments_and_upvotes(peter)
+p 'gertrude ratings/comments/upvotes'
 make_ratings_and_comments_and_upvotes(gertrude)
+p 'photo admin ratings/comments/upvotes'
 make_ratings_and_comments_and_upvotes(@photoadmin)
 
 p 'done'
