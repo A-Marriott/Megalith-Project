@@ -44,9 +44,12 @@
                       <div class="carousel-item <%= 'active' if index == 0  %>">
                         <%= cl_image_tag mega_photo.photo.key, alt: mega_photo.megalith.name %>
                         <!-- not displaying -->
-                        <div class="user-photo-upvotes">
-                          <%= mega_photo.megalith.name %> Upvotes: <%= mega_photo.upvote_score %>
-                        </div>
+                          <div class="carousel-caption d-none d-md-block">
+                            <h5><%= mega_photo.megalith.name %></h5>
+                            <% if mega_photo.upvote_score.present? %>
+                              <p>Upvotes: <%= mega_photo.upvote_score %></p>
+                            <% end %>
+                          </div>
                         <!-- display on hover above images -->
                       </div>
                     <% end %>
