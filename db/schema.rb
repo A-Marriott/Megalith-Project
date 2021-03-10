@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_03_07_151433) do
+ActiveRecord::Schema.define(version: 2021_03_10_144441) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -62,6 +62,7 @@ ActiveRecord::Schema.define(version: 2021_03_07_151433) do
     t.bigint "megalith_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.string "photo_key"
     t.index ["megalith_id"], name: "index_megalith_photos_on_megalith_id"
     t.index ["user_id"], name: "index_megalith_photos_on_user_id"
   end
@@ -115,6 +116,7 @@ ActiveRecord::Schema.define(version: 2021_03_07_151433) do
     t.bigint "trip_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.integer "megalith_photo_id"
     t.index ["trip_id"], name: "index_trip_photos_on_trip_id"
   end
 

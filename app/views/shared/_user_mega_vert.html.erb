@@ -1,6 +1,10 @@
 <div class="megalith-vert">
   <div class="trip-megalith-vert-image-container">
+    <% if megalith.megalith_photos.first.photo.attached? %>
     <%= cl_image_tag megalith.megalith_photos.first.photo.key, alt: megalith.name %>
+    <% else %>
+    <%= cl_image_tag megalith.megalith_photos.first.photo_key, alt: megalith.name %>
+    <% end %>
   </div>
   <div class="megalith-info">
     <p><strong><%= megalith.name.truncate(45) %></strong></p>

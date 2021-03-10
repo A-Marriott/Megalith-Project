@@ -47,6 +47,7 @@ class TripsController < ApplicationController
     @search_users = User.search_users(params[:user_query]) if params[:user_query]
     @trip_megaliths = @trip.trip_megaliths.includes(:megalith)
     @active_tab = params[:active_tab] if params[:active_tab]
+    @megalith_photo = MegalithPhoto.new
     @search_megaliths = Megalith.near([@main_megalith.latitude, @main_megalith.longitude], 5)
                                 .reject { |megalith| @trip.megaliths.include? megalith }
                                 .first(5)
@@ -70,7 +71,7 @@ class TripsController < ApplicationController
       params[:trip][:photos].each do |photo|
         TripPhoto.create(trip: @trip, photo: photo)
       end
-      redirect_to edit_trip_path(@trip, anchor: 'trip-edit-title'), notice: "Trip updated"
+      redirect_to edit_trip_path(@trip, anchor: 'trip-edit-title', active_tab: params[:active_tab]), notice: "Trip updated"
     elsif params[:commit] == "Update Details" || params[:commit] == "Confirm Date"
       @trip.update(trip_params)
       redirect_to edit_trip_path(@trip, anchor: 'trip-edit-title'), notice: "Trip updated"

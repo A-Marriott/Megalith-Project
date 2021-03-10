@@ -19,4 +19,5 @@ Rails.application.routes.draw do
   resources :trip_users, only: [:create, :destroy]
   resources :trip_megaliths, only: [:create, :destroy]
   get "trips/:id/finalise_trip", to: "trips#finalise_trip_edit", as: :finalise_trip_edit
+  post "trips/:id/megalith_photos", to: "megalith_photos#create_from_trip_photo", as: :trip_photo_megalith_photos
 end

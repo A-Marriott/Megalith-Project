@@ -3,7 +3,7 @@ class UsersController < ApplicationController
     @user = User.find params[:id]
     @user.recalculate_badge_scores
     @comments = @user.comments
-    @photos = @user.megalith_photos
+    @megalith_photos = @user.megalith_photos
     @favourites = @user.favourited
     @visiteds = @user.visited
     @planned_trips = @user.trips.where(date_visited: nil)

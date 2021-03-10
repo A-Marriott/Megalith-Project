@@ -36,14 +36,18 @@
             <div class= "user-photo-container">
               <div id="user-page-carousel" class="carousel slide" data-ride="false">
                 <div class="carousel-inner">
-                  <% if @photos.empty? %>
+                  <% if @megalith_photos.empty? %>
                     <div class="carousel-item active">
                       <%= image_tag "placeholder-megalith.png", class:"d-block w-100", alt:"Megalith"%>
                     </div>
                     <% else %>
-                    <% @photos.each_with_index do |mega_photo, index| %>
+                    <% @megalith_photos.each_with_index do |mega_photo, index| %>
                       <div class="carousel-item <%= 'active' if index == 0  %>">
+                        <% if mega_photo.photo.attached? %>
                         <%= cl_image_tag mega_photo.photo.key, alt: mega_photo.megalith.name %>
+                        <% else %>
+                        <%= cl_image_tag mega_photo.photo_key, alt: mega_photo.megalith.name %>
+                        <% end %>
                           <div class="carousel-caption d-none d-md-block">
                             <h5><%= mega_photo.megalith.name %></h5>
                             <% if mega_photo.upvote_score.present? %>

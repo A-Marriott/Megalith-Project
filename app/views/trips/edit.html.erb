@@ -47,23 +47,23 @@
     <div class="trip-edit-tabs">
       <nav>
     <div class="nav nav-tabs justify-content-center mt-3" id="nav-tab" role="tablist">
-      <% if !(@active_tab == 'megaliths') %>
-      <button class="nav-link active" id="nav-users-tab" data-toggle="tab" data-target="#nav-users" type="button" role="tab" aria-controls="nav-users" aria-selected="false">Friends</button>
-      <% else %>
-      <button class="nav-link" id="nav-users-tab" data-toggle="tab" data-target="#nav-users" type="button" role="tab" aria-controls="nav-users" aria-selected="false">Friends</button>
-      <% end %>
       <% if @active_tab == 'megaliths' %>
+      <button class="nav-link" id="nav-users-tab" data-toggle="tab" data-target="#nav-users" type="button" role="tab" aria-controls="nav-users" aria-selected="false">Friends</button>
       <button class="nav-link active" id="nav-megaliths-tab" data-toggle="tab" data-target="#nav-megaliths" type="button" role="tab" aria-controls="nav-megaliths" aria-selected="false">Megaliths</button>
-      <% else %>
+      <button class="nav-link" id="nav-photos-tab" data-toggle="tab" data-target="#nav-photos" type="button" role="tab" aria-controls="nav-photos" aria-selected="false">Photos</button>
+      <% elsif @active_tab == 'photos' %>
+      <button class="nav-link" id="nav-users-tab" data-toggle="tab" data-target="#nav-users" type="button" role="tab" aria-controls="nav-users" aria-selected="false">Friends</button>
       <button class="nav-link" id="nav-megaliths-tab" data-toggle="tab" data-target="#nav-megaliths" type="button" role="tab" aria-controls="nav-megaliths" aria-selected="false">Megaliths</button>
-      <% end %>
-      <% if @trip.date_visited %>
-        <button class="nav-link" id="nav-photos-tab" data-toggle="tab" data-target="#nav-photos" type="button" role="tab" aria-controls="nav-photos" aria-selected="false">Photos</button>
+      <button class="nav-link active" id="nav-photos-tab" data-toggle="tab" data-target="#nav-photos" type="button" role="tab" aria-controls="nav-photos" aria-selected="false">Photos</button>
+      <% else %>
+      <button class="nav-link active" id="nav-users-tab" data-toggle="tab" data-target="#nav-users" type="button" role="tab" aria-controls="nav-users" aria-selected="false">Friends</button>
+      <button class="nav-link" id="nav-megaliths-tab" data-toggle="tab" data-target="#nav-megaliths" type="button" role="tab" aria-controls="nav-megaliths" aria-selected="false">Megaliths</button>
+      <button class="nav-link" id="nav-photos-tab" data-toggle="tab" data-target="#nav-photos" type="button" role="tab" aria-controls="nav-photos" aria-selected="false">Photos</button>
       <% end %>
     </div>
   </nav>
   <div class="tab-content" id="nav-tabContent">
-    <% if !(@active_tab == 'megaliths') %>
+    <% if !(@active_tab) %>
     <div class="tab-pane fade show active container" id="nav-users" role="tabpanel" aria-labelledby="nav-users-tab">
     <% else %>
     <div class="tab-pane fade container" id="nav-users" role="tabpanel" aria-labelledby="nav-users-tab">
@@ -116,12 +116,39 @@
           </div>
         </div>
       </div>
+      <% if @active_tab == 'photos' %>
+      <div class="tab-pane fade show active" id="nav-photos" role="tabpanel" aria-labelledby="nav-photos-tab">
+      <% else %>
       <div class="tab-pane fade" id="nav-photos" role="tabpanel" aria-labelledby="nav-photos-tab">
+      <% end %>
         <div class="container">
-          <h2 class="pt-3">Add photos</h2>
+          <% if @trip.trip_photos.first %>
+            <h4 class="pt-3 mb-0" id="photos-anchor">Current photos</h4>
+            <p class="mb-0" style="color: #6c757d"><small><em>Make sure your photos are assigned to megaliths so you can get upvotes!</em></small></p>
+            <div class="trip-photo-edit-container">
+              <% @trip.trip_photos.each do |photo_obj| %>
+                <div class="trip-photo-edit-display" style="background-image: url('<%= cl_image_path photo_obj.photo.key %>')">
+                  <% if photo_obj.megalith_photo_id %>
+                    <% megalith = MegalithPhoto.find(photo_obj.megalith_photo_id).megalith.name %>
+                    <small class="trip-photo-edit-mega-name"><%= megalith %></small>
+                  <% else %>
+                    <%= simple_form_for([photo_obj, @megalith_photo]) do |f| %>
+                      <div class="megalith-form">
+                        <%= f.input :megalith, collection: @trip.megaliths, label: false, input_html: { class: 'select-megalith' } %>
+                        <%= hidden_field_tag(:active_tab, 'photos') %>
+                        <%= f.button :submit, '✓', class: 'p-0 px-1 ml-1 btn btn-outline-secondary', style: "height: 30.8px" %>
+                      </div>
+                    <% end %>
+                  <% end %>
+                </div>
+              <% end %>
+            </div>
+          <% end %>
+          <h4 class="pt-1">Add photos</h4>
           <%= simple_form_for @trip, html: { id: :photo_upload } do |f| %>
             <%= f.input :photos, as: :file, input_html: { multiple: true, class: 'hidden', id: 'photo-input' } %>
               <div class="photo_insert"></div>
+            <%= hidden_field_tag(:active_tab, 'photos') %>
             <%= f.button :submit, value: "Upload Photos", class: "btn btn-outline-secondary" %>
           <% end %>
         </div>

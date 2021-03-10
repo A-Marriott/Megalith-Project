@@ -3,7 +3,11 @@
     <% if trip.trip_photos[0] %>
       <%= cl_image_tag trip.trip_photos.first.photo.key, class:"trip-card-thumbnail" %>
     <% else %>
+      <% if trip.megaliths.first.megalith_photos.first.photo.attached? %>
       <%= cl_image_tag trip.megaliths.first.megalith_photos.first.photo.key, class:"trip-card-thumbnail" %>
+      <% else %>
+      <%= cl_image_tag trip.megaliths.first.megalith_photos.first.photo_key, class:"trip-card-thumbnail" %>
+      <% end %>
     <% end %>
   </div>
   <div class="card-general-infos">

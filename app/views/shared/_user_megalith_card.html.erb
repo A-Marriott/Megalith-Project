@@ -1,6 +1,10 @@
 <div class="user-megalith-card my-2">
   <div class="user-megalith-card-image-container">
+    <% if megalith.megalith_photos.first.photo.attached? %>
     <%= cl_image_tag megalith.megalith_photos.first.photo.key, alt: megalith.name %>
+    <% else %>
+    <%= cl_image_tag megalith.megalith_photos.first.photo.key, alt: megalith.name %>
+    <% end %>
   </div>
   <div class="user-megalith-card-details mx-3">
     <p><strong><%= megalith.name.truncate(30) %></strong><br>

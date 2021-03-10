@@ -59,7 +59,11 @@
             <% else %>
             <% @megalith.megalith_photos.each_with_index do |photo, index| %>
             <div class="carousel-item <%= 'active' if index == 0  %>">
-              <%= cl_image_tag photo.photo.key, class:"d-block w-100"%>
+              <% if photo.photo.attached? %>
+                <%= cl_image_tag photo.photo.key, class:"d-block w-100"%>
+              <% else %>
+                <%= cl_image_tag photo.photo_key, class:"d-block w-100"%>
+              <% end %>
                 <div class="carousel-caption d-none d-md-block">
                   <div class="upvoting">
                     <%= link_to megalith_photos_upvote_path(photo), method: :post, remote: true do %>
