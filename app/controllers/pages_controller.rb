@@ -6,7 +6,7 @@ class PagesController < ApplicationController
                          .sort { |a,b| a.average_rating && b.average_rating ? a.average_rating <=> b.average_rating : a.average_rating ? 1 : -1 }
                          .reverse
                          .first(10)
-    @trips = Trip.all
+    @trips = Trip.where.not(published: true)
                  .map { |t| [t, t.get_likes.size] }
                  .sort { |a,b| b[1] <=> a[1] }
                  .map { |arr| arr[0] }
