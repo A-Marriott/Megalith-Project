@@ -21,19 +21,34 @@
       </div>
     </div>
     <div class="card-general-extras">
-      <% trip.megaliths[0..1].each do |megalith| %>
-        <%= link_to megalith_path(megalith) do %>
-          <span class="badge badge-pill badge-secondary mr-2" data-toggle="tooltip" data-placement="bottom" title="<%= megalith.name %>"><%= megalith.name.truncate(15) %></span>
+      <% if current_page? root_path %>
+        <% trip.megaliths[0..1].each do |megalith| %>
+          <%= link_to megalith_path(megalith) do %>
+            <span class="badge badge-pill badge-secondary mr-2" data-toggle="tooltip" data-placement="bottom" title="<%= megalith.name %>"><%= megalith.name.truncate(15) %></span>
+          <% end %>
         <% end %>
-      <% end %>
-      <% if trip.megaliths.third %>
-        <span class="badge badge-pill badge-secondary mr-2" data-toggle="tooltip" data-placement="bottom" data-html="true"
-        title="<% trip.megaliths[2..-1].each do |megalith| %><%= megalith.name %><br><% end %>">...</span>
+        <% if trip.megaliths.third %>
+          <span class="badge badge-pill badge-secondary mr-2" data-toggle="tooltip" data-placement="bottom" data-html="true" title="<% trip.megaliths[2..-1].each do |megalith| %><%= megalith.name %><br><% end %>">...</span>
+        <% end %>
+      <% else %>
+        <% trip.megaliths[0..6].each do |megalith| %>
+          <%= link_to megalith_path(megalith) do %>
+            <span class="badge badge-pill badge-secondary mr-2" data-toggle="tooltip" data-placement="bottom" title="<%= megalith.name %>"><%= megalith.name.truncate(15) %></span>
+          <% end %>
+        <% end %>
+        <% if trip.megaliths[7] %>
+          <span class="badge badge-pill badge-secondary mr-2" data-toggle="tooltip" data-placement="bottom" data-html="true" title="<% trip.megaliths[7..-1].each do |megalith| %><%= megalith.name %><br><% end %>">...</span>
+        <% end %>
       <% end %>
     </div>
     <HR class="trip-card-hr">
     <div class="card-general-tagline">
-      <p><%= trip.top_tip %></p>
+      <% if current_page? root_path %>
+        <p><%= trip.top_tip %></p>
+      <% else %>
+        <p><%= trip.top_tip %></p>
+        <p><%= trip.description%></p>
+      <% end %>
     </div>
     <HR class="trip-card-hr">
     <div class="card-general-bottom">
