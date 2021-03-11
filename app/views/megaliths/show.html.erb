@@ -168,7 +168,7 @@
           <%= simple_form_for [ @megalith, @trip ] do |f| %>
             <%= f.input :name, hint: "Give your trip a name" %>
             <%= f.input :tagline, hint: "Add a short sentence to describe your trip" %>
-            <%= f.input :description, hint: "Use this area to make notes on your trip (you can edit this at a later date)" %>
+            <%= f.input :description, label: "Notes", hint: "Use this area to make notes on your trip (you can edit this at a later date)" %>
             <%= f.button :submit, class: "btn btn-primary" %>
             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
           <% end %>
