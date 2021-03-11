@@ -11,6 +11,6 @@
   <% if button == 'add' %>
     <%= link_to "Add to trip", trip_users_path(user: user, trip: trip), method: :post, remote: true, class: "btn btn-outline-secondary" %>
   <% elsif button == 'delete' %>
-    <%= link_to "Remove from trip", trip_user_path(user: user, trip: trip), method: :delete, remote: true, class: "btn btn-outline-warning" %>
+    <%= link_to "Remove from trip", trip_user_path(user: user, trip: trip), method: :delete, remote: true, class: "btn btn-outline-danger" %>
   <% end %>
 </div>
