@@ -1,15 +1,19 @@
-.trip-avatar {
-    height: 34px;
-    width: 34px;
-    border-radius: 50%;
-    margin-top: 10px;
-  }
 
 .trip-profile-image {
   text-align: center;
-  width: 60px;
-  margin-right: 8px;
+  width: 34px;
+  height: 34px;
+  margin-top: 10px;
+  margin-left: -8px;
+  .trip-avatar {
+    height: 100%;
+    width: 100%;
+    border-radius: 50%;
+    object-fit: cover;
+  }
 }
+
+
 
 .card-trip-image {
   height: 233px;
