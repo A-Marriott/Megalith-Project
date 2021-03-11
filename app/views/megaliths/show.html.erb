@@ -65,12 +65,12 @@
                 <%= cl_image_tag photo.photo_key, class:"d-block w-100"%>
               <% end %>
                 <div class="carousel-caption d-none d-md-block">
-                  <div class="upvoting">
-                    <%= link_to megalith_photos_upvote_path(photo), method: :post, remote: true do %>
+                  <%= link_to megalith_photos_upvote_path(photo), method: :post, remote: true do %>
+                    <div class="upvoting">
+                      <p><%= photo.get_likes.size %></p>
                       <i class="fas fa-angle-up"></i>
-                    <% end %>
-                    <p><%= photo.get_likes.size %></p>
-                  </div>
+                    </div>
+                  <% end %>
                 </div>
             </div>
             <% end %>
