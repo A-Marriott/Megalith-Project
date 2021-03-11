@@ -25,7 +25,7 @@
         <% if megalith.tagline? %>
           <%= megalith.tagline %><p>
         <% elsif megalith.description %>
-          <%= megalith.description.truncate(240) %>
+          <%= megalith.description.truncate(120) %>
         <% end %>
       </p>
     </div>
@@ -34,21 +34,22 @@
       <div class="card-general-location">
         <% if current_user %>
           <% if current_user.favourited.include? megalith %>
-              <i class="fas fa-heart" style="font-size: 10px"></i>
+              <i class="fas fa-heart" style="font-size: 16px"></i>
           <% else %>
-              <i class="far fa-heart" style="font-size: 10px"></i>
+              <i class="far fa-heart" style="font-size: 16px"></i>
           <% end %>
         <% end %>
         <!-- <p>location</p> -->
       </div>
       <div class="card-general-bottom-left">
-        <p>
+        <p style="font-size: 16px">
           <% if megalith.average_rating %>
-            <%= megalith.average_rating %> ★<p>
+            <%= megalith.average_rating %><p>
           <% else %>
-          — ★
+          —
           <% end %>
         </p>
+        <p style="font-size: 16px; padding-left: 4px; padding-bottom: 2px;">★</p>
       </div>
     </div>
   </div>
