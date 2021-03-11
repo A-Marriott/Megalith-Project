@@ -63,8 +63,11 @@ const initMapbox = () => {
     //                                  mapboxgl: mapboxgl }));
     map.addControl(new mapboxgl.NavigationControl());
     map.once('load', () => {
+      console.log('hey');
       map.resize();
     });
+    document.querySelector('.mapboxgl-canvas').style.width = '100%';
+    document.querySelector('.mapboxgl-canvas').style.height = '100%';
     if (document.querySelector('.trip-page-map')) {
       map.addControl(directions, 'top-left');
     };

@@ -10,7 +10,6 @@
   padding: 0 !important;
 }
 
-
 .card-map {
   overflow: hidden;
   height: 50px;
@@ -46,4 +45,7 @@
   }
 }
 
-
+.mapboxgl-canvas {
+  width: 100%;
+  height: 100%;
+}
