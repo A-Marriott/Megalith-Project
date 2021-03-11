@@ -100,7 +100,7 @@
       <% if @active_tab == 'megaliths' %>
       <div class="tab-pane fade show active" id="nav-megaliths" role="tabpanel" aria-labelledby="nav-megaliths-tab">
       <% else %>
-      <div class="tab-pane fade" id="nav-megaliths" role="tabpanel" aria-labelledby="nav-megaliths-tab">
+      <div class="tab-pane fade container" id="nav-megaliths" role="tabpanel" aria-labelledby="nav-megaliths-tab">
       <% end %>
         <div class="current-trip-megaliths">
             <div class="trip-page-map">
@@ -127,7 +127,7 @@
       <% if @active_tab == 'photos' %>
       <div class="tab-pane fade show active" id="nav-photos" role="tabpanel" aria-labelledby="nav-photos-tab">
       <% else %>
-      <div class="tab-pane fade" id="nav-photos" role="tabpanel" aria-labelledby="nav-photos-tab">
+      <div class="tab-pane fade container" id="nav-photos" role="tabpanel" aria-labelledby="nav-photos-tab">
       <% end %>
         <div class="container">
           <% if @trip.trip_photos.first %>
