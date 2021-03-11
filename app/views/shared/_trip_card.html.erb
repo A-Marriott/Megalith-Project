@@ -38,7 +38,7 @@
     <HR class="trip-card-hr">
     <div class="card-general-bottom">
       <div class="card-general-location trip-profiles-container">
-        <% trip.users.each do |user| %>
+        <% trip.users[0..3].each do |user| %>
           <%= link_to user_path(user) do %>
             <div class="trip-profile-image" data-toggle="tooltip" data-placement="top" title=" <% if user.username %> <%= user.username %> <% else %> Anon <% end %>">
               <% if user.photo %>
@@ -47,6 +47,15 @@
                 <%= image_tag "https://upload.wikimedia.org/wikipedia/commons/7/7c/Profile_avatar_placeholder_large.png", class: "trip-avatar" %>
               <% end %>
             </div>
+          <% end %>
+        <% end %>
+        <% if trip.users.fifth %>
+          <% trip.users[4..-1].each do |user| %>
+            <%= link_to user_path(user) do %>
+              <div class="trip-profile-image" data-toggle="tooltip" data-placement="top" data-html="true" title="<% trip.users[4..-1].each do |user| %><%= user.username %><br><% end %>">
+                  <%= image_tag "https://visualpharm.com/assets/766/Timezone%20+5-595b40b85ba036ed117dbc56.svg", class: "trip-avatar" %>
+              </div>
+            <% end %>
           <% end %>
         <% end %>
       </div>
