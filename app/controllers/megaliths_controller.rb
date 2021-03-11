@@ -34,7 +34,9 @@ class MegalithsController < ApplicationController
       @trips = @megalith.trips.where(published: true)
       @markers = [{lat:@megalith.latitude, lng:@megalith.longitude, image_url: helpers.asset_url('logo.png')}]
       @comment = Comment.new
-      @comments = @megalith.comments
+      @comments = @megalith.comments.map { |t| [t, t.get_likes.size] }
+                                    .sort { |a,b| b[1] <=> a[1] }
+                                    .map { |arr| arr[0] }
     end
 
   end
