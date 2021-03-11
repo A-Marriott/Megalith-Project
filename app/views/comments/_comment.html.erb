@@ -7,10 +7,10 @@
       <p><small><em>Posted <%= distance_of_time_in_words(comment.created_at, Time.now) %> ago by </em></small><strong><%= comment.user.username %></strong><%= image_tag "https://upload.wikimedia.org/wikipedia/commons/7/7c/Profile_avatar_placeholder_large.png", alt: "profile avatar", class: "avatar ml-3" %></p>
     <% end %>
   </div>
-  <div class="upvoting">
-    <%= link_to comments_upvote_path(comment, redirect: comment.megalith, redirect_type: 'megalith'), method: :post, remote: true do %>
-    <i class="fas fa-angle-up"></i>
-    <% end %>
-    <p><%= comment.get_likes.size %></p>
-  </div>
+  <%= link_to comments_upvote_path(comment, redirect: comment.megalith, redirect_type: 'megalith'), method: :post, remote: true do %>
+    <div class="upvoting">
+      <p><%= comment.get_likes.size %></p>
+      <i class="fas fa-angle-up"></i>
+    </div>
+  <% end %>
 </div>

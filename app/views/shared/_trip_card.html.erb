@@ -48,12 +48,12 @@
         <% end %>
       </div>
       <% unless redirect == 'none' %>
-      <div class="card-general-bottom-left upvoting">
-        <p><%= trip.get_likes.size %></p>
         <%= link_to trips_upvote_path(trip, redirect: redirect, redirect_type: redirect_type), method: :post, remote: true do %>
-          <i class="fas fa-angle-up"></i>
+        <div class="card-general-bottom-left upvoting upvoting-card">
+            <p><%= trip.get_likes.size %></p>
+            <i class="fas fa-angle-up"></i>
+        </div>
         <% end %>
-      </div>
       <% end %>
     </div>
   </div>
