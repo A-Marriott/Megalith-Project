@@ -11,7 +11,7 @@ class TripsController < ApplicationController
     if @trip.save
       TripUser.create(user: current_user, trip: @trip)
       TripMegalith.create(megalith_id: params[:megalith_id], trip: @trip, main: true)
-      redirect_to trip_path(@trip)
+      redirect_to edit_trip_path(@trip)
     else
       render :new
     end

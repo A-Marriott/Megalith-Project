@@ -30,7 +30,7 @@
             <%= f.input :tagline, hint: "One sentence to describe your trip" %>
             <% if @trip.date_visited %>
             <%= f.input :top_tip, hint: "What made your trip special?" %>
-            <%= f.input :description, :input_html => {:rows => 10}, hint: "Give as much detail as you like!" %>
+            <%= f.input :description, :input_html => {:rows => 5}, hint: "Give as much detail as you like!" %>
             <% else %>
             <%= f.input :description, label: "Notes", :input_html => {:rows => 10}, hint: "Describe and plan your walk with your fellow enthusiasts!" %>
             <% end %>
@@ -132,7 +132,7 @@
         <div class="container">
           <% if @trip.trip_photos.first %>
             <h4 class="pt-3 mb-0" id="photos-anchor">Current photos</h4>
-            <p class="mb-0" style="color: #6c757d"><small><em>Make sure your photos are assigned to megaliths so you can get upvotes!</em></small></p>
+            <p class="mb-0" style="color: #6c757d"><small><em>Assign your photos to megaliths so they show on the megalith page!</em></small></p>
             <div class="trip-photo-edit-container">
               <% @trip.trip_photos.each do |photo_obj| %>
                 <div class="trip-photo-edit-display" style="background-image: url('<%= cl_image_path photo_obj.photo.key %>')">
