@@ -195,7 +195,7 @@ hengistbury = Megalith.find_by_name("Hengistbury Head")
 img_file = URI.open("https://www.visitbournemouth.com/media/zoo/images/HengistburyHead_e6cfac90bf47ee0bb6d6c10edaae4a21.JPG")
 img = MegalithPhoto.new
 img.photo.attach(io: img_file, filename: "lith.jpg", content_type: 'image/png')
-img.megalith = maiden_castle
+img.megalith = hengistbury
 img.user = brian
 p img.save
 [noobles, gertrude].each { |u| img.liked_by u }
