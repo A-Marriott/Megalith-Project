@@ -1,15 +1,13 @@
 .mapboxgl-popup {
-  width: 200px;
+  width: 160px;
   height: auto;
   object-fit: cover;
-
 }
 
 .mapboxgl-popup-content {
   text-align: center;
   margin: 0 !important;
-
-
+  padding: 0 !important;
 }
 
 
@@ -18,6 +16,11 @@
   height: 50px;
   display: flex;
   align-items: center;
+  border-radius: 5%;
+
+  .card-map:focus {
+    outline: none;
+  }
   .card-map-image-container {
     height: 50px;
     width: 50px;
@@ -38,10 +41,8 @@
   }
   .card-map-infos {
   padding: 6px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: space-between;
+  padding-right: 16px;
+  text-align: left;
   }
 }
 
