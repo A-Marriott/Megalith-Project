@@ -81,6 +81,10 @@ def make_ratings_and_comments_and_upvotes(user)
     photos.sample(photos.size * 0.5).each do |photo|
       photo.liked_by user
     end
+    trips = Trip.all
+    trips.sample(trips.size * 0.7).each do |trip|
+      trip.liked_by user
+    end
   end
 end
 
@@ -97,6 +101,19 @@ attach_avatar(gertrude, 'https://t4.ftcdn.net/jpg/03/16/16/21/360_F_316162176_3S
 @photoadmin = User.create(email: 'photographer@test.com', password: 'password', username: 'Stone cold Snapper')
 attach_avatar(@photoadmin, 'https://www.davidnoton.com/public/images/Home/david-new.jpg')
 
+USERS = [noobles, david, peter, gertrude, @photoadmin]
+
+def make_trips(user)
+  3.times do
+    lith = Megalith.find(Megalith.pluck(:id).sample)
+    trip = Trip.create(name: Faker::Compass.quarter_wind + " to " + Faker::Ancient.primordial, tagline: Faker::Music::RockBand.name, top_tip: Faker::Food.measurement + " of " + Faker::Beer.style, description: Faker::Hipster.paragraph(sentence_count: 3), date_visited: Faker::Date.between(from: 1.year.ago, to: Date.yesterday), published: true)
+    TripUser.create(trip: trip, user: user)
+    other_user = USERS.reject {|u| u == user}.sample
+    TripUser.create(trip: trip, user: other_user)
+    TripMegalith.create(trip: trip, megalith: lith, main: true)
+  end
+end
+
 p 'users in the bag. time for some liths'
 
 dorset_file_relative = "./seed-play/Dorset-v3-latlong-formatted.json"
@@ -108,33 +125,33 @@ def hash_of_liths_from_json(relative_filepath)
   json_file = File.join(File.dirname(__FILE__), relative_filepath)
   liths = JSON.parse(File.read(json_file))
 end
-# # # OPTIONS --- PICK ONE ONLY
-# 1 load 20 with photos
-hash_of_liths_from_json(dorset_file_relative).first(40).each { |lith| load_lith_with_photo(lith) }
+# # # # OPTIONS --- PICK ONE ONLY
+# # 1 load 20 with photos
+# # hash_of_liths_from_json(dorset_file_relative).first(40).each { |lith| load_lith_with_photo(lith) }
 
-# 2 load all with photos - expensive for cloudinary, will take a long time
-# all_three.each do |filepath|
-#   hash_of_liths_from_json(filepath).each { |lith| load_lith_with_photo(lith) }
-# end
+# # 2 load all with photos - expensive for cloudinary, will take a long time
+# # all_three.each do |filepath|
+# #   hash_of_liths_from_json(filepath).each { |lith| load_lith_with_photo(lith) }
+# # end
 
-# 3 load all without photos - good to practise with pagination and lots of stuff on the map
-# all_three.each do |filepath|
-#   hash_of_liths_from_json(filepath).each { |lith| load_lith_without_photo(lith) }
-# end
+# # 3 load all without photos - good to practise with pagination and lots of stuff on the map
+# # all_three.each do |filepath|
+# #   hash_of_liths_from_json(filepath).each { |lith| load_lith_without_photo(lith) }
+# # end
 
-# 4 load somerset with photos and devon/dorset without - maybe a good balance for the final presentation?
-# hash_of_liths_from_json(somerset_file_relative).each { |lith| load_lith_with_photo(lith) }
-# hash_of_liths_from_json(devon_file_relative).each { |lith| load_lith_without_photo(lith) }
-# hash_of_liths_from_json(dorset_file_relative).each { |lith| load_lith_without_photo(lith) }
+# # 4 load somerset with photos and devon/dorset without - maybe a good balance for the final presentation?
+# # hash_of_liths_from_json(somerset_file_relative).each { |lith| load_lith_with_photo(lith) }
+# # hash_of_liths_from_json(devon_file_relative).each { |lith| load_lith_without_photo(lith) }
+# # hash_of_liths_from_json(dorset_file_relative).each { |lith| load_lith_without_photo(lith) }
 
-# 5 load somerset with photos and devon/dorset with fakes - WILL ONLY WORK WITH ARFA.CAMBLE CLOUDINARY
-# hash_of_liths_from_json(somerset_file_relative).each { |lith| load_lith_with_photo(lith) }
-# hash_of_liths_from_json(devon_file_relative).each { |lith| load_lith_with_fake_photo(lith) }
-# hash_of_liths_from_json(dorset_file_relative).each { |lith| load_lith_with_fake_photo(lith) }
+# # 5 load somerset with photos and devon/dorset with fakes - WILL ONLY WORK WITH ARFA.CAMBLE CLOUDINARY
+# # hash_of_liths_from_json(somerset_file_relative).each { |lith| load_lith_with_photo(lith) }
+# # hash_of_liths_from_json(devon_file_relative).each { |lith| load_lith_with_fake_photo(lith) }
+# # hash_of_liths_from_json(dorset_file_relative).each { |lith| load_lith_with_fake_photo(lith) }
 
-# # 6 load all with fakes - WILL ONLY WORK WITH ARFA.CAMBLE CLOUDINARY
-# hash_of_liths_from_json(somerset_file_relative).each { |lith| load_lith_with_fake_photo(lith) }
-# hash_of_liths_from_json(devon_file_relative).each { |lith| load_lith_with_fake_photo(lith) }
+# # # 6 load all with fakes - WILL ONLY WORK WITH ARFA.CAMBLE CLOUDINARY
+# # hash_of_liths_from_json(somerset_file_relative).each { |lith| load_lith_with_fake_photo(lith) }
+# # hash_of_liths_from_json(devon_file_relative).each { |lith| load_lith_with_fake_photo(lith) }
 # hash_of_liths_from_json(dorset_file_relative).each { |lith| load_lith_with_fake_photo(lith) }
 
 # FINAL
@@ -188,28 +205,33 @@ trip = Trip.new(name: "Stroll up Maiden Castle", tagline: "EPIC hillfort", top_t
 p 1
 TripUser.create(trip: trip, user: brian)
 TripUser.create(trip: trip, user: noobles)
-TripMegalith.create(trip: trip, megalith: maiden_castle)
+TripMegalith.create(trip: trip, megalith: maiden_castle, main: true)
 p 2
 maiden_img = TripPhoto.new(trip: trip)
-maiden_img.photo.attach(io: maiden_img_file, filename: "lith.jpg", content_type: 'image/png')
-# maiden_img.save
+maiden_img_file_two = URI.open("https://assets.simpleview-europe.com/dorset2016/imageresizer/?image=%2Fdmsimgs%2FMaiden_Castle_531161138.jpg&action=ProductDetail")
+maiden_img.photo.attach(io: maiden_img_file_two, filename: "lith.jpg", content_type: 'image/png')
+maiden_img.save
 p trip.save
 
 trip = Trip.create(name: "Around the Clandon Barrow", tagline: "Big historic mound", top_tip: "The White Hart down the road has great homemade sausage rolls", description: "This is a great big mound of earth and there's sure to be all sorts of history hidden inside. I took along my metal detector and found a ha'penny bit so I bet there's neolithic stone currency somewhere. Good luck!", date_visited: 'Tue, 09 Mar 2021', published: true)
 TripUser.create(trip: trip, user: brian)
 TripUser.create(trip: trip, user: peter)
 TripUser.create(trip: trip, user: gertrude)
-TripMegalith.create(trip: trip, megalith: clandon)
+TripMegalith.create(trip: trip, megalith: clandon, main: true)
 TripMegalith.create(trip: trip, megalith: Megalith.find_by_name("Maumbury Rings"))
 clandon_img = TripPhoto.new(trip: trip)
-clandon_img.photo.attach(io: clandon_img_file, filename: "lith.jpg", content_type: 'image/png')
-# clandon_img.save
+clandon_img_file_two = URI.open('https://historicengland.org.uk/etl/1015781/5cd574d0-bb2a-496b-a244-4a3931482917.jpg')
+clandon_img.photo.attach(io: clandon_img_file_two, filename: "lith.jpg", content_type: 'image/png')
+clandon_img.save
 
 trip = Trip.create(name: "Marvel at the Cross and Hand Stone", tagline: "Pillar with Stunning Lichen", description: "Let's see the stone and then head to the pub")
 TripUser.create(trip: trip, user: brian)
 TripUser.create(trip: trip, user: gertrude)
 stone = Megalith.find_by_name('Cross and Hand Stone')
-TripMegalith.create(trip: trip, megalith: stone)
+TripMegalith.create(trip: trip, megalith: stone, main: true)
+
+p 'david trips'
+make_trips(david)
 
 p 'david ratings/comments/upvotes'
 make_ratings_and_comments_and_upvotes(david)
