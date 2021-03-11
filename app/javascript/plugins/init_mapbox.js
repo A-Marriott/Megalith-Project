@@ -44,12 +44,6 @@ const initMapbox = () => {
     });
   };
 
-  const directions = new MapboxDirections({
-    accessToken: process.env.MAPBOX_API_KEY,
-    unit: 'imperial',
-    profile: 'mapbox/walking'
-  });
-
   if (mapElement) { // only build a map if there's a div#map to inject into
     mapboxgl.accessToken = mapElement.dataset.mapboxApiKey;
     const map = new mapboxgl.Map({
@@ -63,12 +57,17 @@ const initMapbox = () => {
     //                                  mapboxgl: mapboxgl }));
     map.addControl(new mapboxgl.NavigationControl());
     map.once('load', () => {
-      console.log('hey');
       map.resize();
     });
     document.querySelector('.mapboxgl-canvas').style.width = '100%';
     document.querySelector('.mapboxgl-canvas').style.height = '100%';
     if (document.querySelector('.trip-page-map')) {
+      const directions = new MapboxDirections({
+        accessToken: process.env.MAPBOX_API_KEY,
+        unit: 'imperial',
+        profile: 'mapbox/walking',
+        controls: {profileSwitcher: false}
+      });
       map.addControl(directions, 'top-left');
     };
   }
