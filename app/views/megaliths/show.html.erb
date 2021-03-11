@@ -57,7 +57,7 @@
               <%= image_tag "placeholder-megalith.png", class:"d-block w-100", alt:"Megalith"%>
             </div>
             <% else %>
-            <% @megalith.megalith_photos.each_with_index do |photo, index| %>
+            <% @photos.each_with_index do |photo, index| %>
             <div class="carousel-item <%= 'active' if index == 0  %>">
               <% if photo.photo.attached? %>
                 <%= cl_image_tag photo.photo.key, class:"d-block w-100"%>

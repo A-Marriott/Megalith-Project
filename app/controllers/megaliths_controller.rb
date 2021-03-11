@@ -23,6 +23,10 @@ class MegalithsController < ApplicationController
     else
       @megalith = Megalith.find(params[:id])
       @megalith_photo = MegalithPhoto.new
+      @photos = @megalith.megalith_photos
+                 .map { |t| [t, t.get_likes.size] }
+                 .sort { |a,b| b[1] <=> a[1] }
+                 .map { |arr| arr[0] }
       unless @my_rating = Rating.where(user: current_user, megalith: @megalith).first
         @rating = Rating.new
       end
