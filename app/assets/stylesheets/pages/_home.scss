@@ -1,86 +1,26 @@
 // Specific CSS for your home-page
-
-.homepage-card-container {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: stretch;
-  justify-content: space-between;
-  grid-gap: 16px;
-  margin: 50px;
-}
-
-.homepage-card-container-temp {
-  display: grid;
-  grid-gap: 80px;
-  grid-template-columns: repeat(3, 1fr);
-  padding-bottom: 20px;
-}
-
-@media screen and (max-width: 992px) {
-    .homepage-card-container-temp {
-    grid-template-columns: 1fr;
-    grid-gap: 20px;
+.homepage-banner {
+  background-size: cover;
+  color: white;
+  text-shadow: 1px 1px 3px rgba(0,0,0,0.2);
+  background-position: center;
+  padding: 33vh 0;
+  h1 {
+    font-size: 42px;
+    font-weight: bold;
+    margin-bottom: 15px;
+  }
+  h2 {
+    font-size: 24px;
+    margin-bottom: 25px;
+  }
+  p {
+    font-size: 20px;
+    opacity: .7;
   }
 }
 
-.homepage-card {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  flex-grow: 1;
-  background: #F4F4F4;
-  font-weight: lighter;
-  text-align: center;
-  box-shadow: 0 0 15px rgba(0,0,0,0.2);
-}
-
-.homepage-card-text {
-  padding: 14px;
-}
-
-.homepage-card img {
-  width: 100%;
-  height: 200px;
-  object-fit: cover;
-  padding-bottom: 10px;
-}
-
-
-
-
-
-.homepage-banner {
-  background-size: cover;
-  background-position: center;
-  padding: 40vh 0;
-}
-
-.homepage-banner h1 {
-  color: white;
-  text-shadow: 1px 1px 3px rgba(0,0,0,0.2);
-  font-size: 42px;
-  font-weight: bold;
-  margin-bottom: 15px;
-}
-
-.homepage-banner h2 {
-  color: white;
-  font-size: 24px;
-  margin-bottom: 25px;
-}
-
-.homepage-banner p {
-  font-size: 20px;
-  color: white;
-  opacity: .7;
-  text-shadow: 1px 1px 3px rgba(0,0,0,0.2);
-}
-
-.most-visited-container {
-}
-
 .home-search {
-
   .geocoder {
     position: absolute;
     width: 50%;
@@ -93,3 +33,53 @@
       margin-left: 0px;
     }
 }
+
+.home-page-middle-text {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 0 50px;
+  h3 {
+  font-size: 18px;
+  line-height: 1.3;
+  }
+  p {
+  font-weight: lighter;
+  line-height: 1.3;
+  font-size: 17px;
+  }
+}
+.home-page-images {
+  padding-right: 30px;
+}
+
+@media screen and (max-width: 992px) {
+  .home-page-images {
+    padding-right: 0;
+  }
+}
+
+.step-card-container {
+  display: flex;
+  flex-wrap: wrap;
+  margin: 50px;
+}
+
+
+
+
+
+// .homepage-card-container-temp {
+//   display: grid;
+//   grid-gap: 80px;
+//   grid-template-columns: repeat(3, 1fr);
+//   padding-bottom: 20px;
+// }
+
+// @media screen and (max-width: 992px) {
+//     .homepage-card-container-temp {
+//     grid-template-columns: 1fr;
+//     grid-gap: 20px;
+//   }
+// }
