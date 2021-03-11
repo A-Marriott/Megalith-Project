@@ -22,10 +22,10 @@
     <HR>
     <div class="card-general-tagline">
       <p>
-        <% if megalith.tagline? %>
-          <%= megalith.tagline %><p>
-        <% elsif megalith.description %>
+        <% if current_page? root_path %>
           <%= megalith.description.truncate(120) %>
+        <% else %>
+          <%= megalith.description.truncate(470) %>
         <% end %>
       </p>
     </div>
