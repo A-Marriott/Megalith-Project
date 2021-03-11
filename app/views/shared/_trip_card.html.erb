@@ -17,20 +17,23 @@
         <h3><%= trip.tagline.truncate(35) %></h3>
       </div>
       <div class="card-trip-top-right">
-        <p><%= trip.date_visited %></p>
+        <p><%= trip.date_visited.strftime('%a %-d %b %Y') %></p>
       </div>
     </div>
     <div class="card-general-extras">
-      <% trip.megaliths.each do |megalith| %>
+      <% trip.megaliths[0..1].each do |megalith| %>
         <%= link_to megalith_path(megalith) do %>
-          <span class="badge badge-pill badge-secondary mr-2"><%= megalith.name.truncate(20) %></span>
+          <span class="badge badge-pill badge-secondary mr-2" data-toggle="tooltip" data-placement="bottom" title="<%= megalith.name %>"><%= megalith.name.truncate(15) %></span>
         <% end %>
+      <% end %>
+      <% if trip.megaliths.third %>
+        <span class="badge badge-pill badge-secondary mr-2" data-toggle="tooltip" data-placement="bottom" data-html="true"
+        title="<% trip.megaliths[2..-1].each do |megalith| %><%= megalith.name %><br><% end %>">...</span>
       <% end %>
     </div>
     <HR class="trip-card-hr">
     <div class="card-general-tagline">
       <p><%= trip.top_tip %></p>
-      <p><%= trip.description.truncate(120) %><p>
     </div>
     <HR class="trip-card-hr">
     <div class="card-general-bottom">
