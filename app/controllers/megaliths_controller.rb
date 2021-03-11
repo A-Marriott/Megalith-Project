@@ -34,7 +34,7 @@ class MegalithsController < ApplicationController
       @trips = @megalith.trips.where(published: true)
       @markers = [{lat:@megalith.latitude, lng:@megalith.longitude, image_url: helpers.asset_url('logo.png')}]
       @comment = Comment.new
-      @comment.megalith_id = @megalith.id
+      @comments = @megalith.comments
     end
 
   end
