@@ -72,13 +72,10 @@
             <div class="comment-container">
               <h5>Recent comments</h5>
               <% @comments.each do |comment| %>
+                  <hr>
                 <div class="user-comment-content">
-                  <p><%= comment.text %></p>
-                  <% if comment.user.photo.attached? %>
-                    <p><small><em>Posted <%= distance_of_time_in_words(comment.created_at, Time.now) %> ago on </em><strong><%= comment.megalith.name %></strong></small></p>
-                  <% else %>
-                    <p><small><em>Posted <%= distance_of_time_in_words(comment.created_at, Time.now) %> ago on </em><strong><%= comment.megalith.name %></strong></small></p>
-                  <% end %>
+                  <p class="mb-1"><%= comment.text %></p>
+                  <p style="margin-bottom: 0;"><small><em>Posted <%= distance_of_time_in_words(comment.created_at, Time.now) %> ago on </em><strong><%= comment.megalith.name %></strong></small></p>
                 </div>
               <% end %>
             </div>
