@@ -68,6 +68,10 @@ end
 
 def make_ratings_and_comments_and_upvotes(user)
   megaliths = Megalith.all
+  trips = Trip.all
+  trips.sample(trips.size * 0.7).each do |trip|
+    trip.liked_by user
+  end
   megaliths.sample(megaliths.size * 0.6).each do |lith|
     p lith.name
     Visited.create(user: user, megalith: lith)
@@ -80,10 +84,6 @@ def make_ratings_and_comments_and_upvotes(user)
     photos = MegalithPhoto.all
     photos.sample(photos.size * 0.5).each do |photo|
       photo.liked_by user
-    end
-    trips = Trip.all
-    trips.sample(trips.size * 0.7).each do |trip|
-      trip.liked_by user
     end
   end
 end
