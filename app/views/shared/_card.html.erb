@@ -3,7 +3,7 @@
     <% if megalith.megalith_photos.first&.photo&.attached? %>
       <%= cl_image_tag megalith.megalith_photos.first.photo.key, class:"card-general-image" %>
     <% else %>
-      <%= image_tag 'placeholder-megalith.png', class:"card-general-image" %>
+      <%= cl_image_tag megalith.megalith_photos.first.photo_key, class:"card-general-image" %>
     <% end %>
   </div>
   <div class="card-general-infos">
