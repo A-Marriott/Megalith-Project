@@ -1,11 +1,12 @@
 <div class="comment" id=<%= "comment-#{comment.id}" %>>
   <div class="comment-content">
-    <p><%= comment.text %></p>
     <% if comment.user.photo.attached? %>
-      <p><small><em>Posted <%= distance_of_time_in_words(comment.created_at, Time.now) %> ago by </em></small><strong><%= comment.user.username %></strong><%= cl_image_tag comment.user.photo.key, alt: "profile avatar", class: "avatar ml-3" %></p>
+      <%= cl_image_tag comment.user.photo.key, alt: "profile avatar", class: "avatar mr-2 mb-1" %><strong><%= comment.user.username %></strong>
     <% else %>
-      <p><small><em>Posted <%= distance_of_time_in_words(comment.created_at, Time.now) %> ago by </em></small><strong><%= comment.user.username %></strong><%= image_tag "https://upload.wikimedia.org/wikipedia/commons/7/7c/Profile_avatar_placeholder_large.png", alt: "profile avatar", class: "avatar ml-3" %></p>
+      <%= image_tag "https://upload.wikimedia.org/wikipedia/commons/7/7c/Profile_avatar_placeholder_large.png", alt: "profile avatar", class: "avatar mr-2 mb-1" %><strong><%= comment.user.username %></strong>
     <% end %>
+    <p class="mb-1"><%= comment.text %></p>
+    <p><small><em>Posted <%= distance_of_time_in_words(comment.created_at, Time.now) %> ago</em></small></p>
   </div>
   <%= link_to comments_upvote_path(comment, redirect: comment.megalith, redirect_type: 'megalith'), method: :post, remote: true do %>
     <div class="upvoting">
@@ -14,3 +15,4 @@
     </div>
   <% end %>
 </div>
+<hr>
