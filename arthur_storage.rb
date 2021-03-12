@@ -16,3 +16,7 @@ badbury.trips.last.destroy
 badbury.megalith_photos.first.disliked_by brian
 visited2 = Visited.where(user: brian, megalith: badbury).first
 visited2.destroy
+
+
+badbury = Megalith.find_by_name('badbury rings')
+badbury.megalith_photos.first.get_likes.last.destroy
