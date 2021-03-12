@@ -1,8 +1,6 @@
 .comment {
-  margin: 8px;
-  padding: 16px;
-  border: 1px solid $softish-stone;
-  border-radius: 2px;
+  position: relative;
+  margin: 32px;
   display: flex;
   align-items: center;
   .comment-content {
