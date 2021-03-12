@@ -11,7 +11,7 @@
     <p><small><em>Posted <%= distance_of_time_in_words(comment.created_at, Time.now) %> ago</em></small></p>
   </div>
   <%= link_to comments_upvote_path(comment, redirect: comment.megalith, redirect_type: 'megalith'), method: :post, remote: true do %>
-    <div class="upvoting">
+    <div class="upvoting upvoting-comment">
       <p><%= comment.get_likes.size %></p>
       <i class="fas fa-angle-up"></i>
     </div>
