@@ -251,3 +251,8 @@ p 'photo admin ratings/comments/upvotes'
 make_ratings_and_comments_and_upvotes(@photoadmin)
 
 p 'done'
+
+User.create(email: 'todd@test.com', username: 'Todd', password: 'password')
+User.create(email: 'alex@test.com', username: 'Alex', password: 'password')
+User.create(email: 'arthur@test.com', username: 'King Arthur', password: 'password')
+User.create(email: 'marc@test.com', username: 'Marc', password: 'password')
