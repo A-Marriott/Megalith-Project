@@ -11,7 +11,4 @@ environment.plugins.prepend('Provide',
     Popper: ['popper.js', 'default']
   })
 );
-module.exports = {
-  environment,
-  mode: 'production'
-}
+module.exports = environment
