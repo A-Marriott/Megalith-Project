@@ -1,9 +1,11 @@
 <div class="comment" id=<%= "comment-#{comment.id}" %>>
   <div class="comment-content">
-    <% if comment.user.photo.attached? %>
-      <%= cl_image_tag comment.user.photo.key, alt: "profile avatar", class: "avatar mr-2 mb-1" %><strong><%= comment.user.username %></strong>
-    <% else %>
-      <%= image_tag "https://upload.wikimedia.org/wikipedia/commons/7/7c/Profile_avatar_placeholder_large.png", alt: "profile avatar", class: "avatar mr-2 mb-1" %><strong><%= comment.user.username %></strong>
+    <%= link_to user_path(comment.user) do  %>
+      <% if comment.user.photo.attached? %>
+          <%= cl_image_tag comment.user.photo.key, alt: "profile avatar", class: "avatar mr-2 mb-2" %><strong><%= comment.user.username %></strong>
+      <% else %>
+        <%= image_tag "https://upload.wikimedia.org/wikipedia/commons/7/7c/Profile_avatar_placeholder_large.png", alt: "profile avatar", class: "avatar mr-2 mb-2" %><strong><%= comment.user.username %></strong>
+      <% end %>
     <% end %>
     <p class="mb-1"><%= comment.text %></p>
     <p><small><em>Posted <%= distance_of_time_in_words(comment.created_at, Time.now) %> ago</em></small></p>
