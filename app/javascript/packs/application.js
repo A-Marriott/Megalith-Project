@@ -40,12 +40,12 @@ document.addEventListener('turbolinks:load', () => {
   initUpdateNavbarOnScroll();
   initFlatpickr();
   initBarRating();
-  initGeocoder();
-  initMapbox();
   previewImageOnFileSelect();
   collapse();
   $(function () {
     $('[data-toggle="tooltip"]').tooltip()
     $('[data-toggle="popover"]').popover()
   })
+  initGeocoder();
+  initMapbox();
 });
