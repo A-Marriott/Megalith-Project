@@ -14,7 +14,9 @@
     <div class="card-general-top">
       <div class="card-general-title">
         <h2><%= trip.name %></h2>
-        <h3><%= trip.tagline.truncate(35) %></h3>
+        <% if trip.tagline %>
+          <h3><%= trip.tagline.truncate(35) %></h3>
+        <% end %>
       </div>
       <div class="card-trip-top-right">
         <p><%= trip.date_visited.strftime('%a %-d %b %Y') %></p>
