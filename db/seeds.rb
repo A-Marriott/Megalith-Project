@@ -212,6 +212,7 @@ maiden_img_file_two = URI.open("https://assets.simpleview-europe.com/dorset2016/
 maiden_img.photo.attach(io: maiden_img_file_two, filename: "lith.jpg", content_type: 'image/png')
 maiden_img.save
 p trip.save
+Comment.create(megalith: maiden_castle, user: brian, text: "A really stunning hillfort, could not recommend more highly. Check out those ramparts!")
 
 trip = Trip.create(name: "Around the Clandon Barrow", tagline: "Big historic mound", top_tip: "The White Hart down the road has great homemade sausage rolls", description: "This is a great big mound of earth and there's sure to be all sorts of history hidden inside. I took along my metal detector and found a ha'penny bit so I bet there's neolithic stone currency somewhere. Good luck!", date_visited: 'Tue, 09 Mar 2021', published: true)
 TripUser.create(trip: trip, user: brian)
@@ -223,6 +224,7 @@ clandon_img = TripPhoto.new(trip: trip)
 clandon_img_file_two = URI.open('https://historicengland.org.uk/etl/1015781/5cd574d0-bb2a-496b-a244-4a3931482917.jpg')
 clandon_img.photo.attach(io: clandon_img_file_two, filename: "lith.jpg", content_type: 'image/png')
 clandon_img.save
+Comment.create(megalith: clandon, user: brian, text: "What a mound of earth! You can't not be impressed by this if you see it in the flesh. Get your metal detectors ready!")
 
 trip = Trip.create(name: "Marvel at the Cross and Hand Stone", tagline: "Pillar with Stunning Lichen", description: "Let's see the stone and then head to the pub")
 TripUser.create(trip: trip, user: brian)
