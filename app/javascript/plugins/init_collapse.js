@@ -9,6 +9,16 @@ const collapse = () => {
         }
       });
     }
+  const collapseTripBtn = document.getElementById( "view+" );
+    if (collapseTripBtn ) {
+      collapseTripBtn.addEventListener("click", () => {
+        if (collapseTripBtn.innerHTML === "View More") {
+          collapseTripBtn.innerHTML = "View Less"
+        } else {
+          collapseTripBtn.innerHTML = "View More"
+        }
+      });
+    }
 }
 
 export default collapse;
