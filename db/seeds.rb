@@ -232,6 +232,12 @@ TripMegalith.create(trip: trip, megalith: stone, main: true)
 
 p 'david trips'
 make_trips(david)
+p 'peter trips'
+make_trips(peter)
+p 'gertrude trips'
+make_trips(gertrude)
+p 'photo admin trips'
+make_trips(@photoadmin)
 
 p 'david ratings/comments/upvotes'
 make_ratings_and_comments_and_upvotes(david)
