@@ -1,9 +1,11 @@
 <div class="card-general mt-3">
   <div class="card-general-image-container">
     <% if megalith.megalith_photos.first&.photo&.attached? %>
-      <%= cl_image_tag megalith.megalith_photos.first.photo.key, class:"card-general-image" %>
+      <%= cl_image_tag megalith.megalith_photos.first.photo.key, class: "card-general-image" %>
+    <% elsif megalith.megalith_photos.first&.photo_key %>
+      <%= cl_image_tag megalith.megalith_photos.first.photo_key, class: "card-general-image" %>
     <% else %>
-      <%= cl_image_tag megalith.megalith_photos.first.photo_key, class:"card-general-image" %>
+      <%= image_tag "placeholder-megalith.png", alt: "alttext", class: "card-general-image" %>
     <% end %>
   </div>
   <div class="card-general-infos">
@@ -22,9 +24,9 @@
     <HR>
     <div class="card-general-tagline">
       <p>
-        <% if current_page? root_path %>
+        <% if current_page?(root_path) && megalith.description %>
           <%= megalith.description.truncate(120) %>
-        <% else %>
+        <% elsif megalith.description %>
           <%= megalith.description.truncate(470) %>
         <% end %>
       </p>
