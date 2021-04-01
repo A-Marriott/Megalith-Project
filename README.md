@@ -1,1 +1,18 @@
-Rails app generated with [lewagon/rails-templates](https://github.com/lewagon/rails-templates), created by the [Le Wagon coding bootcamp](https://www.lewagon.com) team.
+# Megalithipedia
+
+Action | Possible?
+------------- | ----------------------
+Find megalithic sites such as stonehenge? | YES
+Share knowledge and learn about the ancients? | absolutely
+Plan trips to stones with cool friends? | 💯 👍
+
+### Sign up, rock on
+🔗  [megalithipedia](https://www.megalithipedia.com) 🔗
+
+Rails app made by:
+* [A-Marriott](https://github.com/A-Marriott)
+* [arfacamble](https://github.com/arfacamble)
+* [todd-neale](https://github.com/todd-neale)
+* [MarcAppadoo](https://github.com/MarcAppadoo)
+
+<sub>get your dowsing rods out, seek the druid's lair</sub>
