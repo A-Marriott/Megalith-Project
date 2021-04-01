@@ -10,6 +10,7 @@
           <%= submit_tag "Go", class:"btn btn-secondary go-btn" %>
         <% end %>
       </div>
+      <button type="button" class="btn btn-secondary mt-4" data-toggle="modal" data-target="#plan_a_trip">Plan a trip</button>
     <% else %>
       <%= link_to "Sign Up", new_user_session_path, class: "btn btn-light", type: "submit"%>
       <%= link_to "Login", new_user_session_path, class: "btn btn-outline-light", type: "submit"%>
@@ -143,3 +144,25 @@
     <a class="btn btn-outline-secondary mt-3" id="view+" data-toggle="collapse" href="#collapseTrips" role="button" aria-expanded="false" aria-controls="collapseTrips">View More</a>
   </div>
 </div>
+
+  <div class="modal fade" id="plan_a_trip" tabindex="-1" aria-labelledby="planATripModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Plan a trip</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <%= simple_form_for @trip do |f| %>
+            <%#= f.input :name, hint: "Give your trip a name" %>
+            <%#= f.input :tagline, hint: "Add a short sentence to describe your trip" %>
+            <%#= f.input :description, label: "Notes", hint: "Use this area to make notes on your trip (you can edit this at a later date)" %>
+            <%#= f.button :submit, class: "btn btn-primary" %>
+            <!-- <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button> -->
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
