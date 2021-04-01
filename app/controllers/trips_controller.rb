@@ -10,7 +10,7 @@ class TripsController < ApplicationController
     @trip = Trip.new(trip_params)
     if @trip.save
       TripUser.create(user: current_user, trip: @trip)
-      TripMegalith.create(megalith_id: params[:megalith_id], trip: @trip, main: true)
+      params[:megalith_id] ? TripMegalith.create(megalith_id: params[:megalith_id], trip: @trip, main: true) : TripMegalith.create(megalith_id: params[:trip][:megalith_ids][1], trip: @trip, main: true)
       redirect_to edit_trip_path(@trip)
     else
       render :new
