@@ -116,7 +116,7 @@
               <%= render 'shared/trip_megalith_card', megalith: trip_megalith.megalith, button: 'delete', trip: @trip %>
             <% end %>
           </div>
-          <h4 class="mt-4 mb-3">Other megaliths within 5 miles</h4>
+          <h4 class="mt-4 mb-3">Other megaliths within 10 miles</h4>
           <div class="other-edit-megaliths">
             <% @search_megaliths.each do |megalith| %>
               <%= render 'shared/trip_megalith_card', megalith: megalith, button: 'add', trip: @trip %>

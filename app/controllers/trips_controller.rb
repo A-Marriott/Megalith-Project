@@ -10,7 +10,7 @@ class TripsController < ApplicationController
     @trip = Trip.new(trip_params)
     if @trip.save
       TripUser.create(user: current_user, trip: @trip)
-      TripMegalith.create(megalith_id: params[:megalith_id], trip: @trip, main: true)
+      params[:megalith_id] ? TripMegalith.create(megalith_id: params[:megalith_id], trip: @trip, main: true) : TripMegalith.create(megalith_id: params[:trip][:megalith_ids][1], trip: @trip, main: true)
       redirect_to edit_trip_path(@trip)
     else
       render :new
@@ -48,7 +48,7 @@ class TripsController < ApplicationController
     @trip_megaliths = @trip.trip_megaliths.includes(:megalith)
     @active_tab = params[:active_tab] if params[:active_tab]
     @megalith_photo = MegalithPhoto.new
-    @search_megaliths = Megalith.near([@main_megalith.latitude, @main_megalith.longitude], 5)
+    @search_megaliths = Megalith.near([@main_megalith.latitude, @main_megalith.longitude], 10)
                                 .reject { |megalith| @trip.megaliths.include? megalith }
                                 .first(5)
     @markers = @trip_megaliths.map(&:megalith).map do |megalith|

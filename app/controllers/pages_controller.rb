@@ -11,5 +11,6 @@ class PagesController < ApplicationController
                  .sort { |a,b| b[1] <=> a[1] }
                  .map { |arr| arr[0] }
                  .first(10)
+    @trip = Trip.new
   end
 end
