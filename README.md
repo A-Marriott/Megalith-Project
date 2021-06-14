@@ -7,7 +7,7 @@ Share knowledge and learn about the ancients? | absolutely
 Plan trips to stones with cool friends? | 💯 👍
 
 ### Sign up, rock on
-🔗  [megalithipedia](https://www.megalithipedia.com) 🔗
+🔗  [megalithipedia](https://great-stones.herokuapp.com/) 🔗
 
 Rails app made by:
 * [A-Marriott](https://github.com/A-Marriott)
