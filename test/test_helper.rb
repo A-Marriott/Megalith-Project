@@ -4,6 +4,9 @@ require 'rails/test_help'
 
 class ActiveSupport::TestCase
   fixtures :all
+
+  include Warden::Test::Helpers
+  Warden.test_mode!
 end
 
 Capybara.register_driver :headless_chrome do |app|
